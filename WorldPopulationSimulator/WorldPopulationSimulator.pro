@@ -31,7 +31,8 @@ HEADERS += \
         mainwindow.h \
     globe.h \
     continent.h \
-    disaster.h
+    disaster.h \
+    simulation.h
 
 FORMS += \
         mainwindow.ui

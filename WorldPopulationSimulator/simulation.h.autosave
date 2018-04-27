@@ -1,0 +1,13 @@
+#ifndef SIMULATION_H
+#define SIMULATION_H
+
+class Simulation {
+private:
+    // some private variables
+public:
+    Simulation() {
+        // default constructor
+    }
+}
+
+#endif // SIMULATION_H
