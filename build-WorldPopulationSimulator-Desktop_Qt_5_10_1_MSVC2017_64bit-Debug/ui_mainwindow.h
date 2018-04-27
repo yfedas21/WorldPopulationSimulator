@@ -29,7 +29,8 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QLabel *label;
-    QLineEdit *lineEdit;
+    QLineEdit *textbox_runtime;
+    QLabel *label_display;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -43,10 +44,19 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(60, 10, 55, 16));
-        lineEdit = new QLineEdit(centralWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(120, 10, 211, 21));
+        label->setGeometry(QRect(50, 30, 55, 16));
+        textbox_runtime = new QLineEdit(centralWidget);
+        textbox_runtime->setObjectName(QStringLiteral("textbox_runtime"));
+        textbox_runtime->setGeometry(QRect(110, 30, 211, 21));
+        label_display = new QLabel(centralWidget);
+        label_display->setObjectName(QStringLiteral("label_display"));
+        label_display->setGeometry(QRect(210, 160, 601, 291));
+        QFont font;
+        font.setPointSize(18);
+        label_display->setFont(font);
+        label_display->setLayoutDirection(Qt::LeftToRight);
+        label_display->setFrameShape(QFrame::Box);
+        label_display->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -68,6 +78,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QApplication::translate("MainWindow", "Runtime:", nullptr));
+        label_display->setText(QString());
     } // retranslateUi
 
 };
