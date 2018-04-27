@@ -28,7 +28,10 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    globe.h \
+    continent.h \
+    disaster.h
 
 FORMS += \
         mainwindow.ui
