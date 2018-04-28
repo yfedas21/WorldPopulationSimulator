@@ -28,6 +28,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "worldMapAnimation.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -47,6 +48,8 @@ public:
     QVBoxLayout *verticalLayout_3;
     QFormLayout *formLayout_2;
     QWidget *tab;
+    QVBoxLayout *verticalLayout_4;
+    WorldMapAnimation *widget_2;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -157,6 +160,17 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
+        verticalLayout_4 = new QVBoxLayout(tab);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        widget_2 = new WorldMapAnimation(tab);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        sizePolicy.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy);
+
+        verticalLayout_4->addWidget(widget_2);
+
         tabWidget->addTab(tab, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -215,7 +229,6 @@ public:
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        MainWindow->insertToolBarBreak(mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);

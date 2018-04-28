@@ -25,7 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    worldMapAnimation.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -33,7 +34,8 @@ HEADERS += \
     continent.h \
     disaster.h \
     simulation.h \
-    sim_helper.h
+    sim_helper.h \
+    worldMapAnimation.h
 
 FORMS += \
         mainwindow.ui
