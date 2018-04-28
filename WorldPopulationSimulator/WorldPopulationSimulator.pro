@@ -25,8 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    qsfmlcanvas.cpp
+        mainwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -34,20 +33,7 @@ HEADERS += \
     continent.h \
     disaster.h \
     simulation.h \
-    sim_helper.h \
-    qsfmlcanvas.h \
-    qsfmlcanvas.h \
-    SFMLanimation.h
+    sim_helper.h
 
 FORMS += \
         mainwindow.ui
-
-
-#SFML LIBRARY INCLUSION
-INCLUDEPATH += $$PWD/includeSF
-DEPENDPATH += $$PWD/includeSF
-
-LIBS += -L$$PWD/..\LIBS\
-
-CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-system-d -lsfml-main-d -lsfml-window-d -lsfml-graphics-d
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-system -lsfml-main -lsfml-window -lsfml-graphics
