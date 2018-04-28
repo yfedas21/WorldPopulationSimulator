@@ -49,5 +49,5 @@ DEPENDPATH += $$PWD/includeSF
 
 LIBS += -L$$PWD/..\LIBS\
 
-CONFIG(debug, debug|release): LIBS+= -lsfml-audio-d -lsfml-system-d -lsfml-network-d -lsfml-main-d -lsfml-window-d -lsfml-graphics-d
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-system -lsfml-network -lsfml-main -lsfml-window -lsfml-graphics
+CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-system-d -lsfml-main-d -lsfml-window-d -lsfml-graphics-d
+CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-system -lsfml-main -lsfml-window -lsfml-graphics

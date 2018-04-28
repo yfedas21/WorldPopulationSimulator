@@ -2,7 +2,7 @@
 //Largely adapted from 1.6 SFML tutorial -> https://www.sfml-dev.org/tutorials/1.6/graphics-qt.php
 //Many upgrade solutions were found here  -> https://github.com/SFML/SFML/wiki/Tutorial:-Integrating-SFML-into-Qt
 
-#ifndef QSMLCANVAS_H
+/*#ifndef QSMLCANVAS_H
 #define QSMLCANVAS_H
 
 #include <qwidget.h>
@@ -33,4 +33,4 @@ private :
 };
 
 
-#endif // QSMLCANVAS_H
+#endif // QSMLCANVAS_H*/

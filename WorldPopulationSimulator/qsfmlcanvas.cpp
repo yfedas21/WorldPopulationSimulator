@@ -2,7 +2,7 @@
 //Largely adapted from 1.6 SFML tutorial -> https://www.sfml-dev.org/tutorials/1.6/graphics-qt.php
 //Many upgrade solutions were found here  -> https://github.com/SFML/SFML/wiki/Tutorial:-Integrating-SFML-into-Qt
 
-#include "qsfmlcanvas.h"
+/*#include "qsfmlcanvas.h"
 #include "SFML/Graphics.hpp"
 
 //(Fix ME https://github.com/SFML/SFML/wiki/Tutorial:-Integrating-SFML-into-Qt))
@@ -68,4 +68,4 @@ void QSFMLCanvas::paintEvent(QPaintEvent*)
 
     // Display on screen
     sf::Window::display();
-}
+}*/

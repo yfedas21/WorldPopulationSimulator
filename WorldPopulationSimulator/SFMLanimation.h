@@ -2,7 +2,7 @@
 //Largely adapted from 1.6 SFML tutorial -> https://www.sfml-dev.org/tutorials/1.6/graphics-qt.php
 //Many upgrade solutions were found here  -> https://github.com/SFML/SFML/wiki/Tutorial:-Integrating-SFML-into-Qt
 
-#ifndef SFMLANIMATION_H
+/*#ifndef SFMLANIMATION_H
 #define SFMLANIMATION_H
 
 #include "qsfmlcanvas.h"
@@ -47,4 +47,4 @@ private :
 };
 
 
-#endif // QSFMLANIMATION_H
+#endif // QSFMLANIMATION_H*/
