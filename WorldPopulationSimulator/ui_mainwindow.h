@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -28,7 +29,6 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "worldMapAnimation.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -49,7 +49,7 @@ public:
     QFormLayout *formLayout_2;
     QWidget *tab;
     QVBoxLayout *verticalLayout_4;
-    WorldMapAnimation *widget_2;
+    QGraphicsView *worldMapView;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -164,12 +164,11 @@ public:
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        widget_2 = new WorldMapAnimation(tab);
-        widget_2->setObjectName(QStringLiteral("widget_2"));
-        sizePolicy.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
-        widget_2->setSizePolicy(sizePolicy);
+        worldMapView = new QGraphicsView(tab);
+        worldMapView->setObjectName(QStringLiteral("worldMapView"));
+        worldMapView->setMaximumSize(QSize(16777215, 16777215));
 
-        verticalLayout_4->addWidget(widget_2);
+        verticalLayout_4->addWidget(worldMapView);
 
         tabWidget->addTab(tab, QString());
 
