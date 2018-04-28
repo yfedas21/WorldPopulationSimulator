@@ -9,6 +9,6 @@ WorldMapAnimation::WorldMapAnimation(QWidget *parent) : QWidget(parent)
 void WorldMapAnimation::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawArc(0,0,100,100,800,250);
+    painter.drawPixmap(0,0,1600,900,QPixmap("://Resources/WorldMap.png"));
     QWidget::paintEvent(e);
 }

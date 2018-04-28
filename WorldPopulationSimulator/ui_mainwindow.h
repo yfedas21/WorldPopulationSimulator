@@ -73,9 +73,9 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1080, 720));
-        MainWindow->setMaximumSize(QSize(1920, 1080));
+        MainWindow->setMaximumSize(QSize(1600, 1080));
         MainWindow->setSizeIncrement(QSize(5, 5));
-        MainWindow->setBaseSize(QSize(1920, 1080));
+        MainWindow->setBaseSize(QSize(1600, 1080));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
@@ -252,7 +252,7 @@ public:
         label->setText(QApplication::translate("MainWindow", "Runtime:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(quickSettingsTab), QApplication::translate("MainWindow", "Quick Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Advaced Settings", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation Test", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation", nullptr));
         pushButton_2->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "Reset Values", nullptr));
         menuWorld_Population_Simulator->setTitle(QApplication::translate("MainWindow", "File", nullptr));
