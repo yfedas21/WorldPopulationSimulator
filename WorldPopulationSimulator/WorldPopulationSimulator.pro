@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    worldMapFillLayer.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -33,7 +34,8 @@ HEADERS += \
     continent.h \
     disaster.h \
     simulation.h \
-    sim_helper.h
+    sim_helper.h \
+    worldMapFillLayer.h
 
 FORMS += \
         mainwindow.ui
