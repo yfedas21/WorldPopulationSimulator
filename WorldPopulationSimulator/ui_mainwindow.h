@@ -84,7 +84,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1080, 720);
+        MainWindow->resize(1600, 1080);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -164,6 +164,8 @@ public:
         formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setLabelAlignment(Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing);
         formLayout->setFormAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        formLayout->setHorizontalSpacing(10);
+        formLayout->setVerticalSpacing(20);
         label = new QLabel(quickSettingsTab);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -355,7 +357,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1080, 17));
+        menuBar->setGeometry(QRect(0, 0, 1600, 17));
         menuWorld_Population_Simulator = new QMenu(menuBar);
         menuWorld_Population_Simulator->setObjectName(QStringLiteral("menuWorld_Population_Simulator"));
         menuHelp = new QMenu(menuBar);
