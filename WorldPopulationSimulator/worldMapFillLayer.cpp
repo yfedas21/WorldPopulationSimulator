@@ -51,7 +51,7 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 }
 
 //Loads in the needed image
-//@param: landName - if not given a parameter will return full overlay
+//@param: landName - the name of globe part to get overlay layer for
 void worldMapFillLayer::setPixmap(std::string landName)
 {
     //Locate file in directory
