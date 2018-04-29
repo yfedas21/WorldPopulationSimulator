@@ -44,11 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //Central function that updates the entire map by going through each continent
 void MainWindow::updateAnim()
 {
-    qInfo("The animation was updated");
     for(int i = 0; i < (int)continents.size(); i++)
     {
         continents[i]->calculateState(running, population);
-        //continents[i]->update();
         QWidget* viewport = ui->worldMapView->viewport();
         viewport->repaint();
     }
@@ -57,8 +55,6 @@ void MainWindow::updateAnim()
 //Updates the population amount of each country
 void MainWindow::updatePopulation()
 {
-    QString debugInfo = "The population was updated at: " + QString::number(population);
-    qInfo(debugInfo.toLatin1());
     population++;
 }
 

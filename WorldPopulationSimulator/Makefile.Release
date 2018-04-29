@@ -235,25 +235,17 @@ release/moc_mainwindow.cpp: ../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/Q
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
 		worldMapFillLayer.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QStyleOptionGraphicsItem \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/QPainter \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsItem \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsitem.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		mainwindow.h \
 		release/moc_predefs.h \
 		../../../../Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -397,25 +389,17 @@ release/main.o: main.cpp mainwindow.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
 		worldMapFillLayer.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QStyleOptionGraphicsItem \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/QPainter \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsItem \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsitem.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QApplication \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qapplication.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
@@ -540,25 +524,17 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
 		worldMapFillLayer.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QStyleOptionGraphicsItem \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/QPainter \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsItem \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsitem.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		ui_mainwindow.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/QVariant \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QAction \
@@ -584,8 +560,18 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QHeaderView \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qheaderview.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QLabel \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qlabel.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QLineEdit \
@@ -605,7 +591,8 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QTabWidget \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QToolBar \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtoolbar.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QVBoxLayout
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QVBoxLayout \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o mainwindow.cpp
 
 release/worldMapFillLayer.o: worldMapFillLayer.cpp worldMapFillLayer.h \
@@ -687,54 +674,45 @@ release/worldMapFillLayer.o: worldMapFillLayer.cpp worldMapFillLayer.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qline.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainterpath.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QStyleOptionGraphicsItem \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/QPainter \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qbrush.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qfont.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qfontmetrics.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qfontinfo.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qwidget.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpalette.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qcursor.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qkeysequence.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qevent.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qurl.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qurlquery.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qfile.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvector2d.h \
 		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtouchdevice.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qvalidator.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qicon.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qstyle.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qtabwidget.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qframe.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QWidget \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsView \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsview.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpainter.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qtextoption.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtGui/qpen.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qscrollarea.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsscene.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsScene \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/QGraphicsItem \
+		../../../../Qt/5.10.1/mingw53_32/include/QtWidgets/qgraphicsitem.h \
+		../../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\worldMapFillLayer.o worldMapFillLayer.cpp
 
 release/qrc_resources.o: release/qrc_resources.cpp 
