@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "worldMapFillLayer.h"
 #include "ui_mainwindow.h"
 
 #include <QDebug>
@@ -32,12 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
     scene->addPixmap(worldMapView);
 
     //Create continent overalys FIX ME implement actual induvidual continents
-    worldMapFillLayer allContinents("Other", 10);
+    worldMapFillLayer* allContinents = new worldMapFillLayer("Other", 10, 1.0, 0.0);
     continents.push_back(allContinents);
 
     //Add continent layers to scene
     addContinentsToScene();
-    scene->addPixmap(continents[0].getFillImage());
     updateAnim();
 }
 
@@ -47,10 +47,11 @@ void MainWindow::updateAnim()
     qInfo("The animation was updated");
     for(int i = 0; i < (int)continents.size(); i++)
     {
-        continents[i].calculateState(running, population);
+        continents[i]->calculateState(running, population);
+        //continents[i]->update();
+        QWidget* viewport = ui->worldMapView->viewport();
+        viewport->repaint();
     }
-
-    ui->worldMapView->repaint();
 }
 
 //Updates the population amount of each country
@@ -65,7 +66,7 @@ void MainWindow::updatePopulation()
 void MainWindow::addContinentsToScene()
 {
     for(int i = 0; i < (int)continents.size(); i++)
-        scene->addPixmap(continents[i].getFillImage());
+        scene->addItem(continents[i]);
 }
 
 MainWindow::~MainWindow()

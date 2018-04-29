@@ -32,7 +32,7 @@ private:
     QPixmap worldMapFillView;
     QTimer *timer;
     QTimer *simTimer;
-    std::vector<worldMapFillLayer> continents;
+    std::vector<worldMapFillLayer*> continents;
 
     //temp test variables
     int population = 0;

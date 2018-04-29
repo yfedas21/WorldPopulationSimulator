@@ -32,18 +32,18 @@ void worldMapFillLayer::calculateState(bool running, double population)
         fillOpacity = 0.0;
 
     fillOpacity = std::fmin(1, (population/landArea) * fillMultiplier);
-    std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
-              << population << "/" << landArea << " * " << fillMultiplier << std::endl;
-    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
+    
+    //For DEBUG
+    //std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
+    //          << population << "/" << landArea << " * " << fillMultiplier << std::endl;
 }
 
 //Paints the layer on the map
 void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    std::cout << "Repainted with fill opacity: " << std::showpoint << std::fixed << std::setprecision(4)<< fillOpacity << std::endl;
-
     painter->setOpacity(fillOpacity);
     painter->drawPixmap(0,0,1510,744, fillImage);
+    
 }
 
 //Loads in the needed image
