@@ -1,0 +1,6 @@
+#include "worldMapFillLayer.h"
+
+worldMapAnimation::worldMapAnimation()
+{
+
+}

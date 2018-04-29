@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,7 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    qsfmlcanvas.cpp
+    worldMapFillLayer.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -35,19 +35,10 @@ HEADERS += \
     disaster.h \
     simulation.h \
     sim_helper.h \
-    qsfmlcanvas.h \
-    qsfmlcanvas.h \
-    SFMLanimation.h
+    worldMapFillLayer.h
 
 FORMS += \
         mainwindow.ui
 
-
-#SFML LIBRARY INCLUSION
-INCLUDEPATH += $$PWD/includeSF
-DEPENDPATH += $$PWD/includeSF
-
-LIBS += -L$$PWD/..\LIBS\
-
-CONFIG(debug, debug|release): LIBS+= -lsfml-audio-d -lsfml-system-d -lsfml-network-d -lsfml-main-d -lsfml-window-d -lsfml-graphics-d
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-system -lsfml-network -lsfml-main -lsfml-window -lsfml-graphics
+RESOURCES += \
+    resources.qrc
