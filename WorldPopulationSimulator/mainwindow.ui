@@ -118,7 +118,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="quickSettingsTab">
        <attribute name="title">
@@ -420,6 +420,16 @@
        <attribute name="title">
         <string>Simulation Test</string>
        </attribute>
+       <widget class="QGraphicsView" name="worldMapView">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1581</width>
+          <height>811</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

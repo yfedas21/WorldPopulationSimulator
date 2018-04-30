@@ -66,7 +66,6 @@ public:
     QVBoxLayout *verticalLayout_3;
     QFormLayout *formLayout_2;
     QWidget *tab;
-    QVBoxLayout *verticalLayout_4;
     QGraphicsView *worldMapView;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
@@ -91,9 +90,9 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1080, 720));
-        MainWindow->setMaximumSize(QSize(1600, 1080));
+        MainWindow->setMaximumSize(QSize(1920, 1080));
         MainWindow->setSizeIncrement(QSize(5, 5));
-        MainWindow->setBaseSize(QSize(1600, 1080));
+        MainWindow->setBaseSize(QSize(1920, 1080));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
@@ -293,16 +292,9 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_4 = new QVBoxLayout(tab);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         worldMapView = new QGraphicsView(tab);
         worldMapView->setObjectName(QStringLiteral("worldMapView"));
-        worldMapView->setMaximumSize(QSize(16777215, 16777215));
-
-        verticalLayout_4->addWidget(worldMapView);
-
+        worldMapView->setGeometry(QRect(0, 0, 1581, 811));
         tabWidget->addTab(tab, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -329,11 +321,7 @@ public:
         sizePolicy7.setVerticalStretch(1);
         sizePolicy7.setHeightForWidth(beginSimBtn->sizePolicy().hasHeightForWidth());
         beginSimBtn->setSizePolicy(sizePolicy7);
-        beginSimBtn->setMinimumSize(QSize(150, 50));
-        QFont font3;
-        font3.setFamily(QStringLiteral("Simplex_IV50"));
-        font3.setPointSize(10);
-        beginSimBtn->setFont(font3);
+        beginSimBtn->setMinimumSize(QSize(150, 40));
 
         horizontalLayout->addWidget(beginSimBtn);
 
@@ -341,9 +329,8 @@ public:
         resetSimBtn->setObjectName(QStringLiteral("resetSimBtn"));
         sizePolicy7.setHeightForWidth(resetSimBtn->sizePolicy().hasHeightForWidth());
         resetSimBtn->setSizePolicy(sizePolicy7);
-        resetSimBtn->setMinimumSize(QSize(150, 50));
-        resetSimBtn->setBaseSize(QSize(150, 50));
-        resetSimBtn->setFont(font3);
+        resetSimBtn->setMinimumSize(QSize(150, 40));
+        resetSimBtn->setBaseSize(QSize(150, 40));
 
         horizontalLayout->addWidget(resetSimBtn);
 
@@ -376,7 +363,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -406,7 +393,7 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Start Date:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(quickSettingsTab), QApplication::translate("MainWindow", "Quick Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Advaced Settings", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation Test", nullptr));
         beginSimBtn->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
         resetSimBtn->setText(QApplication::translate("MainWindow", "Reset Simulation", nullptr));
         menuWorld_Population_Simulator->setTitle(QApplication::translate("MainWindow", "File", nullptr));
