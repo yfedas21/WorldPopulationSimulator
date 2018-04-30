@@ -2,5 +2,11 @@
     <qresource prefix="/">
         <file>Resources/WorldMap.png</file>
         <file>Resources/WorldMapFilled.png</file>
+        <file>Resources/Africa.png</file>
+        <file>Resources/Asia.png</file>
+        <file>Resources/Australia.png</file>
+        <file>Resources/Europe.png</file>
+        <file>Resources/NorthAmerica.png</file>
+        <file>Resources/SouthAmerica.png</file>
     </qresource>
 </RCC>

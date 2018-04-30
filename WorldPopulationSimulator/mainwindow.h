@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <vector>
 #include "worldMapFillLayer.h"
+#include "sim_helper.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,11 +20,27 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     void addContinentsToScene();
+    void createContinentOverlays();
     ~MainWindow();
 
 public Q_SLOTS:
     void updateAnim();
     void updatePopulation();
+
+private slots:
+    void on_beginSimBtn_clicked();
+
+    void on_resetSimBtn_clicked();
+
+    void on_simRuntimeInput_textEdited(const QString &arg1);
+
+    void on_enableDisastersInput_toggled(bool checked);
+
+    void on_enableMigrationInput_toggled(bool checked);
+
+    void on_continentFocusInput_currentTextChanged(const QString &arg1);
+
+    void on_startDateInput_dateChanged(const QDate &date);
 
 private:
     Ui::MainWindow *ui;
@@ -33,10 +50,11 @@ private:
     QTimer *timer;
     QTimer *simTimer;
     std::vector<worldMapFillLayer*> continents;
+    Sim_Helper *simInfo;
 
     //temp test variables
     int population = 0;
-    bool running = true; //Tells wether simulation is running (FIX ME: Should be false at start)
+    bool running = false; //Tells wether simulation is running
 };
 
 #endif // MAINWINDOW_H
