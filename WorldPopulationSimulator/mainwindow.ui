@@ -6,6 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
+    <width>1080</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -116,11 +118,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-<<<<<<< HEAD
        <number>1</number>
-=======
-       <number>0</number>
->>>>>>> 1abd6b5484fe4252d772fc1863a59fd410c4eaee
       </property>
       <widget class="QWidget" name="quickSettingsTab">
        <attribute name="title">
@@ -454,7 +452,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
         <widget class="QPushButton" name="beginSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -480,7 +477,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
         <widget class="QPushButton" name="resetSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -507,6 +503,7 @@
           </font>
          </property>
          <property name="text">
+          <string>Reset Simulation</string>
          </property>
         </widget>
        </item>
@@ -533,6 +530,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
+     <width>1080</width>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuWorld_Population_Simulator">
