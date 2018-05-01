@@ -6,8 +6,6 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>720</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -457,6 +455,7 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="beginSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -482,6 +481,7 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="resetSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -507,7 +507,6 @@
           </font>
          </property>
          <property name="text">
-          <string>Reset Values</string>
          </property>
         </widget>
        </item>
@@ -534,8 +533,6 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1080</width>
-     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuWorld_Population_Simulator">
