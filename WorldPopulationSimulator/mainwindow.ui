@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>720</height>
+    <width>1600</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -118,7 +118,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="quickSettingsTab">
        <attribute name="title">
@@ -188,7 +188,7 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="textbox_runtime">
+                 <widget class="QLineEdit" name="simRuntimeInput">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>1</horstretch>
@@ -238,7 +238,7 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QCheckBox" name="checkBox">
+                 <widget class="QCheckBox" name="enableDisasterInput">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -270,7 +270,7 @@
                  </widget>
                 </item>
                 <item row="3" column="1">
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="continentFocusInput">
                   <property name="currentText">
                    <string>No</string>
                   </property>
@@ -325,7 +325,7 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QCheckBox" name="checkBox_2">
+                 <widget class="QCheckBox" name="enableMigrationInput">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -351,7 +351,7 @@
                  </widget>
                 </item>
                 <item row="4" column="1">
-                 <widget class="QDateEdit" name="dateEdit">
+                 <widget class="QDateEdit" name="startDateInput">
                   <property name="dateTime">
                    <datetime>
                     <hour>0</hour>
@@ -530,7 +530,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1080</width>
+     <width>1600</width>
      <height>17</height>
     </rect>
    </property>
