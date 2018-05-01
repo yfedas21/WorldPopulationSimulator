@@ -51,28 +51,27 @@ public:
     QSpacerItem *verticalSpacer_2;
     QFormLayout *formLayout;
     QLabel *label;
-    QLineEdit *textbox_runtime;
+    QLineEdit *simRuntimeInput;
     QLabel *label_3;
-    QCheckBox *checkBox;
+    QCheckBox *enableDisastersInput;
     QLabel *label_4;
-    QComboBox *comboBox;
+    QComboBox *continentFocusInput;
     QLabel *label_5;
-    QCheckBox *checkBox_2;
+    QCheckBox *enableMigrationInput;
     QLabel *label_6;
-    QDateEdit *dateEdit;
+    QDateEdit *startDateInput;
     QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer_4;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_3;
     QFormLayout *formLayout_2;
     QWidget *tab;
-    QVBoxLayout *verticalLayout_4;
     QGraphicsView *worldMapView;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
+    QPushButton *beginSimBtn;
+    QPushButton *resetSimBtn;
     QSpacerItem *horizontalSpacer_3;
     QMenuBar *menuBar;
     QMenu *menuWorld_Population_Simulator;
@@ -84,16 +83,16 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1080, 720);
+        MainWindow->resize(1600, 1080);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1080, 720));
-        MainWindow->setMaximumSize(QSize(1600, 1080));
+        MainWindow->setMaximumSize(QSize(1920, 1080));
         MainWindow->setSizeIncrement(QSize(5, 5));
-        MainWindow->setBaseSize(QSize(1600, 1080));
+        MainWindow->setBaseSize(QSize(1920, 1080));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
@@ -164,6 +163,8 @@ public:
         formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setLabelAlignment(Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing);
         formLayout->setFormAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        formLayout->setHorizontalSpacing(10);
+        formLayout->setVerticalSpacing(20);
         label = new QLabel(quickSettingsTab);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -179,15 +180,15 @@ public:
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
-        textbox_runtime = new QLineEdit(quickSettingsTab);
-        textbox_runtime->setObjectName(QStringLiteral("textbox_runtime"));
-        sizePolicy3.setHeightForWidth(textbox_runtime->sizePolicy().hasHeightForWidth());
-        textbox_runtime->setSizePolicy(sizePolicy3);
-        textbox_runtime->setMaximumSize(QSize(16777215, 40));
-        textbox_runtime->setMaxLength(32770);
-        textbox_runtime->setClearButtonEnabled(false);
+        simRuntimeInput = new QLineEdit(quickSettingsTab);
+        simRuntimeInput->setObjectName(QStringLiteral("simRuntimeInput"));
+        sizePolicy3.setHeightForWidth(simRuntimeInput->sizePolicy().hasHeightForWidth());
+        simRuntimeInput->setSizePolicy(sizePolicy3);
+        simRuntimeInput->setMaximumSize(QSize(16777215, 40));
+        simRuntimeInput->setMaxLength(32770);
+        simRuntimeInput->setClearButtonEnabled(false);
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, textbox_runtime);
+        formLayout->setWidget(0, QFormLayout::FieldRole, simRuntimeInput);
 
         label_3 = new QLabel(quickSettingsTab);
         label_3->setObjectName(QStringLiteral("label_3"));
@@ -201,16 +202,16 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_3);
 
-        checkBox = new QCheckBox(quickSettingsTab);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
+        enableDisastersInput = new QCheckBox(quickSettingsTab);
+        enableDisastersInput->setObjectName(QStringLiteral("enableDisastersInput"));
         QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Expanding);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
-        checkBox->setSizePolicy(sizePolicy5);
-        checkBox->setIconSize(QSize(12, 12));
+        sizePolicy5.setHeightForWidth(enableDisastersInput->sizePolicy().hasHeightForWidth());
+        enableDisastersInput->setSizePolicy(sizePolicy5);
+        enableDisastersInput->setIconSize(QSize(12, 12));
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, checkBox);
+        formLayout->setWidget(1, QFormLayout::FieldRole, enableDisastersInput);
 
         label_4 = new QLabel(quickSettingsTab);
         label_4->setObjectName(QStringLiteral("label_4"));
@@ -218,17 +219,17 @@ public:
 
         formLayout->setWidget(3, QFormLayout::LabelRole, label_4);
 
-        comboBox = new QComboBox(quickSettingsTab);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        continentFocusInput = new QComboBox(quickSettingsTab);
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->addItem(QString());
+        continentFocusInput->setObjectName(QStringLiteral("continentFocusInput"));
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, comboBox);
+        formLayout->setWidget(3, QFormLayout::FieldRole, continentFocusInput);
 
         label_5 = new QLabel(quickSettingsTab);
         label_5->setObjectName(QStringLiteral("label_5"));
@@ -236,12 +237,12 @@ public:
 
         formLayout->setWidget(2, QFormLayout::LabelRole, label_5);
 
-        checkBox_2 = new QCheckBox(quickSettingsTab);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
-        sizePolicy5.setHeightForWidth(checkBox_2->sizePolicy().hasHeightForWidth());
-        checkBox_2->setSizePolicy(sizePolicy5);
+        enableMigrationInput = new QCheckBox(quickSettingsTab);
+        enableMigrationInput->setObjectName(QStringLiteral("enableMigrationInput"));
+        sizePolicy5.setHeightForWidth(enableMigrationInput->sizePolicy().hasHeightForWidth());
+        enableMigrationInput->setSizePolicy(sizePolicy5);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, checkBox_2);
+        formLayout->setWidget(2, QFormLayout::FieldRole, enableMigrationInput);
 
         label_6 = new QLabel(quickSettingsTab);
         label_6->setObjectName(QStringLiteral("label_6"));
@@ -249,11 +250,11 @@ public:
 
         formLayout->setWidget(4, QFormLayout::LabelRole, label_6);
 
-        dateEdit = new QDateEdit(quickSettingsTab);
-        dateEdit->setObjectName(QStringLiteral("dateEdit"));
-        dateEdit->setDateTime(QDateTime(QDate(2018, 4, 29), QTime(0, 0, 0)));
+        startDateInput = new QDateEdit(quickSettingsTab);
+        startDateInput->setObjectName(QStringLiteral("startDateInput"));
+        startDateInput->setDateTime(QDateTime(QDate(2018, 4, 29), QTime(0, 0, 0)));
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, dateEdit);
+        formLayout->setWidget(4, QFormLayout::FieldRole, startDateInput);
 
 
         verticalLayout_6->addLayout(formLayout);
@@ -291,16 +292,9 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_4 = new QVBoxLayout(tab);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         worldMapView = new QGraphicsView(tab);
         worldMapView->setObjectName(QStringLiteral("worldMapView"));
-        worldMapView->setMaximumSize(QSize(16777215, 16777215));
-
-        verticalLayout_4->addWidget(worldMapView);
-
+        worldMapView->setGeometry(QRect(0, 0, 1581, 811));
         tabWidget->addTab(tab, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -320,30 +314,25 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        beginSimBtn = new QPushButton(widget);
+        beginSimBtn->setObjectName(QStringLiteral("beginSimBtn"));
         QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy7.setHorizontalStretch(0);
         sizePolicy7.setVerticalStretch(1);
-        sizePolicy7.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
-        pushButton_2->setSizePolicy(sizePolicy7);
-        pushButton_2->setMinimumSize(QSize(150, 50));
-        QFont font3;
-        font3.setFamily(QStringLiteral("Simplex_IV50"));
-        font3.setPointSize(10);
-        pushButton_2->setFont(font3);
+        sizePolicy7.setHeightForWidth(beginSimBtn->sizePolicy().hasHeightForWidth());
+        beginSimBtn->setSizePolicy(sizePolicy7);
+        beginSimBtn->setMinimumSize(QSize(150, 40));
 
-        horizontalLayout->addWidget(pushButton_2);
+        horizontalLayout->addWidget(beginSimBtn);
 
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        sizePolicy7.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy7);
-        pushButton->setMinimumSize(QSize(150, 50));
-        pushButton->setBaseSize(QSize(150, 50));
-        pushButton->setFont(font3);
+        resetSimBtn = new QPushButton(widget);
+        resetSimBtn->setObjectName(QStringLiteral("resetSimBtn"));
+        sizePolicy7.setHeightForWidth(resetSimBtn->sizePolicy().hasHeightForWidth());
+        resetSimBtn->setSizePolicy(sizePolicy7);
+        resetSimBtn->setMinimumSize(QSize(150, 40));
+        resetSimBtn->setBaseSize(QSize(150, 40));
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(resetSimBtn);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -355,7 +344,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1080, 17));
+        menuBar->setGeometry(QRect(0, 0, 1600, 17));
         menuWorld_Population_Simulator = new QMenu(menuBar);
         menuWorld_Population_Simulator->setObjectName(QStringLiteral("menuWorld_Population_Simulator"));
         menuHelp = new QMenu(menuBar);
@@ -374,7 +363,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -385,28 +374,28 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "World Population Simulator", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Welcome to the World Population Simulator!", nullptr));
         label->setText(QApplication::translate("MainWindow", "Simulation Runtime (Days):", nullptr));
-        textbox_runtime->setInputMask(QString());
-        textbox_runtime->setText(QString());
+        simRuntimeInput->setInputMask(QString());
+        simRuntimeInput->setText(QString());
         label_3->setText(QApplication::translate("MainWindow", "Enable Disasters?", nullptr));
-        checkBox->setText(QString());
+        enableDisastersInput->setText(QString());
         label_4->setText(QApplication::translate("MainWindow", "Focus On One Continent?", nullptr));
-        comboBox->setItemText(0, QApplication::translate("MainWindow", "No", nullptr));
-        comboBox->setItemText(1, QApplication::translate("MainWindow", "Africa", nullptr));
-        comboBox->setItemText(2, QApplication::translate("MainWindow", "Asia", nullptr));
-        comboBox->setItemText(3, QApplication::translate("MainWindow", "Australia", nullptr));
-        comboBox->setItemText(4, QApplication::translate("MainWindow", "Europe", nullptr));
-        comboBox->setItemText(5, QApplication::translate("MainWindow", "North America", nullptr));
-        comboBox->setItemText(6, QApplication::translate("MainWindow", "South America", nullptr));
+        continentFocusInput->setItemText(0, QApplication::translate("MainWindow", "No", nullptr));
+        continentFocusInput->setItemText(1, QApplication::translate("MainWindow", "Africa", nullptr));
+        continentFocusInput->setItemText(2, QApplication::translate("MainWindow", "Asia", nullptr));
+        continentFocusInput->setItemText(3, QApplication::translate("MainWindow", "Australia", nullptr));
+        continentFocusInput->setItemText(4, QApplication::translate("MainWindow", "Europe", nullptr));
+        continentFocusInput->setItemText(5, QApplication::translate("MainWindow", "North America", nullptr));
+        continentFocusInput->setItemText(6, QApplication::translate("MainWindow", "South America", nullptr));
 
-        comboBox->setCurrentText(QApplication::translate("MainWindow", "No", nullptr));
+        continentFocusInput->setCurrentText(QApplication::translate("MainWindow", "No", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Enable Migration?", nullptr));
-        checkBox_2->setText(QString());
+        enableMigrationInput->setText(QString());
         label_6->setText(QApplication::translate("MainWindow", "Start Date:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(quickSettingsTab), QApplication::translate("MainWindow", "Quick Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Advaced Settings", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "Reset Values", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation Test", nullptr));
+        beginSimBtn->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
+        resetSimBtn->setText(QApplication::translate("MainWindow", "Reset Simulation", nullptr));
         menuWorld_Population_Simulator->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
