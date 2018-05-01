@@ -6,6 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
+    <width>1600</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -167,6 +169,15 @@
                 <property name="formAlignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                 </property>
+<<<<<<< HEAD
+=======
+                <property name="horizontalSpacing">
+                 <number>10</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>20</number>
+                </property>
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                 <item row="0" column="0">
                  <widget class="QLabel" name="label">
                   <property name="sizePolicy">
@@ -190,7 +201,11 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
+<<<<<<< HEAD
                  <widget class="QLineEdit" name="textbox_runtime">
+=======
+                 <widget class="QLineEdit" name="simRuntimeInput">
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>1</horstretch>
@@ -240,7 +255,11 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
+<<<<<<< HEAD
                  <widget class="QCheckBox" name="checkBox">
+=======
+                 <widget class="QCheckBox" name="enableDisastersInput">
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -272,7 +291,11 @@
                  </widget>
                 </item>
                 <item row="3" column="1">
+<<<<<<< HEAD
                  <widget class="QComboBox" name="comboBox">
+=======
+                 <widget class="QComboBox" name="continentFocusInput">
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                   <property name="currentText">
                    <string>No</string>
                   </property>
@@ -327,7 +350,11 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
+<<<<<<< HEAD
                  <widget class="QCheckBox" name="checkBox_2">
+=======
+                 <widget class="QCheckBox" name="enableMigrationInput">
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -353,7 +380,11 @@
                  </widget>
                 </item>
                 <item row="4" column="1">
+<<<<<<< HEAD
                  <widget class="QDateEdit" name="dateEdit">
+=======
+                 <widget class="QDateEdit" name="startDateInput">
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                   <property name="dateTime">
                    <datetime>
                     <hour>0</hour>
@@ -416,6 +447,7 @@
        <attribute name="title">
         <string>Simulation</string>
        </attribute>
+<<<<<<< HEAD
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QGraphicsView" name="worldMapView">
@@ -428,6 +460,18 @@
          </widget>
         </item>
        </layout>
+=======
+       <widget class="QGraphicsView" name="worldMapView">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1581</width>
+          <height>811</height>
+         </rect>
+        </property>
+       </widget>
+>>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
       </widget>
      </widget>
     </item>
@@ -454,7 +498,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
         <widget class="QPushButton" name="beginSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -480,7 +523,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
         <widget class="QPushButton" name="resetSimBtn">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -507,6 +549,7 @@
           </font>
          </property>
          <property name="text">
+          <string>Reset Simulation</string>
          </property>
         </widget>
        </item>
@@ -533,6 +576,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
+     <width>1600</width>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuWorld_Population_Simulator">
