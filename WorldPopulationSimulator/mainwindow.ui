@@ -118,11 +118,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-<<<<<<< HEAD
-       <number>1</number>
-=======
        <number>0</number>
->>>>>>> 1abd6b5484fe4252d772fc1863a59fd410c4eaee
       </property>
       <widget class="QWidget" name="quickSettingsTab">
        <attribute name="title">
