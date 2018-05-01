@@ -4,14 +4,30 @@
 #include <stdexcept>
 #include <ios>
 #include <string>
+#include <vector>
 #include "globe.h"
+#include "continent.h"
 
 class Simulation {
 private:
-    // some private variables
+    int total_time; // total number of days to run the simulation
+    int day; // current day
+
+    // Create a new globe at simulation init
+    Globe *g;
+
 public:
     Simulation() {
-        // default constructor
+        g = new Globe();
+    }
+
+    void run_simulation() {
+        for (int clock = 0; clock < total_time; clock++) {
+            // update each continent as each day goes by ...
+            for (int cont = 0; cont < continents->size(); cont++){
+                continents->at(cont).update(clock);
+            }
+        }
     }
 }
 

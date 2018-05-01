@@ -34,6 +34,10 @@ public:
     double get_population() {
         return population;
     }
+
+    void update(int day) {
+        // do some cool things here...
+    }
 }
 
 #endif // CONTINENT_H
