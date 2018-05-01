@@ -2,6 +2,8 @@
 #define CONTINENT_H
 
 #include <string>
+#include "sim_helper.h"
+
 using std::string;
 
 class Continent {
@@ -37,6 +39,13 @@ public:
 
     void update(int day) {
         // do some cool things here...
+
+
+        double d = Sim_Helper::calculate_probability(12.0, 23.0);
+
+
+
+
     }
 }
 
