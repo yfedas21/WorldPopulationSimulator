@@ -14,45 +14,45 @@
 
 
 /*/ Global /*/
-global_population = 7468138529 
+global_population = 7468138529 <-- Make sure you can access this
 /*/ End_Global /*/
 
 /*/ Africa /*/
-population = 1287920518
+1287920518
 0.0292
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate = 1.2
-flood_deaths = 12
-thunderstorm_rate = 12
-thunderstorm_deaths = 12
+0
+0
+3
+15
+26
+3874
+3
+0
+6
+400
+20
+300
+100000
+500
 /*/ End_Africa /*/
 
 /*/ Antarctica /*/
-population = 1106   
-net_growth = 0    
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate
-flood_deaths
-thunderstorm_rate
-thunderstorm_deaths
+1106
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
 /*/ End_Antarctica /*/
 
 /*/ Asia /*/
@@ -75,86 +75,87 @@ thunderstorm_deaths
 /*/ End_Asia /*/
 
 /*/ Australia /*/
-population = 39901000  
-net_growth = 0.0154    
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate
-flood_deaths
-thunderstorm_rate
-thunderstorm_deaths
+39901000
+0.0154
+13
+16
+16
+5
+1
+0
+0
+0
+0
+0
+2
+5
+320
+0
 /*/ End_Australia /*/
 
 /*/ Europe /*/
-population = 742648010  
-net_growth = 0.0008   
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate
-flood_deaths
-thunderstorm_rate
-thunderstorm_deaths
+742648010
+0.0008
+1
+3
+300
+5
+3
+1056
+43
+3
+23
+1334
+11
+242
+2000000
+20
 /*/ End_Europe /*/
 
 /*/ North_America /*/
-population = 579000000  
-net_growth = 0.0096     
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate
-flood_deaths
-thunderstorm_rate
-thunderstorm_deaths
+579000000
+0.0096
+15
+315
+1000
+80
+41
+89
+80
+540
+12
+50
+19
+91
+100000
+315
 /*/ End_North_America /*/
 
 /*/ South America /*/
-population = 422535000  
-net_growth = 0.0104  
-hurricane_rate = 1.2
-hurricane_deaths = 1.2
-tornado_rate = 1.1
-tornado_deaths = 1.2
-earthquake_rate = 1.1
-earthquake_deaths = 1.2
-volcano_rate = 2.3
-volcano_deaths = 12
-landslide_rate = 1.2
-landslide_deaths = 2.3
-flood_rate
-flood_deaths
-thunderstorm_rate
-thunderstorm_deaths
+422535000
+0.0104
+2
+4
+32
+5
+1043
+13559
+50
+2
+11
+362
+6
+73
+1200000
+322
 /*/ End_South_America /*/
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 This is the text file that contains initial populations, 
 rates of change, disasters that occur, and other 
 continental information. 
 
-&-&-& HERE IS THE INTERPRETATION -&-&-&
+****** HERE IS THE INTERPRETATION ******
 
 /*/ <Continent_Name> /*/
 value 1: population 
@@ -176,3 +177,4 @@ value 16: thunderstorm_deaths
 /*/ End_<Continent_Name> /*/
 
 Written by Yuriy Fedas, May 5th, 2018
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
