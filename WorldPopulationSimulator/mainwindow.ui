@@ -198,10 +198,14 @@
                 </item>
                 <item row="0" column="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <widget class="QLineEdit" name="textbox_runtime">
 =======
                  <widget class="QLineEdit" name="simRuntimeInput">
 >>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
+=======
+                 <widget class="QLineEdit" name="simRuntimeInput">
+>>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>1</horstretch>
@@ -252,10 +256,14 @@
                 </item>
                 <item row="1" column="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <widget class="QCheckBox" name="checkBox">
 =======
                  <widget class="QCheckBox" name="enableDisastersInput">
 >>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
+=======
+                 <widget class="QCheckBox" name="enableDisasterInput">
+>>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -288,10 +296,14 @@
                 </item>
                 <item row="3" column="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <widget class="QComboBox" name="comboBox">
 =======
                  <widget class="QComboBox" name="continentFocusInput">
 >>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
+=======
+                 <widget class="QComboBox" name="continentFocusInput">
+>>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="currentText">
                    <string>No</string>
                   </property>
@@ -347,10 +359,14 @@
                 </item>
                 <item row="2" column="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <widget class="QCheckBox" name="checkBox_2">
 =======
                  <widget class="QCheckBox" name="enableMigrationInput">
 >>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
+=======
+                 <widget class="QCheckBox" name="enableMigrationInput">
+>>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -377,10 +393,14 @@
                 </item>
                 <item row="4" column="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
                  <widget class="QDateEdit" name="dateEdit">
 =======
                  <widget class="QDateEdit" name="startDateInput">
 >>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
+=======
+                 <widget class="QDateEdit" name="startDateInput">
+>>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="dateTime">
                    <datetime>
                     <hour>0</hour>

@@ -21,6 +21,10 @@ public:
         g = new Globe();
     }
 
+    Globe* get_globe() {
+        return g;
+    }
+
     void run_simulation() {
         for (int clock = 0; clock < total_time; clock++) {
             // update each continent as each day goes by ...
