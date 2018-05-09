@@ -24,18 +24,6 @@ private:
 		this->values_vec = Utility::create_structs(mapping);
 	}
 
-	/**
-		Search the map container for disaster_code 
-		to line number mapping
-		@return the line number relative to the continent block
-	*/
-	int find_in_map(string dis_code) {
-		// the disaster_code exists
-		if (mapping.find(dis_code) != mapping.end()) {
-			return mapping[dis_code];
-		}
-	}
-
 	std::vector<Continent *> create_continents(values) {
 		std::vector<Continent*> cont;
 

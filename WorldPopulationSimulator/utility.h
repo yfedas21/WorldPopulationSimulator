@@ -101,7 +101,6 @@ public:
 			// unable to open file
 
 			// *** Add GUI messagebox popup here ***
-
 		}
 		
 
@@ -185,6 +184,107 @@ public:
 		Africa.thunderstorm_rate = read_value(find_line_number(af, find_in_map(thr, mapping)));
 		Africa.thunderstorm_deaths = read_value(find_line_number(af, find_in_map(thd, mapping)));
 
+		values Antarctica(an);
+		Antarctica.population = read_value(find_line_number(an, find_in_map(pop, mapping)));
+		Antarctica.hurricane_rate = read_value(find_line_number(an, find_in_map(hr, mapping)));
+		Antarctica.hurricane_deaths = read_value(find_line_number(an, find_in_map(hd, mapping)));
+		Antarctica.tornado_rate = read_value(find_line_number(an, find_in_map(tr, mapping)));
+		Antarctica.tornado_deaths = read_value(find_line_number(an, find_in_map(td, mapping)));
+		Antarctica.earthquake_rate = read_value(find_line_number(an, find_in_map(er, mapping)));
+		Antarctica.earthquake_deaths = read_value(find_line_number(an, find_in_map(ed, mapping)));
+		Antarctica.volcano_rate = read_value(find_line_number(an, find_in_map(vr, mapping)));
+		Antarctica.volcano_deaths = read_value(find_line_number(an, find_in_map(vd, mapping)));
+		Antarctica.landslide_rate = read_value(find_line_number(an, find_in_map(lr, mapping)));
+		Antarctica.landslide_deaths = read_value(find_line_number(an, find_in_map(ld, mapping)));
+		Antarctica.flood_rate = read_value(find_line_number(an, find_in_map(fr, mapping)));
+		Antarctica.flood_deaths = read_value(find_line_number(an, find_in_map(fd, mapping)));
+		Antarctica.thunderstorm_rate = read_value(find_line_number(an, find_in_map(thr, mapping)));
+		Antarctica.thunderstorm_deaths = read_value(find_line_number(an, find_in_map(thd, mapping)));
+
+		values Asia(as);
+		Asia.population = read_value(find_line_number(as, find_in_map(pop, mapping)));
+		Asia.hurricane_rate = read_value(find_line_number(as, find_in_map(hr, mapping)));
+		Asia.hurricane_deaths = read_value(find_line_number(as, find_in_map(hd, mapping)));
+		Asia.tornado_rate = read_value(find_line_number(as, find_in_map(tr, mapping)));
+		Asia.tornado_deaths = read_value(find_line_number(as, find_in_map(td, mapping)));
+		Asia.earthquake_rate = read_value(find_line_number(as, find_in_map(er, mapping)));
+		Asia.earthquake_deaths = read_value(find_line_number(as, find_in_map(ed, mapping)));
+		Asia.volcano_rate = read_value(find_line_number(as, find_in_map(vr, mapping)));
+		Asia.volcano_deaths = read_value(find_line_number(as, find_in_map(vd, mapping)));
+		Asia.landslide_rate = read_value(find_line_number(as, find_in_map(lr, mapping)));
+		Asia.landslide_deaths = read_value(find_line_number(as, find_in_map(ld, mapping)));
+		Asia.flood_rate = read_value(find_line_number(as, find_in_map(fr, mapping)));
+		Asia.flood_deaths = read_value(find_line_number(as, find_in_map(fd, mapping)));
+		Asia.thunderstorm_rate = read_value(find_line_number(as, find_in_map(thr, mapping)));
+		Asia.thunderstorm_deaths = read_value(find_line_number(as, find_in_map(thd, mapping)));
+
+		values Australia(au);
+		Australia.population = read_value(find_line_number(au, find_in_map(pop, mapping)));
+		Australia.hurricane_rate = read_value(find_line_number(au, find_in_map(hr, mapping)));
+		Australia.hurricane_deaths = read_value(find_line_number(au, find_in_map(hd, mapping)));
+		Australia.tornado_rate = read_value(find_line_number(au, find_in_map(tr, mapping)));
+		Australia.tornado_deaths = read_value(find_line_number(au, find_in_map(td, mapping)));
+		Australia.earthquake_rate = read_value(find_line_number(au, find_in_map(er, mapping)));
+		Australia.earthquake_deaths = read_value(find_line_number(au, find_in_map(ed, mapping)));
+		Australia.volcano_rate = read_value(find_line_number(au, find_in_map(vr, mapping)));
+		Australia.volcano_deaths = read_value(find_line_number(au, find_in_map(vd, mapping)));
+		Australia.landslide_rate = read_value(find_line_number(au, find_in_map(lr, mapping)));
+		Australia.landslide_deaths = read_value(find_line_number(au, find_in_map(ld, mapping)));
+		Australia.flood_rate = read_value(find_line_number(au, find_in_map(fr, mapping)));
+		Australia.flood_deaths = read_value(find_line_number(au, find_in_map(fd, mapping)));
+		Australia.thunderstorm_rate = read_value(find_line_number(au, find_in_map(thr, mapping)));
+		Australia.thunderstorm_deaths = read_value(find_line_number(au, find_in_map(thd, mapping)));
+
+		values Europe(eu);
+		Europe.population = read_value(find_line_number(eu, find_in_map(pop, mapping)));
+		Europe.hurricane_rate = read_value(find_line_number(eu, find_in_map(hr, mapping)));
+		Europe.hurricane_deaths = read_value(find_line_number(eu, find_in_map(hd, mapping)));
+		Europe.tornado_rate = read_value(find_line_number(eu, find_in_map(tr, mapping)));
+		Europe.tornado_deaths = read_value(find_line_number(eu, find_in_map(td, mapping)));
+		Europe.earthquake_rate = read_value(find_line_number(eu, find_in_map(er, mapping)));
+		Europe.earthquake_deaths = read_value(find_line_number(eu, find_in_map(ed, mapping)));
+		Europe.volcano_rate = read_value(find_line_number(eu, find_in_map(vr, mapping)));
+		Europe.volcano_deaths = read_value(find_line_number(eu, find_in_map(vd, mapping)));
+		Europe.landslide_rate = read_value(find_line_number(eu, find_in_map(lr, mapping)));
+		Europe.landslide_deaths = read_value(find_line_number(eu, find_in_map(ld, mapping)));
+		Europe.flood_rate = read_value(find_line_number(eu, find_in_map(fr, mapping)));
+		Europe.flood_deaths = read_value(find_line_number(eu, find_in_map(fd, mapping)));
+		Europe.thunderstorm_rate = read_value(find_line_number(eu, find_in_map(thr, mapping)));
+		Europe.thunderstorm_deaths = read_value(find_line_number(eu, find_in_map(thd, mapping)));
+
+		values North_America(na);
+		North_America.population = read_value(find_line_number(na, find_in_map(pop, mapping)));
+		North_America.hurricane_rate = read_value(find_line_number(na, find_in_map(hr, mapping)));
+		North_America.hurricane_deaths = read_value(find_line_number(na, find_in_map(hd, mapping)));
+		North_America.tornado_rate = read_value(find_line_number(na, find_in_map(tr, mapping)));
+		North_America.tornado_deaths = read_value(find_line_number(na, find_in_map(td, mapping)));
+		North_America.earthquake_rate = read_value(find_line_number(na, find_in_map(er, mapping)));
+		North_America.earthquake_deaths = read_value(find_line_number(na, find_in_map(ed, mapping)));
+		North_America.volcano_rate = read_value(find_line_number(na, find_in_map(vr, mapping)));
+		North_America.volcano_deaths = read_value(find_line_number(na, find_in_map(vd, mapping)));
+		North_America.landslide_rate = read_value(find_line_number(na, find_in_map(lr, mapping)));
+		North_America.landslide_deaths = read_value(find_line_number(na, find_in_map(ld, mapping)));
+		North_America.flood_rate = read_value(find_line_number(na, find_in_map(fr, mapping)));
+		North_America.flood_deaths = read_value(find_line_number(na, find_in_map(fd, mapping)));
+		North_America.thunderstorm_rate = read_value(find_line_number(na, find_in_map(thr, mapping)));
+		North_America.thunderstorm_deaths = read_value(find_line_number(na, find_in_map(thd, mapping)));
+
+		values South_America(sa);
+		South_America.population = read_value(find_line_number(sa, find_in_map(pop, mapping)));
+		South_America.hurricane_rate = read_value(find_line_number(sa, find_in_map(hr, mapping)));
+		South_America.hurricane_deaths = read_value(find_line_number(sa, find_in_map(hd, mapping)));
+		South_America.tornado_rate = read_value(find_line_number(sa, find_in_map(tr, mapping)));
+		South_America.tornado_deaths = read_value(find_line_number(sa, find_in_map(td, mapping)));
+		South_America.earthquake_rate = read_value(find_line_number(sa, find_in_map(er, mapping)));
+		South_America.earthquake_deaths = read_value(find_line_number(sa, find_in_map(ed, mapping)));
+		South_America.volcano_rate = read_value(find_line_number(sa, find_in_map(vr, mapping)));
+		South_America.volcano_deaths = read_value(find_line_number(sa, find_in_map(vd, mapping)));
+		South_America.landslide_rate = read_value(find_line_number(sa, find_in_map(lr, mapping)));
+		South_America.landslide_deaths = read_value(find_line_number(sa, find_in_map(ld, mapping)));
+		South_America.flood_rate = read_value(find_line_number(sa, find_in_map(fr, mapping)));
+		South_America.flood_deaths = read_value(find_line_number(sa, find_in_map(fd, mapping)));
+		South_America.thunderstorm_rate = read_value(find_line_number(sa, find_in_map(thr, mapping)));
+		South_America.thunderstorm_deaths = read_value(find_line_number(sa, find_in_map(thd, mapping)));
 	}
 };
 
