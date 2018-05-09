@@ -285,6 +285,18 @@ public:
 		South_America.flood_deaths = read_value(find_line_number(sa, find_in_map(fd, mapping)));
 		South_America.thunderstorm_rate = read_value(find_line_number(sa, find_in_map(thr, mapping)));
 		South_America.thunderstorm_deaths = read_value(find_line_number(sa, find_in_map(thd, mapping)));
+
+		// Add to the val_vec vector
+		val_vec.push_back(Africa);
+		val_vec.push_back(Antarctica);
+		val_vec.push_back(Asia);
+		val_vec.push_back(Australia);
+		val_vec.push_back(Europe);
+		val_vec.push_back(North_America);
+		val_vec.push_back(South_America);
+
+		// return the val_vec 
+		return val_vec;
 	}
 };
 
