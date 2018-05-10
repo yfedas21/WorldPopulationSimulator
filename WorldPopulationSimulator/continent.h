@@ -2,9 +2,11 @@
 #define CONTINENT_H
 
 #include <vector>
-#include <string> 
+#include <iostream>
 #include <queue>
+#include "utility.h"
 #include "disaster.h"
+#include "value_container.h"
 
 using std::string;
 using std::vector;
@@ -15,23 +17,10 @@ private:
 	string name;
 	double population;
 	double cont_growth_rate;
+	values struct_that_holds_rates;
+	std::map<std::string, int> mapping;
 	vector<Disaster*> disasters;
 	queue<Disaster*> disasters_to_happen;
-
-public:
-	Continent() {
-		// Default constructor
-	}
-
-	Continent(string name) {
-		this->name = name;
-		add_sample_disasters();
-		initialize_data();
-	}
-
-	string get_name() {
-		return this->name;
-	}
 
 	// function for quick debugging...
 	void add_sample_disasters() {
@@ -48,6 +37,25 @@ public:
 		disasters.push_back(e);
 	}
 
+public:
+	Continent() {
+		// Default constructor
+	}
+
+	/**
+		Constructor that will be used to create a Continent
+		object and read the correct values from the data file
+	*/
+	Continent(string name, std::map<std::string, int> mapping) {
+		this->name = name;
+		this->mapping = mapping;
+		initialize_data(name);
+	}
+
+	string get_name() {
+		return this->name;
+	}
+
 	void add_disaster(string name, double rate_per_year, double deaths_per_year) {
 		Disaster *d = new Disaster(name, rate_per_year, deaths_per_year);
 		disasters.push_back(d);
@@ -60,8 +68,9 @@ public:
 	/**
 		Use data file to initialize object variables. 
 	*/
-	void initialize_data() {
-
+	void initialize_data(string name) {
+		// create a struct that will hold the rates 
+		struct_that_holds_rates = Utility::create_struct(name, this->mapping);
 	}
 
 	// most important function in a simulator ... the update() !

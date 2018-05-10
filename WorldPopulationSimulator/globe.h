@@ -9,10 +9,16 @@ using std::string;
 
 class Globe {
 private:
-	string name;
+	string name; // The Globe name
+
 	// container for Continent objects
 	std::vector<Continent *> continents;
 	
+	// holds the names of the Continents that will 
+	// be created. The name is really important, it 
+	// initializes the Continent with the correct data
+	std::vector<std::string> cont_to_create;
+
 	// structs with information
 	std::vector<values> values_vec;
 
@@ -21,39 +27,46 @@ private:
 	std::map<string, int>::iterator it;
 
 	void create_structs() {
-		this->values_vec = Utility::create_structs(mapping);
+		//this->values_vec = Utility::create_structs(mapping);
 	}
 
-	std::vector<Continent *> create_continents(values) {
-		std::vector<Continent*> cont;
+	/**
+		Add the continent names to the cont_to_add vector
+		Inside the function, the namespace Continent_Names 
+		will go out of scope once the names are added
+	*/
+	void add_cont_codes() {
+		using namespace Continent_Names;
 
-		//// Create Continent objects
-		//Continent *africa = new Continent("africa");
-		//Continent *asia = new Continent("asia");
-		//Continent *australia = new Continent("australia");
-		//Continent *antarctica = new Continent("antarctica");
-		//Continent *north_america = new Continent("north america");
-		//Continent *south_america = new Continent("south america");
-		//Continent *europe = new Continent("europe");
+		// add the default 7 continents
+		cont_to_create.push_back(af);
+		cont_to_create.push_back(an);
+		cont_to_create.push_back(as);
+		cont_to_create.push_back(au);
+		cont_to_create.push_back(eu);
+		cont_to_create.push_back(na);
+		cont_to_create.push_back(sa);
+	}
 
-		//// Add continents to cont std::vector
-		//cont.push_back(africa);
-		//cont.push_back(asia);
-		//cont.push_back(australia);
-		//cont.push_back(antarctica);
-		//cont.push_back(north_america);
-		//cont.push_back(south_america);
-		//cont.push_back(europe);
-
-		//return cont;
+	/**
+		Create the continents based on the continent
+		name stored in the cont_to_create vector
+	*/
+	void create_continents() {
+		// create the continents and initialize the data
+		for (int i = 0; i < cont_to_create.size(); ++i) {
+			Continent *c = new Continent(cont_to_create[i], mapping);
+			continents.push_back(c);
+		}
 	}
 
 public:
 	Globe(string name) {
 		this->name = name;
-		//continents = create_continents();
-		create_map(); // initialize 
-		create_structs(); // initialize Continents
+
+		create_map(); // create map to hold locations
+		add_cont_codes(); // prepare cont names for Continent creation
+		//create_structs(); // return a vector of values structs
 	}
 
 	std::vector<Continent *> get_cont_vec() {
