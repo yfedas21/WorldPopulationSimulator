@@ -25,10 +25,9 @@ worldMapFillLayer::worldMapFillLayer(std::string continent,
 //Updates the opacity for current fill layer
 //@param: running - tells wether animation is running
 //@param: population - amount of people on the continent
-//@param: population - amount of people on the continent
 void worldMapFillLayer::calculateState(bool running, double population)
 {
-    if(!running)
+    if(!running) //FIXME: add check to see if sim is complete
         fillOpacity = 0.0;
 
     fillOpacity = std::fmin(1, (population/landArea) * fillMultiplier);
@@ -39,7 +38,42 @@ void worldMapFillLayer::calculateState(bool running, double population)
     //std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
 }
 
-//Paints the layer on the map
+//Adds any disaster infos queued up for disaster dot list
+void worldMapFillLayer::grabDisasterInfo()
+{
+    if(backendContinent == NULL)
+        return;
+
+    //Continent->setDataRetrival(true); //may need if multithreading issues arrise
+    //Want to transfer all info to plot data erasing the data in backend
+    while(disasterPendingPlot.front() != NULL)
+    {
+        disasterOcurance * curDisasterDot = new disasterOcurance();
+        //FIXME: Adjust or make adjustable by users (size of dots)
+        curDisasterDot->magnitude = disasterPendingPlot.front().deaths / 30;
+        //FIXME: Use the within elipse formula for more visually apealing results
+        //May even want to go further to have the disasters actually cluster where they do in real life
+        //https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
+        curDisasterDot->xPos = rand() % 1510;//FIXME: For now anywhere on screen horizontally
+        curDisasterDot->yPos = rand() % 744;//FIXME: For now anywhere on screen vertically
+        curDisasterDot->color = determineDisasterDotColor(disasterPendingPlot.front().type);
+        disasterDots.push_back(curDisasterDot);
+        disasterPendingPlot.pop();
+    }
+    //Continent->setDataRetrival(false); //may need if multithreading issues arrise
+}
+
+//Finds the correct disaster indicator color for painter to apply when drawing the dot
+//@param: type - the type of disaster by name
+//return: Qcolor of the repective disaster (or/and magnitude)
+QColor worldMapFillLayer::determineDisasterDotColor(std::string type)
+{
+    //FIXME: Complete implementation so different disaster types have different color
+    //FIXME: Possible to change this to color based on magnitude of dot (experiment)
+    return new QColor("#141414"); //black for now
+}
+
+//Paints the continent content layer on to the map
 void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //DEBUG CODE
@@ -48,6 +82,12 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     painter->setOpacity(fillOpacity);
     painter->drawPixmap(0,0,1510,744, fillImage);
+
+    painter->setOpacity(1);//full opasity for diaster indicators
+    for (auto dot: disasterDots)
+    {
+        painter->drawEllipse(dot.xPos,dot.yPos,dot.magnitude,dot.magnitude);
+    }
 }
 
 //Loads in the needed image
@@ -75,6 +115,7 @@ void worldMapFillLayer::setPixmap(std::string landName)
 
 QRectF worldMapFillLayer::boundingRect() const
 {
+    //All overlays are same dimesion as full map for positioning purposes
     return QRect(0,0,1510,744);
 }
 

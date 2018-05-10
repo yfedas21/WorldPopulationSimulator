@@ -1,6 +1,10 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+//Will be adding multithreading via Concurrency Qt Module
+//#include <QThread>
+//possible adaptation of https://www.youtube.com/watch?v=tvpC8UrPpZ4
+
 #include <stdexcept>
 #include <ios>
 #include <string>
