@@ -165,15 +165,12 @@
                 <property name="formAlignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                 </property>
-<<<<<<< HEAD
-=======
                 <property name="horizontalSpacing">
                  <number>10</number>
                 </property>
                 <property name="verticalSpacing">
                  <number>20</number>
                 </property>
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
                 <item row="0" column="0">
                  <widget class="QLabel" name="label">
                   <property name="sizePolicy">
@@ -197,15 +194,7 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 <widget class="QLineEdit" name="textbox_runtime">
-=======
                  <widget class="QLineEdit" name="simRuntimeInput">
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
-=======
-                 <widget class="QLineEdit" name="simRuntimeInput">
->>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>1</horstretch>
@@ -255,15 +244,7 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 <widget class="QCheckBox" name="checkBox">
-=======
-                 <widget class="QCheckBox" name="enableDisastersInput">
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
-=======
                  <widget class="QCheckBox" name="enableDisasterInput">
->>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -295,15 +276,7 @@
                  </widget>
                 </item>
                 <item row="3" column="1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 <widget class="QComboBox" name="comboBox">
-=======
                  <widget class="QComboBox" name="continentFocusInput">
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
-=======
-                 <widget class="QComboBox" name="continentFocusInput">
->>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="currentText">
                    <string>No</string>
                   </property>
@@ -358,15 +331,7 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 <widget class="QCheckBox" name="checkBox_2">
-=======
                  <widget class="QCheckBox" name="enableMigrationInput">
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
-=======
-                 <widget class="QCheckBox" name="enableMigrationInput">
->>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -392,15 +357,7 @@
                  </widget>
                 </item>
                 <item row="4" column="1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 <widget class="QDateEdit" name="dateEdit">
-=======
                  <widget class="QDateEdit" name="startDateInput">
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
-=======
-                 <widget class="QDateEdit" name="startDateInput">
->>>>>>> 8b2bdd1f2b0d892d638f9ba98ccf3defda0af426
                   <property name="dateTime">
                    <datetime>
                     <hour>0</hour>
@@ -463,20 +420,6 @@
        <attribute name="title">
         <string>Simulation</string>
        </attribute>
-<<<<<<< HEAD
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QGraphicsView" name="worldMapView">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-=======
        <widget class="QGraphicsView" name="worldMapView">
         <property name="geometry">
          <rect>
@@ -487,7 +430,6 @@
          </rect>
         </property>
        </widget>
->>>>>>> be4aaf09e9ef8bd996c508c09c50c967ae306e74
       </widget>
      </widget>
     </item>
