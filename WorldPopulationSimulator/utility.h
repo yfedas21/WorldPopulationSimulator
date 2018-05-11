@@ -12,30 +12,30 @@ class Utility {
 
 private:
 
-    std::string pop = "population";
-    std::string ngr = "net_growth";
-    std::string hr = "hurricane_rate";
-    std::string hd = "hurricane_deaths";
-    std::string tr = "tornado_rate";
-    std::string td = "tornado_deaths";
-    std::string er = "earthquake_rate";
-    std::string ed = "earthquake_deaths";
-    std::string vr = "volcano_rate";
-    std::string vd = "volcano_deaths";
-    std::string lr = "landslide_rate";
-    std::string ld = "landslide_deaths";
-    std::string fr = "flood_rate";
-    std::string fd = "flood_deaths";
-    std::string thr = "thunderstorm_rate";
-    std::string thd = "thunderstorm_deaths";
+    static const std::string pop;
+    static const std::string ngr;
+    static const std::string hr;
+    static const std::string hd;
+    static const std::string tr;
+    static const std::string td;
+    static const std::string er;
+    static const std::string ed;
+    static const std::string vr;
+    static const std::string vd;
+    static const std::string lr;
+    static const std::string ld;
+    static const std::string fr;
+    static const std::string fd;
+    static const std::string thr;
+    static const std::string thd;
 
-    std::string af = "Africa";
-    std::string an = "Antarctica";
-    std::string as = "Asia";
-    std::string au = "Australia";
-    std::string eu = "Europe";
-    std::string na = "North_America";
-    std::string sa = "South_America";
+    static const std::string af;
+    static const std::string an;
+    static const std::string as;
+    static const std::string au;
+    static const std::string eu;
+    static const std::string na;
+    static const std::string sa;
 
 
 public:
@@ -43,7 +43,7 @@ public:
     Utility() {}
 
 
-    void set_map(std::map<std::string, int> mapping) {
+    static void set_map(std::map<std::string, int> mapping) {
 		mapping = mapping;
 	}
 
@@ -57,7 +57,7 @@ public:
 		@param line_number the line number of target data
 		@return the target data
 	*/
-    double read_value(int line_number) {
+    static double read_value(int line_number) {
 
 		// attempt to read data from file
 		try {
@@ -93,7 +93,7 @@ public:
 		Find the location of the specific rate in the data file
 		@return the line number with the rate in the data file
 	*/
-    int find_line_number(const std::string cont_name, const int dis_code_location) {
+    static int find_line_number(const std::string cont_name, const int dis_code_location) {
 		// Hold the start line of the information for the continent
 		// in the data file
 		int cont_location = get_cont_line_start(cont_name);
@@ -105,7 +105,7 @@ public:
 	to line number mapping
 	@return the line number relative to the continent block
 	*/
-    int find_in_map(std::string dis_code, std::map<std::string, int>& mapping) {
+    static int find_in_map(std::string dis_code, std::map<std::string, int>& mapping) {
 		// the disaster_code exists
 		if (mapping.find(dis_code) != mapping.end()) {
 			return mapping[dis_code];
@@ -117,7 +117,7 @@ public:
 		starts in the data file
 		@return the line in the file where continental info begins 
     */
-    int get_cont_line_start(std::string cont_name) {
+    static int get_cont_line_start(std::string cont_name) {
         //using namespace Continent_Names;
 		// each continents block is 19 lines long.
 		int cont_block = 19;
@@ -144,7 +144,7 @@ public:
 	Creates a struct that rates and populations in one location
 	@return the values struct with data from the data file
 	*/
-    values create_struct(std::string name, std::map<std::string, int> mapping) {
+    static values create_struct(std::string name, std::map<std::string, int> mapping) {
         //using namespace Disaster_Codes;
 
 		values V(name); 

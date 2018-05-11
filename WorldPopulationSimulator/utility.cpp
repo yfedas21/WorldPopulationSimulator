@@ -4,36 +4,32 @@
 #include "utility.h"
 using std::string;
 
+    const std::string Utility::pop = "population";
+    const std::string Utility::ngr = "net_growth";
+    const std::string Utility::hr = "hurricane_rate";
+    const std::string Utility::hd = "hurricane_deaths";
+    const std::string Utility::tr = "tornado_rate";
+    const std::string Utility::td = "tornado_deaths";
+    const std::string Utility::er = "earthquake_rate";
+    const std::string Utility::ed = "earthquake_deaths";
+    const std::string Utility::vr = "volcano_rate";
+    const std::string Utility::vd = "volcano_deaths";
+    const std::string Utility::lr = "landslide_rate";
+    const std::string Utility::ld = "landslide_deaths";
+    const std::string Utility::fr = "flood_rate";
+    const std::string Utility::fd = "flood_deaths";
+    const std::string Utility::thr = "thunderstorm_rate";
+    const std::string Utility::thd = "thunderstorm_deaths";
+
+    const std::string Utility::af = "Africa";
+    const std::string Utility::an = "Antarctica";
+    const std::string Utility::as = "Asia";
+    const std::string Utility::au = "Australia";
+    const std::string Utility::eu = "Europe";
+    const std::string Utility::na = "North_America";
+    const std::string Utility::sa = "South_America";
+
 /*namespace Disaster_Codes {
-    std::string pop = "population";
-    std::string ngr = "net_growth";
-    std::string hr = "hurricane_rate";
-    std::string hd = "hurricane_deaths";
-    std::string tr = "tornado_rate";
-    std::string td = "tornado_deaths";
-    std::string er = "earthquake_rate";
-    std::string ed = "earthquake_deaths";
-    std::string vr = "volcano_rate";
-    std::string vd = "volcano_deaths";
-    std::string lr = "landslide_rate";
-    std::string ld = "landslide_deaths";
-    std::string fr = "flood_rate";
-    std::string fd = "flood_deaths";
-    std::string thr = "thunderstorm_rate";
-    std::string thd = "thunderstorm_deaths";
-}
-
-namespace Continent_Names {
-    std::string af = "Africa";
-    std::string an = "Antarctica";
-    std::string as = "Asia";
-    std::string au = "Australia";
-    std::string eu = "Europe";
-    std::string na = "North_America";
-    std::string sa = "South_America";
-}
-
-namespace Disaster_Codes {
     std::string pop;
     std::string ngr;
     std::string hr;
