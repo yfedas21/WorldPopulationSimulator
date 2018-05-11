@@ -2,6 +2,7 @@
 #define VALUE_CONTIANER_H_
 
 #include <string>
+#include <iomanip>
 
 struct values {
 	std::string name;
@@ -24,6 +25,27 @@ struct values {
 	double flood_deaths = 0;
 	double thunderstorm_rate = 0;
 	double thunderstorm_deaths = 0;
+
+	// for debug purposes...
+	void display() {
+		std::cout << "Name: " << name << std::endl;
+		std::cout <<  "Population: " << population << std::endl;
+		std::cout <<  "Net growth: " << net_growth << std::endl;
+		std::cout <<  "Hurricane rate:" << hurricane_rate << std::endl;
+		std::cout <<  "Hurricane deaths: " << hurricane_deaths << std::endl;
+		std::cout <<  "Tornado rate: " << tornado_rate << std::endl;
+		std::cout <<  "Tornado deaths: " << tornado_deaths << std::endl;
+		std::cout <<  "Earthquake rate: " << earthquake_rate << std::endl;
+		std::cout <<  "Earthquake deaths: " << earthquake_deaths << std::endl;
+		std::cout <<  "Volcano rate: " << volcano_rate << std::endl;
+		std::cout <<  "Volcano deaths: " << volcano_deaths << std::endl;
+		std::cout <<  "Landslide rate: " << landslide_rate << std::endl;
+		std::cout <<  "Landslide deaths: " << landslide_deaths << std::endl;
+		std::cout <<  "Flood rate: " << flood_rate << std::endl;
+		std::cout <<  "Flood deaths: " << flood_deaths << std::endl;
+		std::cout <<  "Thunderstorm rate: " << thunderstorm_rate << std::endl;
+		std::cout <<  "Thunderstorm deaths: " << thunderstorm_deaths << std::endl;
+	}
 };
 
 #endif 

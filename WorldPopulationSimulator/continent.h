@@ -59,6 +59,10 @@ public:
 		initialize_data(name);
 	}
 
+	values get_values_struct() {
+		return struct_that_holds_rates;
+	}
+
 	string get_name() {
 		return this->name;
 	}
