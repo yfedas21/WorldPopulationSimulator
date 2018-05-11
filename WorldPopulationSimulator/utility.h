@@ -48,7 +48,7 @@ public:
 		mapping = mapping;
 	}
 
-	static double calculate_prop(double occ, double deaths) {
+	static double calculate_prob(double occ, double deaths) {
 		// do some magic here...
 		return 1.2;
 	}
@@ -73,7 +73,6 @@ public:
 			}
 			else {
 				int i = 9;
-				std::cout << "File open was successful! \n\n";
 				while (std::getline(file, str) && line_counter < line_number) {
 					line_counter++;
 				}
@@ -141,11 +140,16 @@ public:
 			return -1;
 	}
 
+	/**
+		Creates a struct that rates and populations in one location
+		@return the values struct with data from the data file
+	*/
 	static values create_struct(std::string name, std::map<std::string, int> mapping) {
 		using namespace Disaster_Codes;
 
 		values V(name); 
 		V.population = read_value(find_line_number(name, find_in_map(pop, mapping)));
+		V.net_growth = read_value(find_line_number(name, find_in_map(ngr, mapping)));
 		V.hurricane_rate = read_value(find_line_number(name, find_in_map(hr, mapping)));
 		V.hurricane_deaths = read_value(find_line_number(name, find_in_map(hd, mapping)));
 		V.tornado_rate = read_value(find_line_number(name, find_in_map(tr, mapping)));

@@ -52,6 +52,10 @@ public:
 		initialize_data(name);
 	}
 
+	values get_values_struct() {
+		return struct_that_holds_rates;
+	}
+
 	string get_name() {
 		return this->name;
 	}
@@ -70,7 +74,7 @@ public:
 	*/
 	void initialize_data(string name) {
 		// create a struct that will hold the rates 
-		struct_that_holds_rates = Utility::create_struct(name, this->mapping);
+		struct_that_holds_rates = Utility::create_struct(name, mapping);
 	}
 
 	// most important function in a simulator ... the update() !

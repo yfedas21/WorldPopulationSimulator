@@ -9,7 +9,7 @@ using std::string;
 
 class Globe {
 private:
-	string name; // The Globe name
+	string name; // The globe name
 
 	// container for Continent objects
 	std::vector<Continent *> continents;
@@ -18,9 +18,6 @@ private:
 	// be created. The name is really important, it 
 	// initializes the Continent with the correct data
 	std::vector<std::string> cont_to_create;
-
-	// structs with information
-	std::vector<values> values_vec;
 
 	// map to hold disaster_code and line number mappings
 	std::map<string, int> mapping;
@@ -61,21 +58,36 @@ private:
 	}
 
 public:
+	/**
+		Only one constructor, the initilization process 
+		is very specific. 
+		@param name the name of the Continent
+	*/
 	Globe(string name) {
 		this->name = name;
 
-		create_map(); // create map to hold locations
+		create_map(); // create map to hold location mappings 
 		add_cont_codes(); // prepare cont names for Continent creation
-		//create_structs(); // return a vector of values structs
+
+		// Create the continents and add them to the Continent vector
+		create_continents(); 
 	}
 
+	std::string get_name() {
+		return this->name;
+	}
+
+	/**
+		Returns the vector that holds Continent objects
+		@return the vector that holds Continent objects
+	*/
 	std::vector<Continent *> get_cont_vec() {
 		return continents;
 	}
 
 	/**
-	Create a map container to hold the location of the
-	Disaster_Codes in the data file
+		Create a map container to hold the location of the
+		Disaster_Codes in the data file
 	*/
 	void create_map() {
 		using namespace Disaster_Codes;
@@ -100,28 +112,5 @@ public:
 		mapping.insert(std::make_pair(thd, 17));
 	}
 };
-
-//struct values {
-//	string name;
-//	// Constructor with name parameter
-//	values(string name) { this->name = name; }
-//	double population = 0;
-//	double net_growth = 0;
-//	double hurricane_rate = 0;
-//	double hurricane_deaths = 0;
-//	double tornado_rate = 0;
-//	double tornado_deaths = 0;
-//	double earthquake_rate = 0;
-//	double earthquake_deaths = 0;
-//	double volcano_rate = 0;
-//	double volcano_deaths = 0;
-//	double landslide_rate = 0;
-//	double landslide_deaths = 0;
-//	double flood_rate = 0;
-//	double flood_deaths = 0;
-//	double thunderstorm_rate = 0;
-//	double thunderstorm_deaths = 0;
-//};
-
 #endif // !GLOBE_H
 
