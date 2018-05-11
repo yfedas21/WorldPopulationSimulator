@@ -239,6 +239,7 @@ Makefile: WorldPopulationSimulator.pro ../../../../Qt/5.10.1/mingw53_32/mkspecs/
 		../../../../Qt/5.10.1/mingw53_32/lib/qtmaind.prl \
 		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Widgets.prl \
 		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Gui.prl \
+		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Concurrent.prl \
 		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Core.prl
 	$(QMAKE) -o Makefile WorldPopulationSimulator.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../../../Qt/5.10.1/mingw53_32/mkspecs/features/spec_pre.prf:
@@ -419,6 +420,7 @@ WorldPopulationSimulator.pro:
 ../../../../Qt/5.10.1/mingw53_32/lib/qtmaind.prl:
 ../../../../Qt/5.10.1/mingw53_32/lib/Qt5Widgets.prl:
 ../../../../Qt/5.10.1/mingw53_32/lib/Qt5Gui.prl:
+../../../../Qt/5.10.1/mingw53_32/lib/Qt5Concurrent.prl:
 ../../../../Qt/5.10.1/mingw53_32/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile WorldPopulationSimulator.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

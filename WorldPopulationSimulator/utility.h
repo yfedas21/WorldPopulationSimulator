@@ -1,6 +1,6 @@
 #ifndef UTILITY_H
 #define UTILITY_H
-
+#pragma once
 #include <map>
 #include <iterator>
 #include <iomanip>
@@ -8,43 +8,42 @@
 #include <iostream>
 #include "value_container.h"
 
-namespace Disaster_Codes {
-	std::string pop = "population";
-	std::string ngr = "net_growth";
-	std::string hr = "hurricane_rate";
-	std::string hd = "hurricane_deaths";
-	std::string tr = "tornado_rate";
-	std::string td = "tornado_deaths";
-	std::string er = "earthquake_rate";
-	std::string ed = "earthquake_deaths";
-	std::string vr = "volcano_rate";
-	std::string vd = "volcano_deaths";
-	std::string lr = "landslide_rate";
-	std::string ld = "landslide_deaths";
-	std::string fr = "flood_rate";
-	std::string fd = "flood_deaths";
-	std::string thr = "thunderstorm_rate";
-	std::string thd = "thunderstorm_deaths";
-};
-
-namespace Continent_Names {
-	std::string af = "Africa";
-	std::string an = "Antarctica";
-	std::string as = "Asia";
-	std::string au = "Australia";
-	std::string eu = "Europe";
-	std::string na = "North_America";
-	std::string sa = "South_America";
-}
-
 class Utility {
 
 private:
-	Utility() {}
+
+    std::string pop = "population";
+    std::string ngr = "net_growth";
+    std::string hr = "hurricane_rate";
+    std::string hd = "hurricane_deaths";
+    std::string tr = "tornado_rate";
+    std::string td = "tornado_deaths";
+    std::string er = "earthquake_rate";
+    std::string ed = "earthquake_deaths";
+    std::string vr = "volcano_rate";
+    std::string vd = "volcano_deaths";
+    std::string lr = "landslide_rate";
+    std::string ld = "landslide_deaths";
+    std::string fr = "flood_rate";
+    std::string fd = "flood_deaths";
+    std::string thr = "thunderstorm_rate";
+    std::string thd = "thunderstorm_deaths";
+
+    std::string af = "Africa";
+    std::string an = "Antarctica";
+    std::string as = "Asia";
+    std::string au = "Australia";
+    std::string eu = "Europe";
+    std::string na = "North_America";
+    std::string sa = "South_America";
+
 
 public:
+    //FIX ME: anything to add here?
+    Utility() {}
 
-	static void set_map(std::map<std::string, int> mapping) {
+
+    void set_map(std::map<std::string, int> mapping) {
 		mapping = mapping;
 	}
 
@@ -58,7 +57,7 @@ public:
 		@param line_number the line number of target data
 		@return the target data
 	*/
-	static double read_value(int line_number) {
+    double read_value(int line_number) {
 
 		// attempt to read data from file
 		try {
@@ -95,7 +94,7 @@ public:
 		Find the location of the specific rate in the data file
 		@return the line number with the rate in the data file
 	*/
-	static int find_line_number(const std::string cont_name, const int dis_code_location) {
+    int find_line_number(const std::string cont_name, const int dis_code_location) {
 		// Hold the start line of the information for the continent
 		// in the data file
 		int cont_location = get_cont_line_start(cont_name);
@@ -107,7 +106,7 @@ public:
 	to line number mapping
 	@return the line number relative to the continent block
 	*/
-	static int find_in_map(std::string dis_code, std::map<std::string, int>& mapping) {
+    int find_in_map(std::string dis_code, std::map<std::string, int>& mapping) {
 		// the disaster_code exists
 		if (mapping.find(dis_code) != mapping.end()) {
 			return mapping[dis_code];
@@ -118,9 +117,9 @@ public:
 		Get the line where the continent information
 		starts in the data file
 		@return the line in the file where continental info begins 
-	*/
-	static int get_cont_line_start(std::string cont_name) {
-		using namespace Continent_Names;
+    */
+    int get_cont_line_start(std::string cont_name) {
+        //using namespace Continent_Names;
 		// each continents block is 19 lines long.
 		int cont_block = 19;
 		if (cont_name == af)
@@ -139,10 +138,10 @@ public:
 			return cont_block * 7;
 		else
 			return -1;
-	}
+    }
 
-	static values create_struct(std::string name, std::map<std::string, int> mapping) {
-		using namespace Disaster_Codes;
+    values create_struct(std::string name, std::map<std::string, int> mapping) {
+        //using namespace Disaster_Codes;
 
 		values V(name); 
 		V.population = read_value(find_line_number(name, find_in_map(pop, mapping)));
@@ -162,7 +161,7 @@ public:
 		V.thunderstorm_deaths = read_value(find_line_number(name, find_in_map(thd, mapping)));
 
 		return V;
-	}
+    }
 };
 
 #endif // !UTILITY_H

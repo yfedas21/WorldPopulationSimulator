@@ -66,7 +66,6 @@ public:
     QVBoxLayout *verticalLayout_3;
     QFormLayout *formLayout_2;
     QWidget *tab;
-    QVBoxLayout *verticalLayout_4;
     QGraphicsView *worldMapView;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
@@ -164,6 +163,8 @@ public:
         formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setLabelAlignment(Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing);
         formLayout->setFormAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        formLayout->setHorizontalSpacing(10);
+        formLayout->setVerticalSpacing(20);
         label = new QLabel(quickSettingsTab);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -291,16 +292,9 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_4 = new QVBoxLayout(tab);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         worldMapView = new QGraphicsView(tab);
         worldMapView->setObjectName(QStringLiteral("worldMapView"));
-        worldMapView->setMaximumSize(QSize(16777215, 16777215));
-
-        verticalLayout_4->addWidget(worldMapView);
-
+        worldMapView->setGeometry(QRect(0, 0, 1581, 811));
         tabWidget->addTab(tab, QString());
 
         verticalLayout->addWidget(tabWidget);

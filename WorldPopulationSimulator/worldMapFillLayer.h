@@ -48,6 +48,9 @@ public:
                       double fillMultiplier = 1.0,
                       double initOpacity = 0.0);
 
+    //DEBUG disaster indicators
+    void addSampleDisasterIndicators();
+
     //~worldMapFillLayer(); (Possibly handled by QT)
     //(disasterOcurance pointers might need to be deleted)
 
@@ -66,7 +69,7 @@ public:
     void grabDisasterInfo();
 
     //Returns the correct disaster indicator color for painter to apply
-    QColor determineDisasterDotColor(){}
+    QColor determineDisasterDotColor(std::string type);
 
     //Sets the image of the population overlay
     void setPixmap(std::string landName = "Other");

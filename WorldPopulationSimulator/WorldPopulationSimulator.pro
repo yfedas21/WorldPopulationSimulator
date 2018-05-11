@@ -26,16 +26,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    worldMapFillLayer.cpp
+        worldMapFillLayer.cpp \
+        utility.cpp
 
 HEADERS += \
         mainwindow.h \
-    globe.h \
-    continent.h \
-    disaster.h \
-    simulation.h \
-    sim_helper.h \
-    worldMapFillLayer.h
+        globe.h \
+        continent.h \
+        disaster.h \
+        simulation.h \
+        sim_helper.h \
+        worldMapFillLayer.h \
+        utility.h
+    value_container.h
 
 FORMS += \
         mainwindow.ui

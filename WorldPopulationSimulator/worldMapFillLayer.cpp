@@ -20,6 +20,29 @@ worldMapFillLayer::worldMapFillLayer(std::string continent,
     fillOpacity = initOpacity;
     this->fillMultiplier = fillMultiplier;
     landArea = area;
+    addSampleDisasterIndicators();
+}
+
+//DEBUG FUNCTION FOR DISASTER INDICATORS
+void worldMapFillLayer::addSampleDisasterIndicators()
+{
+    if(continentName != "Africa")
+        return;
+
+    for(int i = 0; i < 100; i++)
+    {
+        disasterOcurance * curDisasterDot = new disasterOcurance();
+        //FIXME: Adjust or make adjustable by users (size of dots)
+        curDisasterDot->magnitude = (rand() % 100)/3;
+        //FIXME: Use the within elipse formula for more visually apealing results
+        //May even want to go further to have the disasters actually cluster where they do in real life
+        //https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
+        curDisasterDot->xPos = rand() % 1510; //FIXME: For now anywhere on screen horizontally
+        curDisasterDot->yPos = rand() % 744; //FIXME: For now anywhere on screen vertically
+        curDisasterDot->color = determineDisasterDotColor("debug");
+        disasterDots.push_back(curDisasterDot);
+    }
+
 }
 
 //Updates the opacity for current fill layer
@@ -44,9 +67,10 @@ void worldMapFillLayer::grabDisasterInfo()
     if(backendContinent == NULL)
         return;
 
+    //FIXME: Finish implementation when backend complete
     //Continent->setDataRetrival(true); //may need if multithreading issues arrise
     //Want to transfer all info to plot data erasing the data in backend
-    while(disasterPendingPlot.front() != NULL)
+    /*while(disasterPendingPlot.front() != NULL)
     {
         disasterOcurance * curDisasterDot = new disasterOcurance();
         //FIXME: Adjust or make adjustable by users (size of dots)
@@ -59,7 +83,7 @@ void worldMapFillLayer::grabDisasterInfo()
         curDisasterDot->color = determineDisasterDotColor(disasterPendingPlot.front().type);
         disasterDots.push_back(curDisasterDot);
         disasterPendingPlot.pop();
-    }
+    }*/
     //Continent->setDataRetrival(false); //may need if multithreading issues arrise
 }
 
@@ -70,7 +94,8 @@ QColor worldMapFillLayer::determineDisasterDotColor(std::string type)
 {
     //FIXME: Complete implementation so different disaster types have different color
     //FIXME: Possible to change this to color based on magnitude of dot (experiment)
-    return new QColor("#141414"); //black for now
+    QColor resultColor = QColor(0, 0, 0, 195);
+    return resultColor; //black for now
 }
 
 //Paints the continent content layer on to the map
@@ -86,7 +111,8 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     painter->setOpacity(1);//full opasity for diaster indicators
     for (auto dot: disasterDots)
     {
-        painter->drawEllipse(dot.xPos,dot.yPos,dot.magnitude,dot.magnitude);
+        painter->setBrush(dot->color);
+        painter->drawEllipse(dot->xPos,dot->yPos,dot->magnitude,dot->magnitude);
     }
 }
 

@@ -22,6 +22,9 @@ private:
 	vector<Disaster*> disasters;
 	queue<Disaster*> disasters_to_happen;
 
+    //FOR UI to work
+    Utility * util;
+
 	// function for quick debugging...
 	void add_sample_disasters() {
 		Disaster *a = new Disaster("tornado", 1.1, 1.1);
@@ -39,13 +42,17 @@ private:
 
 public:
 	Continent() {
+        //BIG FIXME: make this be passed from the
+        //globe class so only one util object actually created
+        //For Ui to work not static for now!!!
+        util = new Utility();
 		// Default constructor
 	}
 
 	/**
 		Constructor that will be used to create a Continent
 		object and read the correct values from the data file
-	*/
+    */
 	Continent(string name, std::map<std::string, int> mapping) {
 		this->name = name;
 		this->mapping = mapping;
@@ -66,11 +73,11 @@ public:
 	}
 
 	/**
-		Use data file to initialize object variables. 
-	*/
+        Use data file to initialize object variables.
+    */
 	void initialize_data(string name) {
 		// create a struct that will hold the rates 
-		struct_that_holds_rates = Utility::create_struct(name, this->mapping);
+        struct_that_holds_rates = util->create_struct(name, this->mapping);
 	}
 
 	// most important function in a simulator ... the update() !
