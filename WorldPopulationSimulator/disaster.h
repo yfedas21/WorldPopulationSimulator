@@ -12,9 +12,13 @@ private:
 	double rate_per_year;
 	double deaths_per_year;
 
+    Utility * util;
+
 public:
 	Disaster() {
-		// default constructor
+        //BIG FIXME: Make the object that creates disasters objects pass in the utility class pointer
+        //that is created in the globe object or simulation object
+        util = new Utility();
 	}
 
 	~Disaster() {
@@ -32,7 +36,7 @@ public:
 	}
 
 	double calculate_prob() {
-		return Utility::calculate_prop(this->rate_per_year, this->deaths_per_year);
+        return util->calculate_prob(this->rate_per_year, this->deaths_per_year);
 	}
 };
 
