@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include "continent.h"
+#include "constants.h"
+#include "utility.h"
 
 using std::string;
 
@@ -23,17 +25,12 @@ private:
 	std::map<string, int> mapping;
 	std::map<string, int>::iterator it;
 
-	void create_structs() {
-		//this->values_vec = Utility::create_structs(mapping);
-	}
-
 	/**
 		Add the continent names to the cont_to_add vector
 		Inside the function, the namespace Continent_Names 
 		will go out of scope once the names are added
 	*/
 	void add_cont_codes() {
-		using namespace Continent_Names;
 
 		// add the default 7 continents
 		cont_to_create.push_back(af);
@@ -90,8 +87,6 @@ public:
 		Disaster_Codes in the data file
 	*/
 	void create_map() {
-		using namespace Disaster_Codes;
-
 		// Create a map container to hold Disaster_Code
 		// to line number in the data file mappings
 		mapping.insert(std::make_pair(pop, 2));

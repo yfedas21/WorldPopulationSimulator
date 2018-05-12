@@ -1,55 +1,88 @@
 #ifndef UTILITY_H
 #define UTILITY_H
-#pragma once
 #include <map>
 #include <iterator>
-#include <iomanip>
 #include <fstream>
 #include <iostream>
+#include <random>
+#include "constants.h"
 #include "value_container.h"
+#include "disaster.h"
 
 class Utility {
 
 private:
 
-    static const std::string pop;
-    static const std::string ngr;
-    static const std::string hr;
-    static const std::string hd;
-    static const std::string tr;
-    static const std::string td;
-    static const std::string er;
-    static const std::string ed;
-    static const std::string vr;
-    static const std::string vd;
-    static const std::string lr;
-    static const std::string ld;
-    static const std::string fr;
-    static const std::string fd;
-    static const std::string thr;
-    static const std::string thd;
-
-    static const std::string af;
-    static const std::string an;
-    static const std::string as;
-    static const std::string au;
-    static const std::string eu;
-    static const std::string na;
-    static const std::string sa;
-
+	// Private constructor will ensure this
+	// class doesn't create any objects. 
+	Utility() {}
 
 public:
-    //FIX ME: anything to add here?
-    Utility() {}
 
+	/**
+		Calculate whether a specific disaster is set to happen 
+		on any given day
+		@return true if a disaster is to occur that day; false otherwise
+	*/
+	static bool calculate_probability(int rate_of_occurrence) {
+		// generate a random number between 0 and 365 (annual rates)
+		// source: https://stackoverflow.com/a/7560564/9036593
+		std::random_device rd; // obtain a random number from hardware
+		std::mt19937 eng(rd()); // seed the generator
+		std::uniform_int_distribution<> distr(0, 365); // annual rate
 
-    static void set_map(std::map<std::string, int> mapping) {
-		mapping = mapping;
+		// create a new random number in the range of 0 / 365
+		int random_integer = distr(eng);
+
+		if (random_integer <= rate_of_occurrence) 
+			return true;
+		else 
+			return false;
 	}
 
-	static double calculate_prob(double occ, double deaths) {
-		// do some magic here...
-		return 1.2;
+	/**
+		Calculate the number of deaths from the disaster
+		@return deaths the number of deaths
+	*/
+	static int calculate_deaths(Disaster* disaster) {
+		// use a different method of calculation for lightning
+		// because of the high occurence rate (in the millions)
+		if (disaster->get_name() == "lightning") {
+			// algorithm to calculate the number of deaths per day from lightning
+			// prototype: int number_of_deaths = disaster.lightning_deaths / 365 
+
+
+			// *********************** Work on this prototype
+
+
+			//int deaths_ = disaster->get_deaths_per_year / 365;
+		}
+		else {
+			// see calculate_probability() for random number generator source
+			std::random_device rd; // obtain a random number from hardware
+			std::mt19937 eng(rd()); // seed the generator
+
+			/*
+				Algorithm for determining deaths per occurence of disaster
+				1.) retrieve the number of deaths / year for the disaster
+				2.) divide the # of occ / year to get the avg deaths / occ
+				3.) multiply avg deaths * .30 
+				4.) generate random number between 
+					(avg - (avg * .30), avg + (avg * .30)) as the 
+					(lower bound	  , upper bound		))
+				*/
+			int dpy = disaster->get_deaths_per_year();
+			int avg = dpy / disaster->get_rate_per_year();
+			// +1 for nice variable name
+			int wiggle_room = avg * .3; 
+			// generate number of deaths with reasonable randomness (scary thought...)
+			std::uniform_int_distribution<> distr(avg - wiggle_room, avg + wiggle_room); 
+
+			// return the calculated # of deaths
+			return distr(eng);
+		}
+
+		return 0;
 	}
 
 	/**
