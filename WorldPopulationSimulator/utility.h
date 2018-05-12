@@ -45,23 +45,36 @@ public:
 		@return deaths the number of deaths
 	*/
 	static int calculate_deaths(Disaster* disaster) {
+
+		// see calculate_probability() for random number generator source
+		std::random_device rd; // obtain a random number from hardware
+		std::mt19937 eng(rd()); // seed the generator
+
 		// use a different method of calculation for lightning
 		// because of the high occurence rate (in the millions)
 		if (disaster->get_name() == "lightning") {
 			// algorithm to calculate the number of deaths per day from lightning
-			// prototype: int number_of_deaths = disaster.lightning_deaths / 365 
+			std::uniform_int_distribution<> distr(0, 100);
+			int deaths = 0;
+			int rate_per_day;
+			int mod; 
 
+			if (disaster->get_deaths_per_year() / 365 > 1) {
+				mod = disaster->get_deaths_per_year() % 365;
+				rate_per_day = (int)((mod / 365.0) * 100);
+				if (distr(eng) <= rate_per_day)
+					return (int)(disaster->get_deaths_per_year() / 365) + 1;
+			}
+			else {
+				rate_per_day = (int)((disaster->get_deaths_per_year() / 365.0) * 100);
 
-			// *********************** Work on this prototype
+				if (distr(eng) <= rate_per_day)
+					return 1;
+			}
 
-
-			//int deaths_ = disaster->get_deaths_per_year / 365;
+			return -1; // IF -1 returns, Houston, we have a problem
 		}
 		else {
-			// see calculate_probability() for random number generator source
-			std::random_device rd; // obtain a random number from hardware
-			std::mt19937 eng(rd()); // seed the generator
-
 			/*
 				Algorithm for determining deaths per occurence of disaster
 				1.) retrieve the number of deaths / year for the disaster
@@ -81,8 +94,8 @@ public:
 			// return the calculated # of deaths
 			return distr(eng);
 		}
-
-		return 0;
+		// if all else fails scenario: nobody dies!
+		return -1;
 	}
 
 	/**
