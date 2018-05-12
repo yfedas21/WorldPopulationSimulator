@@ -15,7 +15,7 @@ private:
 
 	// Private constructor will ensure this
 	// class doesn't create any objects. 
-    Utility() {}
+	Utility() {}
 
 public:
 
@@ -46,24 +46,24 @@ public:
 	*/
 	static int calculate_deaths(Disaster* disaster) {
 
-		// see calculate_probability() for random number generator source
-		std::random_device rd; // obtain a random number from hardware
-		std::mt19937 eng(rd()); // seed the generator
-
 		// use a different method of calculation for lightning
 		// because of the high occurence rate (in the millions)
-		if (disaster->get_name() == "lightning") {
+		if (disaster->get_name() == "thunderstorm") {
+
+			// see calculate_probability() for random number generator source
+			std::random_device rd; // obtain a random number from hardware
+			std::mt19937 eng(rd()); // seed the generator
+
 			// algorithm to calculate the number of deaths per day from lightning
 			std::uniform_int_distribution<> distr(0, 100);
-			int deaths = 0;
 			int rate_per_day;
 			int mod; 
 
-			if (disaster->get_deaths_per_year() / 365 > 1) {
-				mod = disaster->get_deaths_per_year() % 365;
-				rate_per_day = (int)((mod / 365.0) * 100);
+			if ((disaster->get_deaths_per_year() / 365) > 1) {
+				mod = (int)(disaster->get_deaths_per_year()) % 365;
+				rate_per_day = (mod / 365.0) * 100;
 				if (distr(eng) <= rate_per_day)
-					return (int)(disaster->get_deaths_per_year() / 365) + 1;
+					return (disaster->get_deaths_per_year() / 365) + 1;
 			}
 			else {
 				rate_per_day = (int)((disaster->get_deaths_per_year() / 365.0) * 100);
@@ -75,6 +75,11 @@ public:
 			return -1; // IF -1 returns, Houston, we have a problem
 		}
 		else {
+
+			// see calculate_probability() for random number generator source
+			std::random_device rd; // obtain a random number from hardware
+			std::mt19937 eng(rd()); // seed the generator
+
 			/*
 				Algorithm for determining deaths per occurence of disaster
 				1.) retrieve the number of deaths / year for the disaster
@@ -84,15 +89,21 @@ public:
 					(avg - (avg * .30), avg + (avg * .30)) as the 
 					(lower bound	  , upper bound		))
 				*/
-			int dpy = disaster->get_deaths_per_year();
-			int avg = dpy / disaster->get_rate_per_year();
-			// +1 for nice variable name
-			int wiggle_room = avg * .3; 
-			// generate number of deaths with reasonable randomness (scary thought...)
-			std::uniform_int_distribution<> distr(avg - wiggle_room, avg + wiggle_room); 
+			int dpy = (int)(disaster->get_deaths_per_year());
+			
+			if ((int)(disaster->get_rate_per_year()) == 0)
+				return 0;
+			else { // divide by zero exception
+				double avg = dpy / (int)(disaster->get_rate_per_year());
+				// +1 for nice variable name
+				double wiggle_room = avg * .3;
+				// generate number of deaths with reasonable randomness (scary thought...)
+				std::uniform_int_distribution<> distr(avg - wiggle_room, avg + wiggle_room);
 
-			// return the calculated # of deaths
-			return distr(eng);
+				// return the calculated # of deaths
+				if (distr(eng) <= avg)
+					return (int)(avg + .5);
+			}
 		}
 		// if all else fails scenario: nobody dies!
 		return -1;

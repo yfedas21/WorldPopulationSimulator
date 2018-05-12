@@ -1,8 +1,7 @@
-#ifndef VALUE_CONTIANER_H_
-#define VALUE_CONTIANER_H_
+#ifndef VALUE_CONTAINER_H_
+#define VALUE_CONTAINER_H_
 
 #include <string>
-#include <iomanip>
 
 struct values {
 	std::string name;

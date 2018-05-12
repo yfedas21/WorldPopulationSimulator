@@ -13,7 +13,7 @@ private: // parts
 	double deaths_per_year;
 
 public:
-	// The boring default constructor
+	// The lonely default constructor
 	Disaster() {}
 
 	/**

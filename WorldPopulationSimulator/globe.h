@@ -58,7 +58,7 @@ public:
 	/**
 		Only one constructor, the initilization process 
 		is very specific. 
-		@param name the name of the Continent
+		@param name the name of the Globe
 	*/
 	Globe(string name) {
 		this->name = name;
@@ -70,6 +70,10 @@ public:
 		create_continents(); 
 	}
 
+	/**
+		Accessor for the name of the Globe
+		@return name the name of this Globe object
+	*/
 	std::string get_name() {
 		return this->name;
 	}
@@ -83,8 +87,29 @@ public:
 	}
 
 	/**
+		The Globe update function, which just runs
+		each Continent's update function, but provides a 
+		level of abstraction from the Simulator class
+	*/
+	void update() {
+		for (auto cont : continents) {
+			cont->update();
+		}
+	}
+
+	/**
+		A test update function, one with debug information
+	*/
+	void _test_update_() {
+		for (auto cont : continents) {
+			cont->_test_update_();
+		}
+	}
+
+	/**
 		Create a map container to hold the location of the
 		Disaster_Codes in the data file
+		@return the current state of my wallet
 	*/
 	void create_map() {
 		// Create a map container to hold Disaster_Code
