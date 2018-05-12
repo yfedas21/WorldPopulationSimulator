@@ -15,7 +15,7 @@ private:
 
 	// Private constructor will ensure this
 	// class doesn't create any objects. 
-	Utility() {}
+    Utility() {}
 
 public:
 
