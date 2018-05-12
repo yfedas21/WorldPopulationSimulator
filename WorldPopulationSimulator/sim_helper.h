@@ -29,12 +29,6 @@ public:
         continentFocus = "No";
         startDate = QDate(4,29,2018);
     }
-
-    //FIXME: Unneeded?
-    //static double calculate_probability(double rate, double population) {
-    //    //do some cool stuff here...
-    //    return 0;
-    //}
 };
 
 #endif // SIM_HELPER_H
