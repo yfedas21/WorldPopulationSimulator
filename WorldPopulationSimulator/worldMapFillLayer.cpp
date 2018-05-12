@@ -1,5 +1,6 @@
 #include "worldMapFillLayer.h"
 
+
 //[Constructors]
 worldMapFillLayer::worldMapFillLayer()
 {
@@ -40,6 +41,7 @@ void worldMapFillLayer::addSampleDisasterIndicators()
         curDisasterDot->xPos = rand() % 1510; //FIXME: For now anywhere on screen horizontally
         curDisasterDot->yPos = rand() % 744; //FIXME: For now anywhere on screen vertically
         curDisasterDot->color = determineDisasterDotColor("debug");
+        curDisasterDot->day = rand() % 1000;
         disasterDots.push_back(curDisasterDot);
     }
 
@@ -48,12 +50,14 @@ void worldMapFillLayer::addSampleDisasterIndicators()
 //Updates the opacity for current fill layer
 //@param: running - tells wether animation is running
 //@param: population - amount of people on the continent
-void worldMapFillLayer::calculateState(bool running, double population)
+void worldMapFillLayer::calculateState(bool running, double population, int day)
 {
     if(!running) //FIXME: add check to see if sim is complete
         fillOpacity = 0.0;
 
     fillOpacity = std::fmin(1, (population/landArea) * fillMultiplier);
+
+    simDay = day;
 
     //DEBUG CODE
     //std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
@@ -82,6 +86,7 @@ void worldMapFillLayer::grabDisasterInfo()
         curDisasterDot->yPos = rand() % 744;//FIXME: For now anywhere on screen vertically
         curDisasterDot->color = determineDisasterDotColor(disasterPendingPlot.front().type);
         disasterDots.push_back(curDisasterDot);
+        curDisasterDot->day = disasterPendingPlot.front().dayOccured;
         disasterPendingPlot.pop();
     }*/
     //Continent->setDataRetrival(false); //may need if multithreading issues arrise
@@ -94,7 +99,7 @@ QColor worldMapFillLayer::determineDisasterDotColor(std::string type)
 {
     //FIXME: Complete implementation so different disaster types have different color
     //FIXME: Possible to change this to color based on magnitude of dot (experiment)
-    QColor resultColor = QColor(0, 0, 0, 195);
+    QColor resultColor = QColor(0, 0, 0, 255);
     return resultColor; //black for now
 }
 
@@ -111,9 +116,37 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     painter->setOpacity(1);//full opasity for diaster indicators
     for (auto dot: disasterDots)
     {
+        //FIXME: might want to place old indicators into a seperate
+        //untouched container for effieciency purposes
+        //Skip idicator if too old
+        if(dot->day + 30 < simDay)
+            continue;
+
         painter->setBrush(dot->color);
+        painter->setOpacity(getIndicatorOpacity(dot->day,simDay));
         painter->drawEllipse(dot->xPos,dot->yPos,dot->magnitude,dot->magnitude);
     }
+}
+
+//Gets the current animation day
+//(should be a thread safe operation if end up using threads)
+//return: the amount of days after animation start
+int worldMapFillLayer::grabAnimDay(){
+
+    return simDay;
+}
+
+//Returns the opasity for a particular indicator at particular day
+//@param: dotDay - the tested diaster day info
+//@param: animDay - the current simulation day
+//return: calculated opasity of the disaster (based on days passed
+double worldMapFillLayer::getIndicatorOpacity(int dotDay, int animDay)
+{
+    //FIXME: may want to design a "pulsing" animation
+    //Disaster dots fading out over the course of 30 days
+    int daysPassed = (double) animDay - (double) dotDay;
+    //FIXME: check if Qt automatically makes negative opacity a zero
+    return std::max(1 - (daysPassed/30), 0);
 }
 
 //Loads in the needed image

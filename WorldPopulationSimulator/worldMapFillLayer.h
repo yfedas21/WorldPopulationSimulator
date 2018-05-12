@@ -1,6 +1,8 @@
 #ifndef WORLDMAPFILLLAYER_H
 #define WORLDMAPFILLLAYER_H
 
+#pragma once
+
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsView>
@@ -8,25 +10,15 @@
 #include <QGraphicsItem>
 #include <QDebug>
 #include <algorithm>
+#include <math.h>
 #include <string>
 #include <random>
 #include <list>
 #include "continent.h"
+#include "disasterOccurance.h"
 //Debug
 #include <iostream>
 #include <iomanip>
-
-
-struct disasterOcurance
-{
-    int xPos;      //amount right
-    int yPos;      //amount down
-    int magnitude; //based on disater casualties amount
-    QColor color;     //based on disaster type
-
-    disasterOcurance(){} //FIX ME: add default values as needed
-};
-
 
 class worldMapFillLayer : public QGraphicsItem
 {
@@ -39,6 +31,7 @@ private:
 
     std::list<disasterOcurance*> disasterDots;
     Continent* backendContinent; //Pointer to apropriate continent object w/ calculations
+    int simDay;
 
 public:
     //Constructors for the fill layers
@@ -63,13 +56,19 @@ public:
                QWidget *widget);
 
     //Grabs the current population amount
-    void calculateState(bool running, double population);
+    void calculateState(bool running, double population, int day);
 
     //Adds any disaster infos queued up for disaster dot list
     void grabDisasterInfo();
 
     //Returns the correct disaster indicator color for painter to apply
     QColor determineDisasterDotColor(std::string type);
+
+    //Gets the current animation day (should be a thread safe operation if end up using threads)
+    int grabAnimDay();
+
+    //Returns the opasity for a particular indicator at particular day
+    double getIndicatorOpacity(int dotDay, int animDay);
 
     //Sets the image of the population overlay
     void setPixmap(std::string landName = "Other");

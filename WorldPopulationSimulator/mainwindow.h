@@ -13,6 +13,7 @@ namespace Ui {
 class MainWindow;
 }
 
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -54,7 +55,10 @@ private:
 
     //temp test variables
     int population = 0;
+    int day = 0;
     bool running = false; //Tells wether simulation is running
+    QFont* dateFont;
+    QGraphicsTextItem* shownDate;
 };
 
 #endif // MAINWINDOW_H

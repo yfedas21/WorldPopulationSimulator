@@ -32,6 +32,14 @@ MainWindow::MainWindow(QWidget *parent) :
     //Background for the world map
     scene->addPixmap(worldMapView);
 
+    //Date Indicator
+    dateFont = new QFont("Times", 15, QFont::Bold);
+    shownDate = new QGraphicsTextItem("XX/XX/XXXX");
+    shownDate->setDefaultTextColor(QColor(253,240,34,255));
+    shownDate->setFont((*dateFont));
+    scene->addItem(shownDate);
+    shownDate->setPos(shownDate->mapFromScene(1200,10));
+
     //Create continent overalys
     createContinentOverlays();
 
@@ -48,7 +56,7 @@ void MainWindow::updateAnim()
 {
     for(int i = 0; i < (int)continents.size(); i++)
     {
-        continents[i]->calculateState(running, population);
+        continents[i]->calculateState(running, population, day);
         QWidget* viewport = ui->worldMapView->viewport();
         viewport->repaint();
     }
@@ -57,8 +65,11 @@ void MainWindow::updateAnim()
 //Updates the population amount of each country
 void MainWindow::updatePopulation()
 {
-    if(running)
+    if(running){
         population++;
+        day++;
+    }
+
 }
 
 //Adds continent overlay items to storage vector
