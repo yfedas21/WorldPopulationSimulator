@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include "worldMapFillLayer.h"
+#include "simdeltaoutcome.h"
 #include "simulator.h"
 #include "sim_helper.h"
 
@@ -25,11 +26,14 @@ public:
     void addContinentsToScene();
     void createContinentOverlays();
     QString getCurSimDate();
+    //SimDeltaOutcome run_simulation();
+
     ~MainWindow();
 
 public Q_SLOTS:
     void updateAnim();
     void updatePopulation();
+    void simCalcFinished();
 
 private slots:
     void on_beginSimBtn_clicked();
@@ -48,14 +52,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
-    Simulator * curSim; //reference to backend simulation object
+    QGraphicsScene* scene;
 
     QPixmap worldMapView;
-    QTimer *timer;
-    QTimer *simTimer;
+    QTimer* timer;
+    QTimer* simTimer;
     std::vector<worldMapFillLayer*> continents;
-    Sim_Helper *simInfo;
+    Sim_Helper* simInfo;
+    QFutureWatcher<SimDeltaOutcome> simWatcher;
+    QFuture<SimDeltaOutcome> simResults;
+    SimDeltaOutcome curSimResults;
 
     //temp test variables
     int population = 0;

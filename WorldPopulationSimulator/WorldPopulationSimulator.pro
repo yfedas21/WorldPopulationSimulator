@@ -35,10 +35,14 @@ HEADERS += \
         disaster.h \
         sim_helper.h \
         utility.h \
-    disasteroccurance.h \
     worldMapFillLayer.h \
     value_container.h \
-    simulator.h
+    simulator.h \
+    continentalday.h \
+    disasterOccurrence.h \
+    globalday.h \
+    SimDeltaOutcome.h \
+    constants.h
 
 FORMS += \
         mainwindow.ui

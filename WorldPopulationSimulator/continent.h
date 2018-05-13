@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <queue>
+#include "continentalday.h"
 #include "utility.h"
 
 using std::string;
@@ -128,34 +129,56 @@ public:
 	}
 
 	/**
-		The core of any simulation program
+        The core of single continent one day simulation
+        @param: day - current simulationDay (used for setting the correct disaster timestamp easily)
+        @return: population amount, growth and disasters that occured for the day
 	*/
-    double update() {
+    continentalDay update(int day) {
 
-        //Debug of Simulation Running
-        std::cout << value_container.name << " is now at " << value_container.population << " population." << std::endl;
+        //Create today's continent snapshot
+        continentalDay contDayResult = continentalDay();
+
+        //Store the initial population of continent
+        double original_pop = value_container.population;
 
         // For each day, increment the continental population based on annual net growth rate / 365
         value_container.population +=
             (int)((value_container.population * value_container.net_growth / 365) + 0.5);
 
-        double original_pop = value_container.population;
-
-		// Loop through the disasters vector to determine which ones will occur
-		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
-			if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
-				// add the disaster into the Disaster queue
+        // Loop through the disasters vector to determine which ones will occur
+        // FIXME: add functionallity for more than one disaster of one type to occur in one day
+        for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
+            if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
+                // add the disaster into the Disaster queue
                 disasters_in_queue.push(disasters[loc_in_vec]);
-			}
-		}
+            }
+        }
 
-		while (!disasters_in_queue.empty()) {
-			value_container.population -= Utility::calculate_deaths(disasters_in_queue.front());
-			disasters_in_queue.pop();
-		}
+        //Loop through all disasters that happened today
+        while (!disasters_in_queue.empty()) {
+            //Find the amount of deaths disaster causes
+            int disasterDeaths = Utility::calculate_deaths(disasters_in_queue.front());
 
-		return original_pop - value_container.population;
-	}
+            //Apply population impact of disaster
+            value_container.population -= disasterDeaths;
+
+            //Create current disaster snapshot
+            contDayResult.addDisasterSnapshot(disasterOccurrence((double)disasterDeaths/5,day));
+
+            //Remove pending disasters for this continent for today
+            disasters_in_queue.pop();
+        }
+
+        //Read population state into continent day snapshot
+        contDayResult.todayPopulation = value_container.population;
+        contDayResult.populationGrowth = original_pop - value_container.population;
+
+        return contDayResult;
+
+        //DEBUG CODE
+        //Debug of Simulation Running
+        //std::cout << value_container.name << " is now at " << value_container.population << " population." << std::endl;
+    }
 
 private:
 	friend class Globe;

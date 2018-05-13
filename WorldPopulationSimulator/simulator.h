@@ -2,7 +2,9 @@
 #define SIMULATOR_H
 
 #include "globe.h"
+#include "SimDeltaOutcome.h"
 #include <QMessageBox>
+#include <QProgressDialog>
 
 class Simulator {
 private:
@@ -39,30 +41,34 @@ public:
 		The top-level simulation driver
         @return: simStatus code (-1 error running)
 	*/
-    int run_simulation() {
+    int check_run_simulation() {
 
         if(total_time == -1)
         {
-            //Adapted Message box from documentation
-            //http://doc.qt.io/archives/qt-4.8/qmessagebox.html#QMessageBox
-            QMessageBox msgBox;
-            msgBox.setText("Invalid Simulation Settings");
-            msgBox.setInformativeText("Please enter a positive integer in the runtime textfield of the \"Quick Settings\" tab!");
-            msgBox.setStandardButtons(QMessageBox::Close);
-            msgBox.setDefaultButton(QMessageBox::Close);
-            msgBox.setIconPixmap(QPixmap("://Resources/formIcon.png"));
-            msgBox.exec();
+
             return -1;
         }
 
+        //FIXME: remove DEBUG when complete
         std::cout << "Simulation going to be running!" << std::endl;
 
-		for (int time = 0; time < total_time; ++time) {
-			// call the Globe update (which calls each Continent update):
-			g->update();
-		}
         return 1;
 	}
+
+    SimDeltaOutcome run_simulation()
+    {
+        //Create snapshot container
+        std::map<int, globalDay> dayResults;
+
+        for (int day = 0; day < total_time; ++day)
+        {
+            qDebug() << "Completing Day: " << day;
+            // Call the Globe update (which calls each Continent update):
+            dayResults.insert(std::make_pair(day, g->update(day)));
+        }
+
+        return SimDeltaOutcome(dayResults);
+    }
 
 	void _run_tests_() {
 

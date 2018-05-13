@@ -34,14 +34,14 @@ void worldMapFillLayer::addSampleDisasterIndicators()
 
     for(int i = 0; i < 100; i++)
     {
-        disasterOcurance * curDisasterDot = new disasterOcurance();
+        disasterOccurrence curDisasterDot = disasterOccurrence();
         //FIXME: Adjust or make adjustable by users (size of dots)
-        curDisasterDot->magnitude = (rand() % 80)/4;
+        curDisasterDot.magnitude = (rand() % 80)/4;
         //FIXME: May want to go further to have the disasters
         //actually cluster where they do in real life
-        curDisasterDot->dotPos = getNewIndicatorPosition();
-        curDisasterDot->color = determineDisasterDotColor("debug");
-        curDisasterDot->day = rand() % 500;
+        curDisasterDot.dotPos = getNewIndicatorPosition();
+        curDisasterDot.color = determineDisasterDotColor("debug");
+        curDisasterDot.day = rand() % 500;
         disasterDots.push_back(curDisasterDot);  
     }
 
@@ -138,12 +138,12 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         //FIXME: might want to place old indicators into a seperate
         //untouched container for effieciency purposes
         //Skip idicator if too old
-        if(dot->day + 30 < simDay || dot->day > simDay)
+        if(dot.day + 30 < simDay || dot.day > simDay)
             continue;
 
-        painter->setBrush(dot->color);
-        painter->setOpacity(getIndicatorOpacity(dot->day,simDay));
-        painter->drawEllipse(dot->dotPos,dot->magnitude,dot->magnitude);
+        painter->setBrush(dot.color);
+        painter->setOpacity(getIndicatorOpacity(dot.day,simDay));
+        painter->drawEllipse(dot.dotPos,dot.magnitude,dot.magnitude);
     }
 }
 

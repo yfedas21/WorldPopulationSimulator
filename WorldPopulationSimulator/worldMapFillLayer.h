@@ -8,7 +8,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include <QDebug>
+#include <QtConcurrent>
 #include <algorithm>
 #include <math.h>
 #include <cmath>
@@ -16,7 +16,8 @@
 #include <random>
 #include <list>
 #include "continent.h"
-#include "disasterOccurance.h"
+#include "disasterOccurrence.h"
+#include "worldMapFillLayer.h"
 //Debug
 #include <iostream>
 #include <iomanip>
@@ -30,7 +31,7 @@ private:
     float landArea;             //Continent's total land area (used for opacity)
     float fillMultiplier;       //Increase opacity growth rate (equal for all continents = unbiased)
 
-    std::list<disasterOcurance*> disasterDots;
+    std::list<disasterOccurrence> disasterDots; //FIXME: Has to be a pointer?
     QPoint continentCenter;
     QPoint continentSize;
     Continent* backendContinent; //Pointer to apropriate continent object w/ calculations

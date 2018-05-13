@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "worldMapFillLayer.h"
 #include "ui_mainwindow.h"
 
 
@@ -10,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->curSim = new Simulator();
 
     //Create the input/calculation storage class
     simInfo = new Sim_Helper();
@@ -33,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateAnim())); //an update tenth of a second
     timer->start(100);
+
+    //Connect QFuture watcher to apropriate methods
+    connect(&simWatcher, SIGNAL(finished()), this, SLOT(simCalcFinished()));
 
     //Background for the world map
     scene->addPixmap(worldMapView);
@@ -138,17 +139,42 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+SimDeltaOutcome run_simulation()
+{
+    qDebug() << "Hello from worker thread!";
+    qDebug() << "Simulator object was created";
+    return Simulator().run_simulation();
+}
+
 void MainWindow::on_beginSimBtn_clicked()
 {
     if(!running)
     {
-        curSim->set_total_time(simInfo->getRunTime());
-        std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
-        int runCode = curSim->run_simulation();
-        if(runCode == -1);
+        if((simInfo->getRunTime() == -1)||(simInfo->getRunTime() == 0))
+        {
+            //FIXME: make into a seperate function
+            //Adapted Message box from documentation
+            //http://doc.qt.io/archives/qt-4.8/qmessagebox.html#QMessageBox
+            QMessageBox msgBox;
+            msgBox.setText("Invalid Simulation Settings");
+            msgBox.setInformativeText("Please enter a positive integer in the runtime textfield of the \"Quick Settings\" tab!");
+            msgBox.setStandardButtons(QMessageBox::Close);
+            msgBox.setDefaultButton(QMessageBox::Close);
+            msgBox.setIconPixmap(QPixmap("://Resources/formIcon.png"));
+            msgBox.exec();
             return;
+        }
+
+        std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
 
         //Change values only if simulation ran/resumed successfully
+        //Documentation: https://doc.qt.io/qt-5.10/qfuturewatcher.html
+        //Documentation: https://doc.qt.io/qt-5.10/qfuture.html#details
+        simResults = QtConcurrent::run(run_simulation);
+        simWatcher.setFuture(simResults);
+        std::cout << "QFuture isFinished #1? " << simResults.isFinished() << std::endl;
+        std::cout<< "Started? " << simWatcher.isStarted() << " Finshed? "<< simWatcher.isFinished() << std::endl;
+
         ui->beginSimBtn->setText("Pause Simulation");
         running = true;
     }
@@ -168,6 +194,16 @@ void MainWindow::on_resetSimBtn_clicked()
         running=false;
         ui->beginSimBtn->setText("Begin Simulation");
     }
+}
+
+void MainWindow::simCalcFinished(){
+    std::cout << "QFuture isFinished #2? " << simResults.isFinished() << std::endl;
+
+    std::cout<< "2 Started? " << simWatcher.isStarted() << " 2 Finshed? "<< simWatcher.isFinished() << std::endl;
+
+    std::cout << "Calculations are complete!"  << std::endl;
+
+     std::cout << "pop growth day 1: " << simResults.result().snapshots.at(1).continentDays.at("Africa").populationGrowth << std::endl;
 }
 
 void MainWindow::on_simRuntimeInput_textEdited(const QString &arg1)

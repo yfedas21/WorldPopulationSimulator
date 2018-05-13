@@ -2,6 +2,7 @@
 #define GLOBE_H
 
 #include "continent.h"
+#include "globalday.h"
 
 using std::string;
 
@@ -102,12 +103,18 @@ public:
 		The Globe update function, which just runs
 		each Continent's update function, but provides a 
 		level of abstraction from the Simulator class
-	*/
-	void update() {
-		for (auto cont : continents) {
-            global_population += cont->update();
-		}
-	}
+    */
+    globalDay update(int day)
+    {
+        globalDay globalDayResult;
+        for (auto cont : continents)
+        {
+            continentalDay curContResult = cont->update(day);
+            global_population += curContResult.populationGrowth;
+            globalDayResult.addContData(cont->name, curContResult);
+        }
+        return globalDayResult;
+    }
 
 	/**
 		A test update function, one with debug information
@@ -115,6 +122,7 @@ public:
 	*/
 	void _test_update_() {
 		for (auto cont : continents) {
+
             cont->_test_update_();
 		}
 	}
