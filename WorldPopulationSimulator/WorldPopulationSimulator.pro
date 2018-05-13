@@ -26,8 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         worldMapFillLayer.cpp \
-        mainwindow.cpp \
-        utility.cpp
+        mainwindow.cpp
 
 HEADERS += \
         mainwindow.h \
