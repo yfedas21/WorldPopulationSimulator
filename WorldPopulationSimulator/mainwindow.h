@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QTimer>
 #include <vector>
+#include <iostream>
 #include "worldMapFillLayer.h"
 #include "sim_helper.h"
 
@@ -22,6 +23,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void addContinentsToScene();
     void createContinentOverlays();
+    QString getCurSimDate();
     ~MainWindow();
 
 public Q_SLOTS:

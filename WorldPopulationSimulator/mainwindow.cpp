@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Create the input/calculation storage class
+    simInfo = new Sim_Helper();
+
     scene = new QGraphicsScene(this);
     ui->worldMapView->setScene(scene);
     ui->worldMapView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
@@ -46,20 +49,19 @@ MainWindow::MainWindow(QWidget *parent) :
     //Add continent layers to scene
     addContinentsToScene();
     updateAnim();
-
-    //Create the input/calculation storage class
-    simInfo = new Sim_Helper();
 }
 
 //Central function that updates the entire map by going through each continent
 void MainWindow::updateAnim()
 {
-    for(int i = 0; i < (int)continents.size(); i++)
-    {
+    shownDate->setPlainText(getCurSimDate());
+
+    for(int i = 0; i < (int)continents.size(); i++){
         continents[i]->calculateState(running, population, day);
-        QWidget* viewport = ui->worldMapView->viewport();
-        viewport->repaint();
     }
+
+    QWidget* viewport = ui->worldMapView->viewport();
+    viewport->repaint();
 }
 
 //Updates the population amount of each country
@@ -72,16 +74,39 @@ void MainWindow::updatePopulation()
 
 }
 
+//Returns the simulation date based on the current days after sim start
+QString MainWindow::getCurSimDate()
+{
+    //FIXME: Investigate if causes a memory leak
+    QDate resultDate = simInfo->startDate.addDays(day);
+    if(resultDate.toString() == "")
+    {
+        QDate curDate = QDate::currentDate();
+        simInfo->startDate = curDate;
+        return QString::number(curDate.month()) + "/" +
+               QString::number(curDate.day()) + "/" +
+               QString::number(curDate.year());
+    } else {
+        return QString::number(resultDate.month()) + "/" +
+               QString::number(resultDate.day()) + "/" +
+               QString::number(resultDate.year());
+    }
+
+    //DEBUG CODE
+    //std::cout << "Added day(s): " << day << " " << resultDate.toString().toUtf8().constData() << std::endl;
+}
+
+
 //Adds continent overlay items to storage vector
 void MainWindow::createContinentOverlays()
 {
     //Object creation using Overlay constructor
-    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21,.02,0.0);
-    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73,.02,0.0);
-    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32,.02,0.0);
-    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931,.02,0.0);
-    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54,.02,0.0);
-    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888,.02,0.0);
+    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21,.02,0.0, QPoint(1150,300), QPoint(250,200));
+    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73,.02,0.0, QPoint(810,465), QPoint(150,160));
+    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32,.02,0.0, QPoint(1315,595), QPoint(150,130));
+    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931,.02,0.0, QPoint(800,210), QPoint(150,130));
+    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54,.02,0.0, QPoint(300,250), QPoint(240,230));
+    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888,.02,0.0, QPoint(450,560), QPoint(110,135));
     //Pushing all continents into the storage vector
     continents.push_back(Asia);
     continents.push_back(Africa);
@@ -128,6 +153,7 @@ void MainWindow::on_beginSimBtn_clicked()
 void MainWindow::on_resetSimBtn_clicked()
 {
     population = 0;
+    day = 0;
     if(running)
     {
         running=false;

@@ -60,7 +60,7 @@ public:
 			int mod; 
 
 			if (disaster->get_deaths_per_year() / 365 > 1) {
-				mod = disaster->get_deaths_per_year() % 365;
+                mod = (int) disaster->get_deaths_per_year() % 365;
 				rate_per_day = (int)((mod / 365.0) * 100);
 				if (distr(eng) <= rate_per_day)
 					return (int)(disaster->get_deaths_per_year() / 365) + 1;

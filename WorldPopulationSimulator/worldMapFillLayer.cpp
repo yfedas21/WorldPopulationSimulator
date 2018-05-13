@@ -14,36 +14,39 @@ worldMapFillLayer::worldMapFillLayer()
 worldMapFillLayer::worldMapFillLayer(std::string continent,
                                      double area,
                                      double fillMultiplier,
-                                     double initOpacity)
+                                     double initOpacity,
+                                     QPoint continentCenter,
+                                     QPoint continentSize)
 {
     continentName = continent;
     setPixmap(continentName);
     fillOpacity = initOpacity;
     this->fillMultiplier = fillMultiplier;
     landArea = area;
+    this->continentCenter = continentCenter;
+    this->continentSize = continentSize;
     addSampleDisasterIndicators();
 }
 
 //DEBUG FUNCTION FOR DISASTER INDICATORS
 void worldMapFillLayer::addSampleDisasterIndicators()
 {
-    if(continentName != "Africa")
-        return;
 
     for(int i = 0; i < 100; i++)
     {
         disasterOcurance * curDisasterDot = new disasterOcurance();
         //FIXME: Adjust or make adjustable by users (size of dots)
-        curDisasterDot->magnitude = (rand() % 100)/3;
-        //FIXME: Use the within elipse formula for more visually apealing results
-        //May even want to go further to have the disasters actually cluster where they do in real life
-        //https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
-        curDisasterDot->xPos = rand() % 1510; //FIXME: For now anywhere on screen horizontally
-        curDisasterDot->yPos = rand() % 744; //FIXME: For now anywhere on screen vertically
+        curDisasterDot->magnitude = (rand() % 80)/4;
+        //FIXME: May want to go further to have the disasters
+        //actually cluster where they do in real life
+        curDisasterDot->dotPos = getNewIndicatorPosition();
         curDisasterDot->color = determineDisasterDotColor("debug");
-        curDisasterDot->day = rand() % 1000;
-        disasterDots.push_back(curDisasterDot);
+        curDisasterDot->day = rand() % 500;
+        disasterDots.push_back(curDisasterDot);  
     }
+
+    //DEBUG CODE
+    //std::cout<<"New Dot at X: "<< curDisasterDot->dotPos.x() << " Y: " << curDisasterDot->dotPos.y() << std::endl;
 
 }
 
@@ -78,15 +81,13 @@ void worldMapFillLayer::grabDisasterInfo()
     {
         disasterOcurance * curDisasterDot = new disasterOcurance();
         //FIXME: Adjust or make adjustable by users (size of dots)
-        curDisasterDot->magnitude = disasterPendingPlot.front().deaths / 30;
-        //FIXME: Use the within elipse formula for more visually apealing results
-        //May even want to go further to have the disasters actually cluster where they do in real life
-        //https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
-        curDisasterDot->xPos = rand() % 1510;//FIXME: For now anywhere on screen horizontally
-        curDisasterDot->yPos = rand() % 744;//FIXME: For now anywhere on screen vertically
+        curDisasterDot->magnitude = (rand() % 80)/3;
+        //FIXME: May want to go further to have the disasters
+        //actually cluster where they do in real life
+        curDisasterDot->dotPos = getNewIndicatorPosition();
         curDisasterDot->color = determineDisasterDotColor(disasterPendingPlot.front().type);
-        disasterDots.push_back(curDisasterDot);
         curDisasterDot->day = disasterPendingPlot.front().dayOccured;
+        disasterDots.push_back(curDisasterDot);
         disasterPendingPlot.pop();
     }*/
     //Continent->setDataRetrival(false); //may need if multithreading issues arrise
@@ -103,37 +104,47 @@ QColor worldMapFillLayer::determineDisasterDotColor(std::string type)
     return resultColor; //black for now
 }
 
+QPoint worldMapFillLayer::getNewIndicatorPosition()
+{
+    int x,y = 0;
+
+    while (!(((pow(x-continentCenter.x(),2)/pow(continentSize.x(),2))+(pow(y-continentCenter.y(),2)/pow(continentSize.y(),2)))<1))
+    {
+        //FIXME: maybe better algorithm exists to fit contraints (than just random)
+        x = rand() % 1510;
+        y = rand() % 744;
+    }
+
+    return QPoint(x,y);
+}
+
 //Paints the continent content layer on to the map
 void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     //DEBUG CODE
+    //Overlay opasity check
     //std::cout << "Repainted with fill opacity: " << std::showpoint
     //          << std::fixed << std::setprecision(4)<< fillOpacity << std::endl;
+    //Continent disaster indicator region check
+    //painter->setOpacity(.5);//full opasity for disaster indicators
+    //painter->setBrush(QColor(0,0,255,255));
+    //painter->drawEllipse(continentCenter,continentSize.x(),continentSize.y());
 
     painter->setOpacity(fillOpacity);
     painter->drawPixmap(0,0,1510,744, fillImage);
 
-    painter->setOpacity(1);//full opasity for diaster indicators
     for (auto dot: disasterDots)
     {
         //FIXME: might want to place old indicators into a seperate
         //untouched container for effieciency purposes
         //Skip idicator if too old
-        if(dot->day + 30 < simDay)
+        if(dot->day + 30 < simDay || dot->day > simDay)
             continue;
 
         painter->setBrush(dot->color);
         painter->setOpacity(getIndicatorOpacity(dot->day,simDay));
-        painter->drawEllipse(dot->xPos,dot->yPos,dot->magnitude,dot->magnitude);
+        painter->drawEllipse(dot->dotPos,dot->magnitude,dot->magnitude);
     }
-}
-
-//Gets the current animation day
-//(should be a thread safe operation if end up using threads)
-//return: the amount of days after animation start
-int worldMapFillLayer::grabAnimDay(){
-
-    return simDay;
 }
 
 //Returns the opasity for a particular indicator at particular day
@@ -144,9 +155,12 @@ double worldMapFillLayer::getIndicatorOpacity(int dotDay, int animDay)
 {
     //FIXME: may want to design a "pulsing" animation
     //Disaster dots fading out over the course of 30 days
-    int daysPassed = (double) animDay - (double) dotDay;
+    double daysPassed = (double) (animDay - dotDay);
     //FIXME: check if Qt automatically makes negative opacity a zero
-    return std::max(1 - (daysPassed/30), 0);
+    return std::max(1 - (daysPassed/30), (double)0);
+
+    //DEBUG CODE
+    //std::cout<< std::max(1 - (daysPassed/30),(double) 0) << std::endl;
 }
 
 //Loads in the needed image

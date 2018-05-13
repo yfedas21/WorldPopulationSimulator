@@ -3,8 +3,7 @@
 
 struct disasterOcurance
 {
-    int xPos;      //amount right
-    int yPos;      //amount down
+    QPoint dotPos;
     int magnitude; //based on disater casualties amount
     QColor color;     //based on disaster type
     int day;       //days after sim start (used for fade out animation)

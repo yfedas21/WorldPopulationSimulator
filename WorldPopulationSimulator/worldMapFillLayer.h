@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <algorithm>
 #include <math.h>
+#include <cmath>
 #include <string>
 #include <random>
 #include <list>
@@ -30,6 +31,8 @@ private:
     float fillMultiplier;       //Increase opacity growth rate (equal for all continents = unbiased)
 
     std::list<disasterOcurance*> disasterDots;
+    QPoint continentCenter;
+    QPoint continentSize;
     Continent* backendContinent; //Pointer to apropriate continent object w/ calculations
     int simDay;
 
@@ -39,7 +42,9 @@ public:
     worldMapFillLayer(std::string continent,
                       double area,
                       double fillMultiplier = 1.0,
-                      double initOpacity = 0.0);
+                      double initOpacity = 0.0,
+                      QPoint continentCenter = QPoint(0,0),
+                      QPoint continentSize = QPoint(10,10));
 
     //DEBUG disaster indicators
     void addSampleDisasterIndicators();
@@ -64,11 +69,11 @@ public:
     //Returns the correct disaster indicator color for painter to apply
     QColor determineDisasterDotColor(std::string type);
 
-    //Gets the current animation day (should be a thread safe operation if end up using threads)
-    int grabAnimDay();
-
     //Returns the opasity for a particular indicator at particular day
     double getIndicatorOpacity(int dotDay, int animDay);
+
+    //Returns a disater point position within continent range
+    QPoint getNewIndicatorPosition();
 
     //Sets the image of the population overlay
     void setPixmap(std::string landName = "Other");
