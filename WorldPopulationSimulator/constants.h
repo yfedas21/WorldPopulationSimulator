@@ -41,21 +41,21 @@ const std::string sa = "South_America";
 
 namespace Database {
 	// Holds a year's worth of data
-	double hur_deaths;
-	double tor_deaths;
-	double ear_deaths;
-	double vol_deaths;
-	double lan_deaths;
-	double flo_deaths;
-	double thu_deaths;
+    extern double hur_deaths;
+    extern double tor_deaths;
+    extern double ear_deaths;
+    extern double vol_deaths;
+    extern double lan_deaths;
+    extern double flo_deaths;
+    extern double thu_deaths;
 
-	double hur_rate;
-	double tor_rate;
-	double ear_rate;
-	double vol_rate;
-	double lan_rate;
-	double flo_rate;
-	double thu_rate;
+    extern double hur_rate;
+    extern double tor_rate;
+    extern double ear_rate;
+    extern double vol_rate;
+    extern double lan_rate;
+    extern double flo_rate;
+    extern double thu_rate;
 }
 
 #endif 
