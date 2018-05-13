@@ -5,12 +5,8 @@
 //#include <QThread>
 //possible adaptation of https://www.youtube.com/watch?v=tvpC8UrPpZ4
 
-#include <stdexcept>
-#include <ios>
 #include <string>
-#include <vector>
 #include "globe.h"
-#include "continent.h"
 
 class Simulation {
 private:
@@ -30,10 +26,10 @@ public:
     }
 
     void run_simulation() {
-        for (int clock = 0; clock < total_time; clock++) {
+        for (int time = 0; time < total_time; ++time) {
             // update each continent as each day goes by ...
             for (int cont = 0; cont < continents->size(); cont++){
-                continents->at(cont).update(clock);
+                continents->at(cont).update(time);
             }
         }
     }

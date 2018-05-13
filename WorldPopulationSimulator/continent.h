@@ -2,7 +2,7 @@
 #define CONTINENT_H
 
 #include <vector>
-#include <iostream>
+#include <iostream> /// *** Used for debugging purposes
 #include <queue>
 #include <deque>
 #include <iterator>
@@ -14,45 +14,17 @@ using std::string;
 using std::vector;
 using std::queue;
 
-/**
-	Inherit from double-ended queue for iterator-like functionality
-	Source: https://stackoverflow.com/a/5984198/9036593
-*/
-template<typename T, typename Container = std::deque<T> >
-class iterable_queue : public std::queue<T, Container>
-{
-public:
-	typedef typename Container::iterator iterator;
-	typedef typename Container::const_iterator const_iterator;
-
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
-	const_iterator begin() const { return this->c.begin(); }
-	const_iterator end() const { return this->c.end(); }
-};
-
 class Continent {
 private:
 	string name;
 	values value_container;
 	std::map<std::string, int> mapping;
 	vector<Disaster*> disasters;
-	iterable_queue<Disaster*> disasters_to_happen;
+	std::queue<Disaster*> disasters_in_queue;
 
-	//// function for quick debugging... Remove later 
-	//void add_sample_disasters() {
-	//	Disaster *a = new Disaster("tornado", 1.1, 1.1);
-	//	Disaster *b = new Disaster("earthquake", 1.2, 1.2);
-	//	Disaster *c = new Disaster("flood", 1.3, 1.3);
-	//	Disaster *d = new Disaster("lightning", 1.4, 1.4);
-	//	Disaster *e = new Disaster("fire", 1.5, 1.5);
-
-	//	disasters.push_back(a);
-	//	disasters.push_back(b);
-	//	disasters.push_back(c);
-	//	disasters.push_back(d);
-	//	disasters.push_back(e);
-	//}
+	// _test member variables
+	double total_deaths_for_continent;
+	double total_disasters_for_continent;
 
 public:
 	Continent() {
@@ -144,8 +116,7 @@ public:
 	/**
 		The core of any simulation program
 	*/
-	void update(int day) {
-
+	void update() {
 		// For each day, increment the continental population based on annual net growth rate / 365
 		value_container.population += 
 			(int)((value_container.population * value_container.net_growth / 365) + 0.5); 
@@ -154,21 +125,95 @@ public:
 		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
 			if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
 				// add the disaster into the Disaster queue
-				disasters_to_happen.push(disasters[loc_in_vec]);
+				disasters_in_queue.push(disasters[loc_in_vec]); 
 			}
 		}
 
-		// Step through each disaster in the iterable_queue 
-		for (auto it = disasters_to_happen.begin(); it != disasters_to_happen.end(); ++it) {
-			// calculate the number of deaths per Disaster
-			value_container.population -= Utility::calculate_deaths(disasters_to_happen.front());
-			
-			// remove the disaster from the queue
-			disasters_to_happen.pop();
+		while (!disasters_in_queue.empty()) {
+			value_container.population -= Utility::calculate_deaths(disasters_in_queue.front());
+			//if (Utility::calculate_deaths(disasters_in_queue.front()) > 0)
+			//	std::cout << disasters_in_queue.front()->get_name() << " " << Utility::calculate_deaths(disasters_in_queue.front()) << std::endl;
+			disasters_in_queue.pop();
 		}
 	}
 
-	
+private:
+	friend class Globe;
+	/**
+		The test function that will do what update() does, 
+		but adds file output, percent calculations, and other
+		debug information. 
+	*/
+	void _test_update_() {
+		// "write" to the database
+		using namespace Database;
+
+		double original_population = value_container.population;
+
+		//std::cout << "The population at the start of _test_update_ for " << this->name << 
+		//	" is " << original_population << std::endl; 
+
+		// For each day, increment the continental population based on annual net growth rate / 365
+		value_container.population +=
+			(int)((value_container.population * value_container.net_growth / 365) + 0.5);
+
+		//std::cout << "With the daily growth, the population of  " << this->name << 
+		//	" is " << value_container.population << std::endl; 
+
+		
+		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
+			if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
+				// add the disaster into the Disaster queue
+				disasters_in_queue.push(disasters[loc_in_vec]); 
+
+				// increment the right disaster counters
+				Disaster *d = disasters[loc_in_vec];
+				if (d->get_name() == "hurricane")
+					Database::hur_rate++;
+				else if (d->get_name() == "tornado")
+					Database::tor_rate++;
+				else if (d->get_name() == "earthquake")
+					Database::ear_rate++;
+				else if (d->get_name() == "volcano")
+					Database::vol_rate++;
+				else if (d->get_name() == "landslide")
+					Database::lan_rate++;
+				else if (d->get_name() == "flood")
+					Database::flo_rate++;
+				else 
+					Database::thu_rate++;	
+			}
+		}
+
+		//std::cout << "The number of disasters for today is " << disasters_in_queue.size() << std::endl; 
+
+		while (!disasters_in_queue.empty()) {
+			int num_deaths = Utility::calculate_deaths(disasters_in_queue.front());
+			value_container.population -= num_deaths;
+
+			// increment the right death counters
+			Disaster *d = disasters_in_queue.front();
+			if (d->get_name() == "hurricane")
+				Database::hur_deaths += num_deaths;
+			else if (d->get_name() == "tornado")
+				Database::tor_deaths += num_deaths;
+			else if (d->get_name() == "earthquake")
+				Database::ear_deaths += num_deaths;
+			else if (d->get_name() == "volcano")
+				Database::vol_deaths += num_deaths;
+			else if (d->get_name() == "landslide")
+				Database::lan_deaths += num_deaths;
+			else if (d->get_name() == "flood")
+				Database::flo_deaths += num_deaths;
+			else
+				Database::thu_deaths += num_deaths;
+
+			disasters_in_queue.pop();
+		}
+
+		//std::cout << "The population increase for " << this->name << " is " <<
+		//	value_container.population - original_population << std::endl << std::endl; 
+	}
 };
 
 #endif // !CONTINENT_H

@@ -14,7 +14,7 @@ public:
     // some utility functions here, such as
     // set initial values, get inputs, and
     // calculate probabilities
-
+	
     int runtime;
     bool enableDisaster;
     bool enableMigration;
