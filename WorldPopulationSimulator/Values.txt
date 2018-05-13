@@ -14,7 +14,7 @@
 
 
 /*/ Global /*/
-global_population = 7468138529 <-- Make sure you can access this
+7468138529
 /*/ End_Global /*/
 
 /*/ Africa /*/

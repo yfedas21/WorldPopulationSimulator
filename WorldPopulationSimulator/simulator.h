@@ -19,6 +19,16 @@ public:
 		g = new Globe("Earth");
 	}
 
+	/**
+		A destructor for Simulator
+	*/
+	~Simulator() {
+		delete g;
+	}
+
+	/**
+		Set the Simulator will run
+	*/
 	void set_total_time(int total_time) {
 		this->total_time = total_time;
 	}
@@ -38,7 +48,7 @@ public:
 			// call the Globe update, which calls a test update
 			g->_test_update_();
 		}
-		std::cout << " ********** Statistics ********** " << std::endl << std::endl;
+		std::cout << " ********** Statistics ********** " << std::endl;
 		std::cout << "hurricane rate: " << Database::hur_rate << std::endl; Database::hur_rate = 0;
 		std::cout << "tornado rate: " << Database::tor_rate << std::endl; Database::tor_rate = 0;
 		std::cout << "earthquake rate: " << Database::ear_rate << std::endl; Database::ear_rate = 0;

@@ -1,7 +1,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
+
 #include <map>
-#include <iterator>
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -59,9 +59,9 @@ public:
 			int rate_per_day;
 			int mod; 
 
-			if (disaster->get_deaths_per_year() / 365 > 1) {
-                mod = (int) disaster->get_deaths_per_year() % 365;
-				rate_per_day = (int)((mod / 365.0) * 100);
+			if ((disaster->get_deaths_per_year() / 365) > 1) {
+				mod = (int)(disaster->get_deaths_per_year()) % 365;
+				rate_per_day = (mod / 365.0) * 100;
 				if (distr(eng) <= rate_per_day)
 					return (disaster->get_deaths_per_year() / 365) + 1;
 			}
@@ -91,7 +91,7 @@ public:
 				*/
 			int dpy = (int)(disaster->get_deaths_per_year());
 			
-			if ((int)(disaster->get_rate_per_year()) == 0)
+			if ((int)(disaster->get_rate_per_year()) <= 0)
 				return 0;
 			else { // divide by zero exception
 				double avg = dpy / (int)(disaster->get_rate_per_year());

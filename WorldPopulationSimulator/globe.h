@@ -1,18 +1,14 @@
 #ifndef GLOBE_H
 #define GLOBE_H
 
-#include <vector>
-#include <string>
 #include "continent.h"
-#include "constants.h"
-#include "utility.h"
 
 using std::string;
 
 class Globe {
 private:
 	string name; // The globe name
-
+	double global_population; 
 	// container for Continent objects
 	std::vector<Continent *> continents;
 	
@@ -65,9 +61,17 @@ public:
 
 		create_map(); // create map to hold location mappings 
 		add_cont_codes(); // prepare cont names for Continent creation
-
+		set_global_population();
 		// Create the continents and add them to the Continent vector
 		create_continents(); 
+	}
+
+	/**
+		Globe destructor (following the Rule of Three)
+	*/
+	~Globe() {
+		for (auto cont_ptr : continents)
+			delete cont_ptr;
 	}
 
 	/**
@@ -76,6 +80,14 @@ public:
 	*/
 	std::string get_name() {
 		return this->name;
+	}
+
+	/**
+		Set this Globe population from file
+		@return freaking nothing lol
+	*/
+	void set_global_population() {
+		this->global_population = Utility::read_value(17);
 	}
 
 	/**
@@ -93,12 +105,13 @@ public:
 	*/
 	void update() {
 		for (auto cont : continents) {
-			cont->update();
+			global_population += cont->update();
 		}
 	}
 
 	/**
 		A test update function, one with debug information
+		DOES NOT MODIFY GLOBAL POPULATION! Use above function
 	*/
 	void _test_update_() {
 		for (auto cont : continents) {

@@ -1,9 +1,6 @@
 #ifndef DISASTER_H
 #define DISASTER_H
 
-#include <string>
-#include "utility.h"
-
 using std::string;
 
 class Disaster {
@@ -20,7 +17,7 @@ public:
 		Deconstructor (Rule of Three)
 	*/
 	~Disaster() {
-		delete this; // don't know if this is implemented correctly, check later
+		// nothing dynamically allocated...
 	}
 	
 	/**

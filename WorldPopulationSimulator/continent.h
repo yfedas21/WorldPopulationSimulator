@@ -2,13 +2,8 @@
 #define CONTINENT_H
 
 #include <vector>
-#include <iostream> /// *** Used for debugging purposes
 #include <queue>
-#include <deque>
-#include <iterator>
 #include "utility.h"
-#include "disaster.h"
-#include "value_container.h"
 
 using std::string;
 using std::vector;
@@ -42,6 +37,18 @@ public:
 		this->mapping = mapping;
 		initialize_data(name); 
 		initialize_disasters();
+	}
+
+	/**
+		A destructor for Continent
+	*/
+	~Continent() {
+		for (auto dis_in_vec : disasters)
+			delete dis_in_vec;
+		while (!disasters_in_queue.empty()) {
+			delete disasters_in_queue.front(); 
+			disasters_in_queue.pop();
+		}
 	}
 
 	/**
@@ -116,10 +123,12 @@ public:
 	/**
 		The core of any simulation program
 	*/
-	void update() {
+	double update() {
 		// For each day, increment the continental population based on annual net growth rate / 365
 		value_container.population += 
 			(int)((value_container.population * value_container.net_growth / 365) + 0.5); 
+
+		double original_pop = value_container.population;
 
 		// Loop through the disasters vector to determine which ones will occur
 		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
@@ -131,10 +140,10 @@ public:
 
 		while (!disasters_in_queue.empty()) {
 			value_container.population -= Utility::calculate_deaths(disasters_in_queue.front());
-			//if (Utility::calculate_deaths(disasters_in_queue.front()) > 0)
-			//	std::cout << disasters_in_queue.front()->get_name() << " " << Utility::calculate_deaths(disasters_in_queue.front()) << std::endl;
 			disasters_in_queue.pop();
 		}
+
+		return original_pop - value_container.population;
 	}
 
 private:
@@ -150,17 +159,11 @@ private:
 
 		double original_population = value_container.population;
 
-		//std::cout << "The population at the start of _test_update_ for " << this->name << 
-		//	" is " << original_population << std::endl; 
-
 		// For each day, increment the continental population based on annual net growth rate / 365
 		value_container.population +=
 			(int)((value_container.population * value_container.net_growth / 365) + 0.5);
-
-		//std::cout << "With the daily growth, the population of  " << this->name << 
-		//	" is " << value_container.population << std::endl; 
-
 		
+		// For debug purposes, keep track of deaths and occurrences to detect bugs...
 		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
 			if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
 				// add the disaster into the Disaster queue
