@@ -98,6 +98,13 @@ public:
 	}
 
 	/**
+		Accessor for the Continent population
+	*/
+	double get_population() {
+		return value_container.population;
+	}
+
+	/**
 		Mutator of the disasters vector that contains the continental disasters
 	*/
 	void add_disaster(string name, double rate_per_year, double deaths_per_year) {
