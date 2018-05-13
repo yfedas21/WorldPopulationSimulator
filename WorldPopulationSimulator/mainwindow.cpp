@@ -2,6 +2,7 @@
 #include "worldMapFillLayer.h"
 #include "ui_mainwindow.h"
 
+
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -9,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->curSim = new Simulator();
 
     //Create the input/calculation storage class
     simInfo = new Sim_Helper();
@@ -140,6 +142,13 @@ void MainWindow::on_beginSimBtn_clicked()
 {
     if(!running)
     {
+        curSim->set_total_time(simInfo->getRunTime());
+        std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
+        int runCode = curSim->run_simulation();
+        if(runCode == -1);
+            return;
+
+        //Change values only if simulation ran/resumed successfully
         ui->beginSimBtn->setText("Pause Simulation");
         running = true;
     }

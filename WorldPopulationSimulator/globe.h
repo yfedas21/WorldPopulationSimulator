@@ -10,7 +10,7 @@ private:
 	string name; // The globe name
 	double global_population; 
 	// container for Continent objects
-	std::vector<Continent *> continents;
+    std::vector<Continent *> continents;
 	
 	// holds the names of the Continents that will 
 	// be created. The name is really important, it 
@@ -45,7 +45,7 @@ private:
 	void create_continents() {
 		// create the continents and initialize the data
 		for (int i = 0; i < cont_to_create.size(); ++i) {
-			Continent *c = new Continent(cont_to_create[i], mapping);
+            Continent *c = new Continent(cont_to_create[i], mapping);
 			continents.push_back(c);
 		}
 	}
@@ -70,8 +70,8 @@ public:
 		Globe destructor (following the Rule of Three)
 	*/
 	~Globe() {
-		for (auto cont_ptr : continents)
-			delete cont_ptr;
+        for (auto cont_ptr : continents)
+            delete cont_ptr;
 	}
 
 	/**
@@ -94,7 +94,7 @@ public:
 		Returns the vector that holds Continent objects
 		@return the vector that holds Continent objects
 	*/
-	std::vector<Continent *> get_cont_vec() {
+    std::vector<Continent *> get_cont_vec() {
 		return continents;
 	}
 
@@ -105,7 +105,7 @@ public:
 	*/
 	void update() {
 		for (auto cont : continents) {
-			global_population += cont->update();
+            global_population += cont->update();
 		}
 	}
 
@@ -115,13 +115,13 @@ public:
 	*/
 	void _test_update_() {
 		for (auto cont : continents) {
-			cont->_test_update_();
+            cont->_test_update_();
 		}
 	}
 
 	/**
 		Create a map container to hold the location of the
-		Disaster_Codes in the data file
+        Disaster_Codes in the data file
 		@return the current state of my wallet
 	*/
 	void create_map() {

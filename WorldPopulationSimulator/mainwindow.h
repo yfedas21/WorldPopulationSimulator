@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include "worldMapFillLayer.h"
+#include "simulator.h"
 #include "sim_helper.h"
 
 namespace Ui {
@@ -48,8 +49,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    Simulator * curSim; //reference to backend simulation object
+
     QPixmap worldMapView;
-    QPixmap worldMapFillView;
     QTimer *timer;
     QTimer *simTimer;
     std::vector<worldMapFillLayer*> continents;

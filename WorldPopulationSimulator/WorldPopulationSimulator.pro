@@ -33,12 +33,12 @@ HEADERS += \
         globe.h \
         continent.h \
         disaster.h \
-        simulation.h \
         sim_helper.h \
         utility.h \
     disasteroccurance.h \
     worldMapFillLayer.h \
-    value_container.h
+    value_container.h \
+    simulator.h
 
 FORMS += \
         mainwindow.ui

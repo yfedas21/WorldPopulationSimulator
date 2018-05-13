@@ -29,6 +29,15 @@ public:
         continentFocus = "No";
         startDate = QDate(4,29,2018);
     }
+
+    //Returns runtime for simulation in days
+    int getRunTime(){
+        if (runtime <= 0){
+            return -1;
+        }else{
+            return runtime;
+        }
+    }
 };
 
 #endif // SIM_HELPER_H

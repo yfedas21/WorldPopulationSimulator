@@ -21,17 +21,28 @@ public:
         g = new Globe();
     }
 
-    Globe* get_globe() {
-        return g;
-    }
-
     void run_simulation() {
+        if (total_time()){
+
+        }
+
         for (int time = 0; time < total_time; ++time) {
             // update each continent as each day goes by ...
             for (int cont = 0; cont < continents->size(); cont++){
                 continents->at(cont).update(time);
             }
         }
+    }
+
+    //ACCESSOR(S)/MUTATOR(S)
+    Globe* get_globe() {
+        return g;
+    }
+    void setRunTime(int runTime){
+        total_time = runTime;
+    }
+    void setDay(int day){
+        this->day = day;
     }
 }
 

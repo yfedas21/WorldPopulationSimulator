@@ -8,5 +8,6 @@
         <file>Resources/Europe.png</file>
         <file>Resources/NorthAmerica.png</file>
         <file>Resources/SouthAmerica.png</file>
+        <file>Resources/formIcon.png</file>
     </qresource>
 </RCC>

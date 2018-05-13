@@ -2,6 +2,7 @@
 #define SIMULATOR_H
 
 #include "globe.h"
+#include <QMessageBox>
 
 class Simulator {
 private:
@@ -9,25 +10,26 @@ private:
 	int day; // current day, might be obsolete
 
 	// Create a new globe at simulation init
-	Globe *g;
+    Globe *g;
 
 public:
 	/**
 		Create a new Globe object at Simulation creation
 	*/
 	Simulator() {
-		g = new Globe("Earth");
+        g = new Globe("Earth");
+        total_time = -1;
 	}
 
 	/**
 		A destructor for Simulator
-	*/
+    */
 	~Simulator() {
 		delete g;
 	}
 
 	/**
-		Set the Simulator will run
+        Set the amount of day the siimulator will run
 	*/
 	void set_total_time(int total_time) {
 		this->total_time = total_time;
@@ -35,15 +37,35 @@ public:
 
 	/**
 		The top-level simulation driver
+        @return: simStatus code (-1 error running)
 	*/
-	void run_simulation() {
+    int run_simulation() {
+
+        if(total_time == -1)
+        {
+            //Adapted Message box from documentation
+            //http://doc.qt.io/archives/qt-4.8/qmessagebox.html#QMessageBox
+            QMessageBox msgBox;
+            msgBox.setText("Invalid Simulation Settings");
+            msgBox.setInformativeText("Please enter a positive integer in the runtime textfield of the \"Quick Settings\" tab!");
+            msgBox.setStandardButtons(QMessageBox::Close);
+            msgBox.setDefaultButton(QMessageBox::Close);
+            msgBox.setIconPixmap(QPixmap("://Resources/formIcon.png"));
+            msgBox.exec();
+            return -1;
+        }
+
+        std::cout << "Simulation going to be running!" << std::endl;
+
 		for (int time = 0; time < total_time; ++time) {
 			// call the Globe update (which calls each Continent update):
 			g->update();
 		}
+        return 1;
 	}
 
 	void _run_tests_() {
+
 		for (int time = 0; time < total_time; ++time) {
 			// call the Globe update, which calls a test update
 			g->_test_update_();

@@ -130,18 +130,22 @@ public:
 	/**
 		The core of any simulation program
 	*/
-	double update() {
-		// For each day, increment the continental population based on annual net growth rate / 365
-		value_container.population += 
-			(int)((value_container.population * value_container.net_growth / 365) + 0.5); 
+    double update() {
 
-		double original_pop = value_container.population;
+        //Debug of Simulation Running
+        std::cout << value_container.name << " is now at " << value_container.population << " population." << std::endl;
+
+        // For each day, increment the continental population based on annual net growth rate / 365
+        value_container.population +=
+            (int)((value_container.population * value_container.net_growth / 365) + 0.5);
+
+        double original_pop = value_container.population;
 
 		// Loop through the disasters vector to determine which ones will occur
 		for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
 			if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
 				// add the disaster into the Disaster queue
-				disasters_in_queue.push(disasters[loc_in_vec]); 
+                disasters_in_queue.push(disasters[loc_in_vec]);
 			}
 		}
 
