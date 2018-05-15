@@ -8,14 +8,14 @@
 class globalDay
 {
 public:
-    std::map<std::string, continentalDay> continentDays;
+    std::map<std::string, continentalDay> continents;
 
     globalDay(){}
 
     //Used by backend
     void addContData(std::string continentName, continentalDay contData)
     {
-        continentDays.insert(std::make_pair(continentName, contData));
+        continents.insert(std::make_pair(continentName, contData));
     }
 
 };

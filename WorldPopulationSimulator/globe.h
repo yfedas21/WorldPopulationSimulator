@@ -1,6 +1,8 @@
 #ifndef GLOBE_H
 #define GLOBE_H
 
+#include <string>
+#include <map>
 #include "continent.h"
 #include "globalday.h"
 
@@ -110,7 +112,7 @@ public:
         for (auto cont : continents)
         {
             continentalDay curContResult = cont->update(day);
-            global_population += curContResult.populationGrowth;
+            global_population += curContResult.popGrowth;
             globalDayResult.addContData(cont->name, curContResult);
         }
         return globalDayResult;

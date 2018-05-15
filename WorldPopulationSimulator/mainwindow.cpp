@@ -2,16 +2,17 @@
 #include "ui_mainwindow.h"
 
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+
     //Create the input/calculation storage class
-    simInfo = new Sim_Helper();
+    simInfo = new Sim_Helper(); //FIXME: check if pointers actually faster
+    curSimResults = new SimDeltaOutcome();
+    simulator = new Simulator();
 
     scene = new QGraphicsScene(this);
     ui->worldMapView->setScene(scene);
@@ -22,27 +23,17 @@ MainWindow::MainWindow(QWidget *parent) :
     worldMapView = QPixmap::fromImage(worldMap);
     worldMapView = worldMapView.scaled(1510, 744, Qt::IgnoreAspectRatio, Qt::FastTransformation);
 
-    //Begin Time that tells how much time passed total since simulation start
+    //Main simulation driver (declaration)
     simTimer = new QTimer(this);
-    connect(simTimer, SIGNAL(timeout()), this, SLOT(updatePopulation()));
-    simTimer->start(100); //FIX ME - currently just adds population every second
-
-    //Begin Timer that calls the updates of frames
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateAnim())); //an update tenth of a second
-    timer->start(100);
-
-    //Connect QFuture watcher to apropriate methods
-    connect(&simWatcher, SIGNAL(finished()), this, SLOT(simCalcFinished()));
+    connect(simTimer, SIGNAL(timeout()), this, SLOT(calculateOneDay()));
 
     //Background for the world map
     scene->addPixmap(worldMapView);
 
     //Date Indicator
-    dateFont = new QFont("Times", 15, QFont::Bold);
     shownDate = new QGraphicsTextItem("XX/XX/XXXX");
     shownDate->setDefaultTextColor(QColor(253,240,34,255));
-    shownDate->setFont((*dateFont));
+    shownDate->setFont(QFont("Times", 15, QFont::Bold));
     scene->addItem(shownDate);
     shownDate->setPos(shownDate->mapFromScene(1200,10));
 
@@ -51,30 +42,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Add continent layers to scene
     addContinentsToScene();
-    updateAnim();
+    updateAnim(day);
 }
 
 //Central function that updates the entire map by going through each continent
-void MainWindow::updateAnim()
+void MainWindow::updateAnim(int day)
 {
     shownDate->setPlainText(getCurSimDate());
 
-    for(int i = 0; i < (int)continents.size(); i++){
-        continents[i]->calculateState(running, population, day);
+    for(int i = 0; i < (int)continents.size(); i++)
+    {
+        continents[i]->updateLayers(day);
     }
 
     QWidget* viewport = ui->worldMapView->viewport();
     viewport->repaint();
 }
 
-//Updates the population amount of each country
-void MainWindow::updatePopulation()
+//Updates the population amount of each country for one day
+void MainWindow::calculateOneDay()
 {
-    if(running){
-        population++;
-        day++;
-    }
-
+    curSimResults->insertNewDay(simulator->run_simulation(day));
+    updateAnim(day);
+    if(++day > simInfo->runtime)
+        simTimer->stop();
 }
 
 //Returns the simulation date based on the current days after sim start
@@ -104,12 +95,12 @@ QString MainWindow::getCurSimDate()
 void MainWindow::createContinentOverlays()
 {
     //Object creation using Overlay constructor
-    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21,.02,0.0, QPoint(1150,300), QPoint(250,200));
-    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73,.02,0.0, QPoint(810,465), QPoint(150,160));
-    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32,.02,0.0, QPoint(1315,595), QPoint(150,130));
-    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931,.02,0.0, QPoint(800,210), QPoint(150,130));
-    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54,.02,0.0, QPoint(300,250), QPoint(240,230));
-    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888,.02,0.0, QPoint(450,560), QPoint(110,135));
+    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21, curSimResults, .005, 0.0, QPoint(1150,300), QPoint(250,200));
+    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73, curSimResults, .005, 0.0, QPoint(810,465), QPoint(150,160));
+    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32, curSimResults, .005, 0.0, QPoint(1315,595), QPoint(150,130));
+    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931, curSimResults, 005, 0.0, QPoint(800,210), QPoint(150,130));
+    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54, curSimResults, .005, 0.0, QPoint(300,250), QPoint(240,230));
+    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888, curSimResults, .005, 0.0, QPoint(450,560), QPoint(110,135));
     //Pushing all continents into the storage vector
     continents.push_back(Asia);
     continents.push_back(Africa);
@@ -139,11 +130,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-SimDeltaOutcome run_simulation()
+//FIXME: find better default icon + add button arrangements + button selection return
+//Adapted Message box from documentation
+//http://doc.qt.io/archives/qt-4.8/qmessagebox.html#QMessageBox
+void MainWindow::showCustomMeassge(QString title, QString message, QPixmap icon)
 {
-    qDebug() << "Hello from worker thread!";
-    qDebug() << "Simulator object was created";
-    return Simulator().run_simulation();
+    QMessageBox msgBox;
+    msgBox.setText(title);
+    msgBox.setInformativeText(message);
+    msgBox.setStandardButtons(QMessageBox::Close);
+    msgBox.setDefaultButton(QMessageBox::Close);
+    msgBox.setIconPixmap(icon);
+    msgBox.exec();
 }
 
 void MainWindow::on_beginSimBtn_clicked()
@@ -152,28 +150,16 @@ void MainWindow::on_beginSimBtn_clicked()
     {
         if((simInfo->getRunTime() == -1)||(simInfo->getRunTime() == 0))
         {
-            //FIXME: make into a seperate function
-            //Adapted Message box from documentation
-            //http://doc.qt.io/archives/qt-4.8/qmessagebox.html#QMessageBox
-            QMessageBox msgBox;
-            msgBox.setText("Invalid Simulation Settings");
-            msgBox.setInformativeText("Please enter a positive integer in the runtime textfield of the \"Quick Settings\" tab!");
-            msgBox.setStandardButtons(QMessageBox::Close);
-            msgBox.setDefaultButton(QMessageBox::Close);
-            msgBox.setIconPixmap(QPixmap("://Resources/formIcon.png"));
-            msgBox.exec();
+            showCustomMeassge("Invalid Simulation Settings",
+                              "Please enter a positive integer in the runtime textfield of the \"Quick Settings\" tab!",
+                              QPixmap("://Resources/formIcon.png"));
             return;
         }
 
         std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
 
         //Change values only if simulation ran/resumed successfully
-        //Documentation: https://doc.qt.io/qt-5.10/qfuturewatcher.html
-        //Documentation: https://doc.qt.io/qt-5.10/qfuture.html#details
-        simResults = QtConcurrent::run(run_simulation);
-        simWatcher.setFuture(simResults);
-        std::cout << "QFuture isFinished #1? " << simResults.isFinished() << std::endl;
-        std::cout<< "Started? " << simWatcher.isStarted() << " Finshed? "<< simWatcher.isFinished() << std::endl;
+        simTimer->start(50); //FIXME: Test with smaller numbers even 0
 
         ui->beginSimBtn->setText("Pause Simulation");
         running = true;
@@ -187,23 +173,14 @@ void MainWindow::on_beginSimBtn_clicked()
 
 void MainWindow::on_resetSimBtn_clicked()
 {
-    population = 0;
     day = 0;
     if(running)
-    {
-        running=false;
-        ui->beginSimBtn->setText("Begin Simulation");
-    }
-}
+        running = false;
 
-void MainWindow::simCalcFinished(){
-    std::cout << "QFuture isFinished #2? " << simResults.isFinished() << std::endl;
-
-    std::cout<< "2 Started? " << simWatcher.isStarted() << " 2 Finshed? "<< simWatcher.isFinished() << std::endl;
-
-    std::cout << "Calculations are complete!"  << std::endl;
-
-     std::cout << "pop growth day 1: " << simResults.result().snapshots.at(1).continentDays.at("Africa").populationGrowth << std::endl;
+    simTimer->stop();
+    ui->beginSimBtn->setText("Begin Simulation");
+    curSimResults->snapshots.clear(); //remove all past simulation values
+    updateAnim(0);
 }
 
 void MainWindow::on_simRuntimeInput_textEdited(const QString &arg1)
@@ -211,7 +188,7 @@ void MainWindow::on_simRuntimeInput_textEdited(const QString &arg1)
     simInfo->runtime = arg1.toInt();
 }
 
-void MainWindow::on_enableDisastersInput_toggled(bool checked)
+void MainWindow::on_enableDisasterInput_toggled(bool checked)
 {
     simInfo->enableDisaster = checked;
 }

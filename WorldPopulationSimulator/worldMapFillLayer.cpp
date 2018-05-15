@@ -4,93 +4,67 @@
 //[Constructors]
 worldMapFillLayer::worldMapFillLayer()
 {
-    continentName = "Other";
+    name = "Other";
     fillOpacity = 0.0;
     landArea = 10.0;
     fillMultiplier = 1.0;
     qCritical("Error: DO NOT DECLARE A FILL LAYER W/O ANY IMAGE - Loaded default values");
 };
 
+/**
+ * @brief worldMapFillLayer::worldMapFillLayer - main constructor used for
+ * creating overlay layers with basic info on the continent they cover
+ * @param continent - name of the globe's continent
+ * @param area - land area for the particular continent (10^-6 scale)
+ * @param fillMultiplier - fill amount per (population/area)
+ * @param initOpacity - initial fill of continent
+ * @param continentCenter - center of continent region on QGraphicsView
+ * @param continentSize - size of continent region in QGrapicsView
+ */
 worldMapFillLayer::worldMapFillLayer(std::string continent,
                                      double area,
+                                     SimDeltaOutcome* animInfo,
                                      double fillMultiplier,
                                      double initOpacity,
                                      QPoint continentCenter,
                                      QPoint continentSize)
 {
-    continentName = continent;
-    setPixmap(continentName);
-    fillOpacity = initOpacity;
+    name = continent;
+    setPixmap(name);
+    landArea = area * 1000000; //conversion to actual area
+    info = animInfo;
     this->fillMultiplier = fillMultiplier;
-    landArea = area;
+    fillOpacity = initOpacity;
     this->continentCenter = continentCenter;
     this->continentSize = continentSize;
-    addSampleDisasterIndicators();
 }
 
-//DEBUG FUNCTION FOR DISASTER INDICATORS
-void worldMapFillLayer::addSampleDisasterIndicators()
+/**
+    @brief worldMapFillLayer::updateLayers - Updates the opacity for current fill layer
+    @param day - tells which day to update the animation for
+*/
+void worldMapFillLayer::updateLayers(int day)
 {
+    //Update Values for next frame
+    // - Layer opacity
+    fillOpacity = std::fmin(1, (info->snapshots[day].continents[name].totalPop/landArea) * fillMultiplier);
+    // - Simulation day
+    simDay = day;
 
-    for(int i = 0; i < 100; i++)
-    {
-        disasterOccurrence curDisasterDot = disasterOccurrence();
-        //FIXME: Adjust or make adjustable by users (size of dots)
-        curDisasterDot.magnitude = (rand() % 80)/4;
-        //FIXME: May want to go further to have the disasters
-        //actually cluster where they do in real life
-        curDisasterDot.dotPos = getNewIndicatorPosition();
-        curDisasterDot.color = determineDisasterDotColor("debug");
-        curDisasterDot.day = rand() % 500;
-        disasterDots.push_back(curDisasterDot);  
+    //Configure any incomplete disaster dots
+    for(auto disaster: info->snapshots[day].continents[name].disasters){
+        if(!disaster.complete)
+        {
+            disaster.dotPos = getNewIndicatorPosition();
+            disaster.color = determineDisasterDotColor("default"); //FIXME: Add different colors for different types
+            disaster.complete = true;
+        }
     }
 
     //DEBUG CODE
-    //std::cout<<"New Dot at X: "<< curDisasterDot->dotPos.x() << " Y: " << curDisasterDot->dotPos.y() << std::endl;
-
-}
-
-//Updates the opacity for current fill layer
-//@param: running - tells wether animation is running
-//@param: population - amount of people on the continent
-void worldMapFillLayer::calculateState(bool running, double population, int day)
-{
-    if(!running) //FIXME: add check to see if sim is complete
-        fillOpacity = 0.0;
-
-    fillOpacity = std::fmin(1, (population/landArea) * fillMultiplier);
-
-    simDay = day;
-
-    //DEBUG CODE
-    //std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
-    //          << population << "/" << landArea << " * " << fillMultiplier << std::endl;
-    //std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
-}
-
-//Adds any disaster infos queued up for disaster dot list
-void worldMapFillLayer::grabDisasterInfo()
-{
-    if(backendContinent == NULL)
-        return;
-
-    //FIXME: Finish implementation when backend complete
-    //Continent->setDataRetrival(true); //may need if multithreading issues arrise
-    //Want to transfer all info to plot data erasing the data in backend
-    /*while(disasterPendingPlot.front() != NULL)
-    {
-        disasterOcurance * curDisasterDot = new disasterOcurance();
-        //FIXME: Adjust or make adjustable by users (size of dots)
-        curDisasterDot->magnitude = (rand() % 80)/3;
-        //FIXME: May want to go further to have the disasters
-        //actually cluster where they do in real life
-        curDisasterDot->dotPos = getNewIndicatorPosition();
-        curDisasterDot->color = determineDisasterDotColor(disasterPendingPlot.front().type);
-        curDisasterDot->day = disasterPendingPlot.front().dayOccured;
-        disasterDots.push_back(curDisasterDot);
-        disasterPendingPlot.pop();
-    }*/
-    //Continent->setDataRetrival(false); //may need if multithreading issues arrise
+    std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
+              << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
+    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
 }
 
 //Finds the correct disaster indicator color for painter to apply when drawing the dot
@@ -104,6 +78,9 @@ QColor worldMapFillLayer::determineDisasterDotColor(std::string type)
     return resultColor; //black for now
 }
 
+/** @brief Uses equation of inside an elipse to create disaster dots only
+ * in the region of the continent on the globe map
+ */
 QPoint worldMapFillLayer::getNewIndicatorPosition()
 {
     int x,y = 0;
@@ -121,36 +98,28 @@ QPoint worldMapFillLayer::getNewIndicatorPosition()
 //Paints the continent content layer on to the map
 void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //DEBUG CODE
-    //Overlay opasity check
-    //std::cout << "Repainted with fill opacity: " << std::showpoint
-    //          << std::fixed << std::setprecision(4)<< fillOpacity << std::endl;
-    //Continent disaster indicator region check
-    //painter->setOpacity(.5);//full opasity for disaster indicators
-    //painter->setBrush(QColor(0,0,255,255));
-    //painter->drawEllipse(continentCenter,continentSize.x(),continentSize.y());
-
     painter->setOpacity(fillOpacity);
     painter->drawPixmap(0,0,1510,744, fillImage);
 
-    for (auto dot: disasterDots)
+    int counter = simDay - 30;
+    while(simDay > counter || counter <= 0)
     {
-        //FIXME: might want to place old indicators into a seperate
-        //untouched container for effieciency purposes
-        //Skip idicator if too old
-        if(dot.day + 30 < simDay || dot.day > simDay)
-            continue;
-
-        painter->setBrush(dot.color);
-        painter->setOpacity(getIndicatorOpacity(dot.day,simDay));
-        painter->drawEllipse(dot.dotPos,dot.magnitude,dot.magnitude);
-    }
+        for(auto dot: info->snapshots[counter].continents[name].disasters)
+        {
+            painter->setBrush(dot.color);
+            painter->setOpacity(getIndicatorOpacity(dot.day,simDay));
+            painter->drawEllipse(dot.dotPos,(int)dot.magnitude,(int)dot.magnitude);
+        }
+        counter++;
+    }  
 }
 
-//Returns the opasity for a particular indicator at particular day
-//@param: dotDay - the tested diaster day info
-//@param: animDay - the current simulation day
-//return: calculated opasity of the disaster (based on days passed
+/**
+    Returns the opasity for a particular indicator at particular day
+    @param dotDay - the tested diaster day info
+    @param animDay - the current simulation day
+    return calculated opasity of the disaster (based on days passed
+*/
 double worldMapFillLayer::getIndicatorOpacity(int dotDay, int animDay)
 {
     //FIXME: may want to design a "pulsing" animation
@@ -197,4 +166,36 @@ QPixmap worldMapFillLayer::getFillImage()
 {
     return fillImage;
 }
+
+
+//[OLD DEBUG CODE]
+/*Old function for adding sample disaster indicators
+void worldMapFillLayer::addSampleDisasterIndicators()
+{
+    for(int i = 0; i < 100; i++)
+    {
+        disasterOccurrence curDisasterDot = disasterOccurrence();
+        //FIXME: Adjust or make adjustable by users (size of dots)
+        curDisasterDot.magnitude = (rand() % 80)/4;
+        //FIXME: May want to go further to have the disasters
+        //actually cluster where they do in real life
+        curDisasterDot.dotPos = getNewIndicatorPosition();
+        curDisasterDot.color = determineDisasterDotColor("debug");
+        curDisasterDot.day = rand() % 500;
+        disasterDots.push_back(curDisasterDot);
+    }
+
+    std::cout<<"New Dot at X: "<< curDisasterDot->dotPos.x() << " Y: " << curDisasterDot->dotPos.y() << std::endl;
+}
+*/
+/*Overlay opasity check (for paint method)
+std::cout << "Repainted with fill opacity: " << std::showpoint
+          << std::fixed << std::setprecision(4)<< fillOpacity << std::endl;
+*/
+/*Continent disaster indicator region check (for paint method)
+painter->setOpacity(.5);//full opasity for disaster indicators
+painter->setBrush(QColor(0,0,255,255));
+painter->drawEllipse(continentCenter,continentSize.x(),continentSize.y());
+*/
+
 

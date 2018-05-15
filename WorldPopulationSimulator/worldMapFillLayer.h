@@ -8,15 +8,14 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include <QtConcurrent>
 #include <algorithm>
 #include <math.h>
 #include <cmath>
 #include <string>
 #include <random>
-#include <list>
 #include "continent.h"
 #include "disasterOccurrence.h"
+#include "simdeltaoutcome.h"
 #include "worldMapFillLayer.h"
 //Debug
 #include <iostream>
@@ -25,16 +24,15 @@
 class worldMapFillLayer : public QGraphicsItem
 {
 private:
-    std::string continentName;
+    std::string name;
     QPixmap fillImage;
     float fillOpacity;          //How much opacity the population overlay has
     float landArea;             //Continent's total land area (used for opacity)
     float fillMultiplier;       //Increase opacity growth rate (equal for all continents = unbiased)
 
-    std::list<disasterOccurrence> disasterDots; //FIXME: Has to be a pointer?
     QPoint continentCenter;
     QPoint continentSize;
-    Continent* backendContinent; //Pointer to apropriate continent object w/ calculations
+    SimDeltaOutcome* info;
     int simDay;
 
 public:
@@ -42,6 +40,7 @@ public:
     worldMapFillLayer();
     worldMapFillLayer(std::string continent,
                       double area,
+                      SimDeltaOutcome* animInfo,
                       double fillMultiplier = 1.0,
                       double initOpacity = 0.0,
                       QPoint continentCenter = QPoint(0,0),
@@ -62,10 +61,7 @@ public:
                QWidget *widget);
 
     //Grabs the current population amount
-    void calculateState(bool running, double population, int day);
-
-    //Adds any disaster infos queued up for disaster dot list
-    void grabDisasterInfo();
+    void updateLayers(int day);
 
     //Returns the correct disaster indicator color for painter to apply
     QColor determineDisasterDotColor(std::string type);

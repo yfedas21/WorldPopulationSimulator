@@ -2,6 +2,7 @@
 #define VALUE_CONTAINER_H_
 
 #include <string>
+#include <iostream>
 
 struct values {
 	std::string name;

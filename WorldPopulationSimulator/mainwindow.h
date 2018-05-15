@@ -5,12 +5,17 @@
 #include <QGraphicsScene>
 #include <QPixmap>
 #include <QTimer>
+#include <QDebug>
+#include <QMessageBox>
 #include <vector>
-#include <iostream>
+#include <map>
 #include "worldMapFillLayer.h"
 #include "simdeltaoutcome.h"
 #include "simulator.h"
 #include "sim_helper.h"
+//Debug
+#include <iostream>
+#include <iomanip>
 
 namespace Ui {
 class MainWindow;
@@ -25,15 +30,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void addContinentsToScene();
     void createContinentOverlays();
+    void showCustomMeassge(QString title = "Something went wrong!",
+                           QString message = "Just click \"Close\" below.",
+                           QPixmap icon = QPixmap("://Resources/formIcon.png"));
+    void updateAnim(int day);
     QString getCurSimDate();
     //SimDeltaOutcome run_simulation();
 
     ~MainWindow();
 
 public Q_SLOTS:
-    void updateAnim();
-    void updatePopulation();
-    void simCalcFinished();
+    void calculateOneDay();
 
 private slots:
     void on_beginSimBtn_clicked();
@@ -42,7 +49,7 @@ private slots:
 
     void on_simRuntimeInput_textEdited(const QString &arg1);
 
-    void on_enableDisastersInput_toggled(bool checked);
+    void on_enableDisasterInput_toggled(bool checked);
 
     void on_enableMigrationInput_toggled(bool checked);
 
@@ -51,24 +58,19 @@ private slots:
     void on_startDateInput_dateChanged(const QDate &date);
 
 private:
+    //Graphic holders
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
-
+    QGraphicsTextItem* shownDate;
     QPixmap worldMapView;
-    QTimer* timer;
+
     QTimer* simTimer;
     std::vector<worldMapFillLayer*> continents;
     Sim_Helper* simInfo;
-    QFutureWatcher<SimDeltaOutcome> simWatcher;
-    QFuture<SimDeltaOutcome> simResults;
-    SimDeltaOutcome curSimResults;
-
-    //temp test variables
-    int population = 0;
-    int day = 0;
+    SimDeltaOutcome* curSimResults;
+    Simulator* simulator;
+    int day = 0; //Tells what day simulation is currently on
     bool running = false; //Tells wether simulation is running
-    QFont* dateFont;
-    QGraphicsTextItem* shownDate;
 };
 
 #endif // MAINWINDOW_H

@@ -10,14 +10,14 @@
 class continentalDay
 {
 public:
-    double todayPopulation;
-    double populationGrowth;
-    std::list<disasterOccurrence> todayDisasters;
+    double totalPop;
+    double popGrowth;
+    std::list<disasterOccurrence> disasters;
 
     continentalDay(){}
 
     void addDisasterSnapshot(disasterOccurrence disaster){
-        todayDisasters.push_back(disaster);
+        disasters.push_back(disaster);
     }
 };
 

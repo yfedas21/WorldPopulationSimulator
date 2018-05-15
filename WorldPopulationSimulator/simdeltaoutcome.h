@@ -13,14 +13,19 @@ public:
 
     std::map<int, globalDay> snapshots;
 
-    //FIXME: need default constructor?
     SimDeltaOutcome(){}
 
+    //FIXME: nolonger needed probably
     //Constructor used by backend to encapsulate all final simulation information
     SimDeltaOutcome(std::map<int, globalDay> snapshots, int calcTime = 0)
     {
         this->snapshots = snapshots;
         totalCalcTime = calcTime;
+    }
+
+    void insertNewDay(std::pair<int, globalDay> dayInfo)
+    {
+        snapshots.insert(dayInfo);
     }
 };
 

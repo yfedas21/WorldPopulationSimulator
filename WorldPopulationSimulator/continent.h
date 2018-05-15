@@ -1,8 +1,11 @@
 #ifndef CONTINENT_H
 #define CONTINENT_H
 
+#include <iostream> //Debug
 #include <vector>
 #include <queue>
+#include <map>
+#include <string>
 #include "continentalday.h"
 #include "utility.h"
 
@@ -170,8 +173,8 @@ public:
         }
 
         //Read population state into continent day snapshot
-        contDayResult.todayPopulation = value_container.population;
-        contDayResult.populationGrowth = original_pop - value_container.population;
+        contDayResult.totalPop = value_container.population;
+        contDayResult.popGrowth = original_pop - value_container.population;
 
         return contDayResult;
 

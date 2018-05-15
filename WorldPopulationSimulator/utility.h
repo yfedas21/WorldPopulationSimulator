@@ -2,6 +2,7 @@
 #define UTILITY_H
 
 #include <map>
+#include <string>
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -125,7 +126,8 @@ public:
 			file.open("Values.txt");
 
 			if (!file) {
-				throw "Exception: The file can't be opened!";
+                std::string error = "Exception: The file can't be opened!"; //didn't know it was and std::string
+                throw error;
 			}
 			else {
 				int i = 9;

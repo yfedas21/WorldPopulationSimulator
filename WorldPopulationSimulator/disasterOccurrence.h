@@ -9,16 +9,18 @@
 
 struct disasterOccurrence
 {
+    bool complete;
     QPoint dotPos;
     double magnitude; //based on disater casualties amount
     QColor color;     //based on disaster type
     int day;       //days after sim start (used for fade out animation)
 
     //FIXME: needed?
-    disasterOccurrence(){}
+    disasterOccurrence(): complete(false){}
 
     //Constructor used by backend during calculations
     disasterOccurrence(double mag, int day){
+        complete = false;
         magnitude = mag;
         this->day = day;
     }

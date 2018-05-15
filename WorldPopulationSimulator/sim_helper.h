@@ -12,8 +12,7 @@ class Sim_Helper
 {
 public:
     // some utility functions here, such as
-    // set initial values, get inputs, and
-    // calculate probabilities
+    // set initial values, get inputs
 	
     int runtime;
     bool enableDisaster;

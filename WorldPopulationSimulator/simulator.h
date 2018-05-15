@@ -2,15 +2,10 @@
 #define SIMULATOR_H
 
 #include "globe.h"
-#include "SimDeltaOutcome.h"
-#include <QMessageBox>
-#include <QProgressDialog>
+#include <iostream> //Dubug
 
 class Simulator {
 private:
-	int total_time; // total number of days to run the simulation
-	int day; // current day, might be obsolete
-
 	// Create a new globe at simulation init
     Globe *g;
 
@@ -20,7 +15,6 @@ public:
 	*/
 	Simulator() {
         g = new Globe("Earth");
-        total_time = -1;
 	}
 
 	/**
@@ -30,52 +24,20 @@ public:
 		delete g;
 	}
 
-	/**
-        Set the amount of day the siimulator will run
-	*/
-	void set_total_time(int total_time) {
-		this->total_time = total_time;
-	}
-
-	/**
-		The top-level simulation driver
-        @return: simStatus code (-1 error running)
-	*/
-    int check_run_simulation() {
-
-        if(total_time == -1)
-        {
-
-            return -1;
-        }
-
-        //FIXME: remove DEBUG when complete
-        std::cout << "Simulation going to be running!" << std::endl;
-
-        return 1;
-	}
-
-    SimDeltaOutcome run_simulation()
-    {
-        //Create snapshot container
-        std::map<int, globalDay> dayResults;
-
-        for (int day = 0; day < total_time; ++day)
-        {
-            qDebug() << "Completing Day: " << day;
-            // Call the Globe update (which calls each Continent update):
-            dayResults.insert(std::make_pair(day, g->update(day)));
-        }
-
-        return SimDeltaOutcome(dayResults);
+    std::pair<int, globalDay> run_simulation(int curDay)
+    { 
+        std::cout << "Completing Day: " << curDay << std::endl;
+        // Call the Globe update (which calls each Continent update):
+        return std::make_pair(curDay, g->update(curDay));
     }
 
 	void _run_tests_() {
 
-		for (int time = 0; time < total_time; ++time) {
-			// call the Globe update, which calls a test update
-			g->_test_update_();
-		}
+        //Timer Design makes this function a bit harder to implement
+        //for (int time = 0; time < total_time; ++time) {
+        //	// call the Globe update, which calls a test update
+        //	g->_test_update_();
+        //}
 		std::cout << " ********** Statistics ********** " << std::endl;
 		std::cout << "hurricane rate: " << Database::hur_rate << std::endl; Database::hur_rate = 0;
 		std::cout << "tornado rate: " << Database::tor_rate << std::endl; Database::tor_rate = 0;
