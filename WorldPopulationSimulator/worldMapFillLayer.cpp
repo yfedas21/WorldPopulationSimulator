@@ -52,12 +52,16 @@ void worldMapFillLayer::updateLayers(int day)
     simDay = day;
 
     //Configure any incomplete disaster dots
-    for(auto disaster: info->snapshots[day].continents[name].disasters){
-        if(!disaster.complete)
+    for(std::list<disasterOccurrence>::iterator iterator = info->snapshots[day].continents[name].disasters.begin();
+        iterator != info->snapshots[day].continents[name].disasters.end(); ++iterator){
+        if(!(*iterator).complete)
         {
-            disaster.dotPos = getNewIndicatorPosition();
-            disaster.color = determineDisasterDotColor("default"); //FIXME: Add different colors for different types
-            disaster.complete = true;
+            (*iterator).dotPos = getNewIndicatorPosition();
+            (*iterator).color = determineDisasterDotColor("default"); //FIXME: Add different colors for different types
+            (*iterator).complete = true;
+            /*std::cout << "Disaster was populated with location info! day: " << day
+                      << " (" << (*iterator).dotPos.x()
+                      << "," << (*iterator).dotPos.y() << ")" << std::endl;*/
         }
     }
 
@@ -104,7 +108,7 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     painter->drawPixmap(0,0,1510,744, fillImage);
 
     int counter = simDay - 30;
-    while(simDay > counter || counter <= 0)
+    while(simDay >= counter || counter <= 0)
     {
         for(auto dot: info->snapshots[counter].continents[name].disasters)
         {
