@@ -62,9 +62,11 @@ void worldMapFillLayer::updateLayers(int day)
     }
 
     //DEBUG CODE
-    std::cout << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity
-              << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
-    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
+    //if(name == "NorthAmerica"){
+    //    std::cout << std::showpoint << std::fixed << std::setprecision(4)
+    //              << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
+    //    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
+    //}
 }
 
 //Finds the correct disaster indicator color for painter to apply when drawing the dot

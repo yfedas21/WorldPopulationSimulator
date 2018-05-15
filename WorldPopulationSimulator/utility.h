@@ -34,9 +34,11 @@ public:
 
 		// create a new random number in the range of 0 / 365
 		int random_integer = distr(eng);
+        if (random_integer <= rate_of_occurrence){
+            std::cout<<"A disaster was added!" << random_integer << "/" << rate_of_occurrence << std::endl;
+            return true;
+        }
 
-		if (random_integer <= rate_of_occurrence) 
-			return true;
 		else 
 			return false;
 	}
@@ -126,16 +128,15 @@ public:
 			file.open("Values.txt");
 
 			if (!file) {
-                std::string error = "Exception: The file can't be opened!"; //didn't know it was and std::string
+                std::string error = "Exception: The file can't be opened!"; //qt didn't know it was and std::string not QString
                 throw error;
 			}
 			else {
-				int i = 9;
 				while (std::getline(file, str) && line_counter < line_number) {
 					line_counter++;
 				}
 				// Assumes line number was found...
-				return std::stod(str, &sz);
+                return std::stod(str, &sz);
 			}
 		}
 		catch (std::string ex) {

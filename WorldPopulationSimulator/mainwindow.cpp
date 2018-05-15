@@ -95,12 +95,12 @@ QString MainWindow::getCurSimDate()
 void MainWindow::createContinentOverlays()
 {
     //Object creation using Overlay constructor
-    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21, curSimResults, .005, 0.0, QPoint(1150,300), QPoint(250,200));
-    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73, curSimResults, .005, 0.0, QPoint(810,465), QPoint(150,160));
-    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32, curSimResults, .005, 0.0, QPoint(1315,595), QPoint(150,130));
-    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931, curSimResults, 005, 0.0, QPoint(800,210), QPoint(150,130));
-    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54, curSimResults, .005, 0.0, QPoint(300,250), QPoint(240,230));
-    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888, curSimResults, .005, 0.0, QPoint(450,560), QPoint(110,135));
+    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21, curSimResults, .002, 0.0, QPoint(1150,300), QPoint(250,200));
+    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73, curSimResults, .002, 0.0, QPoint(810,465), QPoint(150,160));
+    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32, curSimResults, .002, 0.0, QPoint(1315,595), QPoint(150,130));
+    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931, curSimResults, .002, 0.0, QPoint(800,210), QPoint(150,130));
+    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54, curSimResults, .002, 0.0, QPoint(300,250), QPoint(240,230));
+    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888, curSimResults, .002, 0.0, QPoint(450,560), QPoint(110,135));
     //Pushing all continents into the storage vector
     continents.push_back(Asia);
     continents.push_back(Africa);

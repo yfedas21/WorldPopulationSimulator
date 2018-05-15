@@ -36,8 +36,8 @@ const std::string an = "Antarctica";
 const std::string as = "Asia";
 const std::string au = "Australia";
 const std::string eu = "Europe";
-const std::string na = "North_America";
-const std::string sa = "South_America";
+const std::string na = "NorthAmerica";
+const std::string sa = "SouthAmerica";
 
 namespace Database {
 	// Holds a year's worth of data
