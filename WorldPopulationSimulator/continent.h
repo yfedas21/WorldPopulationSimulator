@@ -149,12 +149,18 @@ public:
             (int)((value_container.population * value_container.net_growth / 365) + 0.5);
 
         // Loop through the disasters vector to determine which ones will occur
-        // FIXME: add functionallity for more than one disaster of one type to occur in one day
         for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
-            if (Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year())) {
-                // add the disaster into the Disaster queue
+
+            int disastAmountToday;
+
+            //Calcualte amount of particular disaster in one day combining lightning into one
+            if(disasters[loc_in_vec]->get_name() == "thunderstorm")
+                disastAmountToday = 1;
+            else
+                disastAmountToday = Utility::calculate_probability(disasters[loc_in_vec]->get_rate_per_year());
+
+            for(int i = 0; i < disastAmountToday; i++)
                 disasters_in_queue.push(disasters[loc_in_vec]);
-            }
         }
 
         //Loop through all disasters that happened today
@@ -162,11 +168,14 @@ public:
             //Find the amount of deaths disaster causes
             int disasterDeaths = Utility::calculate_deaths(disasters_in_queue.front());
 
-            //Apply population impact of disaster
-            value_container.population -= disasterDeaths;
+            if(!(disasterDeaths <= 0))
+            {
+                //Apply population impact of disaster
+                value_container.population -= disasterDeaths;
 
-            //Create current disaster snapshot
-            contDayResult.addDisasterSnapshot(disasterOccurrence((double)disasterDeaths/5,day));
+                //Create current disaster snapshot
+                contDayResult.addDisasterSnapshot(disasterOccurrence((double)disasterDeaths/5,day));
+            }
 
             //Remove pending disasters for this continent for today
             disasters_in_queue.pop();
@@ -177,10 +186,6 @@ public:
         contDayResult.popGrowth = original_pop - value_container.population;
 
         return contDayResult;
-
-        //DEBUG CODE
-        //Debug of Simulation Running
-        //std::cout << value_container.name << " is now at " << value_container.population << " population." << std::endl;
     }
 
 private:

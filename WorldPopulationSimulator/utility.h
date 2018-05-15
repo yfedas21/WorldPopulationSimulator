@@ -28,14 +28,18 @@ public:
 	static bool calculate_probability(int rate_of_occurrence) {
 		// generate a random number between 0 and 365 (annual rates)
 		// source: https://stackoverflow.com/a/7560564/9036593
-		std::random_device rd; // obtain a random number from hardware
-		std::mt19937 eng(rd()); // seed the generator
+        static std::random_device rd; // obtain a random number from hardware
+        static std::mt19937 eng(rd()); // seed the generator
 		std::uniform_int_distribution<> distr(0, 365); // annual rate
 
-		// create a new random number in the range of 0 / 365
+        //BIG FIXME: Make it possible for more than one disaster of one type to occur
+        //especcially for ones that have more than 365 occurances per year
+        //Dont worry about lightning (thunderstorm) thats already handled
+
+        // create a new random number in the range of [0 to 365]
 		int random_integer = distr(eng);
         if (random_integer <= rate_of_occurrence){
-            std::cout<<"A disaster was added!" << random_integer << "/" << rate_of_occurrence << std::endl;
+            std::cout<<"A disaster was added! [" << random_integer << " < " << rate_of_occurrence << "]" << std::endl;
             return true;
         }
 
@@ -49,40 +53,34 @@ public:
 	*/
 	static int calculate_deaths(Disaster* disaster) {
 
+        // see calculate_probability() for random number generator source
+        static std::random_device rdd; // obtain a random number from hardware
+        static std::mt19937 engd(rdd()); // seed the generator
+
 		// use a different method of calculation for lightning
 		// because of the high occurence rate (in the millions)
-		if (disaster->get_name() == "thunderstorm") {
-
-			// see calculate_probability() for random number generator source
-			std::random_device rd; // obtain a random number from hardware
-			std::mt19937 eng(rd()); // seed the generator
-
+        if (disaster->get_name() == "thunderstorm")
+        {
 			// algorithm to calculate the number of deaths per day from lightning
-			std::uniform_int_distribution<> distr(0, 100);
-			int rate_per_day;
-			int mod; 
+            std::uniform_int_distribution<> distrd(0, 365);
+            double rate_per_day;
 
-			if ((disaster->get_deaths_per_year() / 365) > 1) {
-				mod = (int)(disaster->get_deaths_per_year()) % 365;
-				rate_per_day = (mod / 365.0) * 100;
-				if (distr(eng) <= rate_per_day)
-					return (disaster->get_deaths_per_year() / 365) + 1;
-			}
-			else {
-				rate_per_day = (int)((disaster->get_deaths_per_year() / 365.0) * 100);
+            rate_per_day = disaster->get_deaths_per_year() / 365;
+            if(rate_per_day < 1) //Case for less than 365 lightning strikes a year
+            {
+                if (distrd(engd) <= disaster->get_deaths_per_year())
+                    return 1;
+                else
+                    return 0;
+            }
 
-				if (distr(eng) <= rate_per_day)
-					return 1;
-			}
+            //FIXME: make more random
+            return rate_per_day;
 
-			return -1; // IF -1 returns, Houston, we have a problem
+            return -1; // IF -1 returns, Houston, we have a problem
 		}
-		else {
-
-			// see calculate_probability() for random number generator source
-			std::random_device rd; // obtain a random number from hardware
-			std::mt19937 eng(rd()); // seed the generator
-
+        else
+        {
 			/*
 				Algorithm for determining deaths per occurence of disaster
 				1.) retrieve the number of deaths / year for the disaster
@@ -94,20 +92,21 @@ public:
 				*/
 			int dpy = (int)(disaster->get_deaths_per_year());
 			
-			if ((int)(disaster->get_rate_per_year()) <= 0)
+            if ((int)(disaster->get_rate_per_year()) <= 0)
 				return 0;
 			else { // divide by zero exception
 				double avg = dpy / (int)(disaster->get_rate_per_year());
-				// +1 for nice variable name
+                // +2 for nice variable name
 				double wiggle_room = avg * .3;
 				// generate number of deaths with reasonable randomness (scary thought...)
 				std::uniform_int_distribution<> distr(avg - wiggle_room, avg + wiggle_room);
 
 				// return the calculated # of deaths
-				if (distr(eng) <= avg)
+                if (distr(engd) <= avg)
 					return (int)(avg + .5);
 			}
 		}
+
 		// if all else fails scenario: nobody dies!
 		return -1;
 	}
@@ -142,7 +141,7 @@ public:
 		catch (std::string ex) {
 			// unable to open file
 
-			// *** Add GUI messagebox popup here ***
+            // *** FIXME: Add GUI messagebox popup here ***
 		}
 		
 
