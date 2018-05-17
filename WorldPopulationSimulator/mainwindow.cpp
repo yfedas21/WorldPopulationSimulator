@@ -116,11 +116,12 @@ void MainWindow::createContinentOverlays()
 
 QGraphicsTextItem* MainWindow::createPopLabel(QPoint pos){
     //Population # string item
-    QGraphicsTextItem* shownPop = new QGraphicsTextItem("XXXXXXXXX");
-    shownPop->setDefaultTextColor(QColor(247,235,63,255));
+    PopulationGraphicLabel* shownPop = new PopulationGraphicLabel("XXXXXXXXX");
+    shownPop->setDefaultTextColor(QColor(0,0,50,255));
     shownPop->setFont(QFont("Times", 12, QFont::Bold));
     scene->addItem(shownPop);
-    shownPop->setPos(shownPop->mapFromScene(pos.x(), pos.y()));
+    //FIXME: Actualy do a correct centering of the label
+    shownPop->setPos(shownPop->mapFromScene(pos.x()-50, pos.y()));
     shownPop->setZValue(5);
     return shownPop;
 }

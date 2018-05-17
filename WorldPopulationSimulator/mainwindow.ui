@@ -260,6 +260,9 @@
                     <height>12</height>
                    </size>
                   </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item row="3" column="0">

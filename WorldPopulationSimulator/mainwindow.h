@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include "worldMapFillLayer.h"
+#include "populationGraphicLabel.h"
 #include "simdeltaoutcome.h"
 #include "simulator.h"
 #include "sim_helper.h"

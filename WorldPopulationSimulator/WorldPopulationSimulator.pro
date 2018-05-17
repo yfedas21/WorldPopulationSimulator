@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         worldMapFillLayer.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    populationGraphicLabel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     disasterOccurrence.h \
     globalday.h \
     SimDeltaOutcome.h \
-    constants.h
+    constants.h \
+    populationGraphicLabel.h
 
 FORMS += \
         mainwindow.ui

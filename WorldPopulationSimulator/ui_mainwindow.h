@@ -211,6 +211,7 @@ public:
         sizePolicy5.setHeightForWidth(enableDisasterInput->sizePolicy().hasHeightForWidth());
         enableDisasterInput->setSizePolicy(sizePolicy5);
         enableDisasterInput->setIconSize(QSize(12, 12));
+        enableDisasterInput->setChecked(true);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, enableDisasterInput);
 
