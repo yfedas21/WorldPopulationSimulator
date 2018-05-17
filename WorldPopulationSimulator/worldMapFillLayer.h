@@ -26,6 +26,7 @@ class worldMapFillLayer : public QGraphicsItem
 private:
     std::string name;
     QPixmap fillImage;
+    QGraphicsTextItem* shownPop;
     float fillOpacity;          //How much opacity the population overlay has
     float landArea;             //Continent's total land area (used for opacity)
     float fillMultiplier;       //Increase opacity growth rate (equal for all continents = unbiased)
@@ -38,7 +39,8 @@ private:
 public:
     //Constructors for the fill layers
     worldMapFillLayer();
-    worldMapFillLayer(std::string continent,
+    worldMapFillLayer(QGraphicsTextItem* shownPop,
+                      std::string continent,
                       double area,
                       SimDeltaOutcome* animInfo,
                       double fillMultiplier = 1.0,

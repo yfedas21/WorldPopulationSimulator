@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1600</width>
-    <height>1080</height>
+    <width>1080</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +25,7 @@
   <property name="maximumSize">
    <size>
     <width>1600</width>
-    <height>1080</height>
+    <height>1120</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -416,20 +416,22 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="Simulation">
        <attribute name="title">
         <string>Simulation</string>
        </attribute>
-       <widget class="QGraphicsView" name="worldMapView">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1581</width>
-          <height>811</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGraphicsView" name="worldMapView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -534,7 +536,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1600</width>
+     <width>1080</width>
      <height>17</height>
     </rect>
    </property>

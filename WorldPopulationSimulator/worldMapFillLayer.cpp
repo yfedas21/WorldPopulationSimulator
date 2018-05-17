@@ -21,7 +21,8 @@ worldMapFillLayer::worldMapFillLayer()
  * @param continentCenter - center of continent region on QGraphicsView
  * @param continentSize - size of continent region in QGrapicsView
  */
-worldMapFillLayer::worldMapFillLayer(std::string continent,
+worldMapFillLayer::worldMapFillLayer(QGraphicsTextItem* shownPop,
+                                     std::string continent,
                                      double area,
                                      SimDeltaOutcome* animInfo,
                                      double fillMultiplier,
@@ -29,6 +30,7 @@ worldMapFillLayer::worldMapFillLayer(std::string continent,
                                      QPoint continentCenter,
                                      QPoint continentSize)
 {
+    this->shownPop = shownPop;
     name = continent;
     setPixmap(name);
     landArea = area * 1000000; //conversion to actual area
@@ -59,18 +61,18 @@ void worldMapFillLayer::updateLayers(int day)
             (*iterator).dotPos = getNewIndicatorPosition();
             (*iterator).color = determineDisasterDotColor("default"); //FIXME: Add different colors for different types
             (*iterator).complete = true;
-            /*std::cout << "Disaster was populated with location info! day: " << day
-                      << " (" << (*iterator).dotPos.x()
-                      << "," << (*iterator).dotPos.y() << ")" << std::endl;*/
         }
     }
 
+    //Population # label
+    shownPop->setPlainText(QString::number(info->snapshots[simDay].continents[name].totalPop));
+
     //DEBUG CODE
-    //if(name == "NorthAmerica"){
-    //    std::cout << std::showpoint << std::fixed << std::setprecision(4)
-    //              << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
-    //    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
-    //}
+    if(name == "NorthAmerica"){
+        std::cout << std::showpoint << std::fixed << std::setprecision(4)
+                  << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
+        std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
+    }
 }
 
 //Finds the correct disaster indicator color for painter to apply when drawing the dot
@@ -91,9 +93,9 @@ QPoint worldMapFillLayer::getNewIndicatorPosition()
 {
     int x,y = 0;
 
+    //FIXME: maybe better algorithm exists to fit contraints (than just random)
     while (!(((pow(x-continentCenter.x(),2)/pow(continentSize.x(),2))+(pow(y-continentCenter.y(),2)/pow(continentSize.y(),2)))<1))
     {
-        //FIXME: maybe better algorithm exists to fit contraints (than just random)
         x = rand() % 1510;
         y = rand() % 744;
     }
@@ -104,9 +106,12 @@ QPoint worldMapFillLayer::getNewIndicatorPosition()
 //Paints the continent content layer on to the map
 void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
+    //Overlay pop intensity layer (red)
     painter->setOpacity(fillOpacity);
     painter->drawPixmap(0,0,1510,744, fillImage);
 
+    //Disaster indicators (past 30 days)
     int counter = simDay - 30;
     while(simDay >= counter || counter <= 0)
     {
@@ -117,7 +122,7 @@ void worldMapFillLayer::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             painter->drawEllipse(dot.dotPos,(int)dot.magnitude,(int)dot.magnitude);
         }
         counter++;
-    }  
+    }
 }
 
 /**

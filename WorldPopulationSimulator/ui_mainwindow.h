@@ -65,7 +65,8 @@ public:
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_3;
     QFormLayout *formLayout_2;
-    QWidget *tab;
+    QWidget *Simulation;
+    QVBoxLayout *verticalLayout_4;
     QGraphicsView *worldMapView;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
@@ -83,14 +84,14 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1600, 1080);
+        MainWindow->resize(1080, 720);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1080, 720));
-        MainWindow->setMaximumSize(QSize(1600, 1080));
+        MainWindow->setMaximumSize(QSize(1600, 1120));
         MainWindow->setSizeIncrement(QSize(5, 5));
         MainWindow->setBaseSize(QSize(1600, 1080));
         centralWidget = new QWidget(MainWindow);
@@ -290,22 +291,33 @@ public:
         verticalLayout_3->addLayout(formLayout_2);
 
         tabWidget->addTab(tab_2, QString());
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        worldMapView = new QGraphicsView(tab);
+        Simulation = new QWidget();
+        Simulation->setObjectName(QStringLiteral("Simulation"));
+        verticalLayout_4 = new QVBoxLayout(Simulation);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        worldMapView = new QGraphicsView(Simulation);
         worldMapView->setObjectName(QStringLiteral("worldMapView"));
-        worldMapView->setGeometry(QRect(0, 0, 1581, 811));
-        tabWidget->addTab(tab, QString());
+        QSizePolicy sizePolicy6(QSizePolicy::Ignored, QSizePolicy::Expanding);
+        sizePolicy6.setHorizontalStretch(1);
+        sizePolicy6.setVerticalStretch(1);
+        sizePolicy6.setHeightForWidth(worldMapView->sizePolicy().hasHeightForWidth());
+        worldMapView->setSizePolicy(sizePolicy6);
+
+        verticalLayout_4->addWidget(worldMapView);
+
+        tabWidget->addTab(Simulation, QString());
 
         verticalLayout->addWidget(tabWidget);
 
         widget = new QWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
-        QSizePolicy sizePolicy6(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(1);
-        sizePolicy6.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy7(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(1);
+        sizePolicy7.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy7);
         horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -316,11 +328,11 @@ public:
 
         beginSimBtn = new QPushButton(widget);
         beginSimBtn->setObjectName(QStringLiteral("beginSimBtn"));
-        QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(1);
-        sizePolicy7.setHeightForWidth(beginSimBtn->sizePolicy().hasHeightForWidth());
-        beginSimBtn->setSizePolicy(sizePolicy7);
+        QSizePolicy sizePolicy8(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(1);
+        sizePolicy8.setHeightForWidth(beginSimBtn->sizePolicy().hasHeightForWidth());
+        beginSimBtn->setSizePolicy(sizePolicy8);
         beginSimBtn->setMinimumSize(QSize(150, 50));
         QFont font3;
         font3.setFamily(QStringLiteral("Simplex_IV50"));
@@ -331,8 +343,8 @@ public:
 
         resetSimBtn = new QPushButton(widget);
         resetSimBtn->setObjectName(QStringLiteral("resetSimBtn"));
-        sizePolicy7.setHeightForWidth(resetSimBtn->sizePolicy().hasHeightForWidth());
-        resetSimBtn->setSizePolicy(sizePolicy7);
+        sizePolicy8.setHeightForWidth(resetSimBtn->sizePolicy().hasHeightForWidth());
+        resetSimBtn->setSizePolicy(sizePolicy8);
         resetSimBtn->setMinimumSize(QSize(150, 50));
         resetSimBtn->setBaseSize(QSize(150, 50));
         resetSimBtn->setFont(font3);
@@ -349,7 +361,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1600, 17));
+        menuBar->setGeometry(QRect(0, 0, 1080, 17));
         menuWorld_Population_Simulator = new QMenu(menuBar);
         menuWorld_Population_Simulator->setObjectName(QStringLiteral("menuWorld_Population_Simulator"));
         menuHelp = new QMenu(menuBar);
@@ -398,7 +410,7 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Start Date:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(quickSettingsTab), QApplication::translate("MainWindow", "Quick Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Advaced Settings", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Simulation", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(Simulation), QApplication::translate("MainWindow", "Simulation", nullptr));
         beginSimBtn->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
         resetSimBtn->setText(QApplication::translate("MainWindow", "Reset Simulation", nullptr));
         menuWorld_Population_Simulator->setTitle(QApplication::translate("MainWindow", "File", nullptr));

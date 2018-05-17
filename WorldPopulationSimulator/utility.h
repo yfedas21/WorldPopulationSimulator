@@ -39,7 +39,7 @@ public:
         // create a new random number in the range of [0 to 365]
 		int random_integer = distr(eng);
         if (random_integer <= rate_of_occurrence){
-            std::cout<<"A disaster was added! [" << random_integer << " < " << rate_of_occurrence << "]" << std::endl;
+            //std::cout<<"A disaster was added! [" << random_integer << " < " << rate_of_occurrence << "]" << std::endl;
             return true;
         }
 

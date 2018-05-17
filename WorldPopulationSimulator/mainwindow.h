@@ -30,6 +30,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void addContinentsToScene();
     void createContinentOverlays();
+    QGraphicsTextItem* createPopLabel(QPoint pos);
     void showCustomMeassge(QString title = "Something went wrong!",
                            QString message = "Just click \"Close\" below.",
                            QPixmap icon = QPixmap("://Resources/formIcon.png"));

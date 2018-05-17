@@ -14,9 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :
     curSimResults = new SimDeltaOutcome();
     simulator = new Simulator();
 
+    ui->worldMapView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    ui->worldMapView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    ui->worldMapView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    //Scene for the graphics view (where to add items)
     scene = new QGraphicsScene(this);
     ui->worldMapView->setScene(scene);
-    ui->worldMapView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 
     //Load the requred Resources for animation to run
     QImage worldMap("://Resources/WorldMap.png");
@@ -35,9 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
     shownDate->setDefaultTextColor(QColor(253,240,34,255));
     shownDate->setFont(QFont("Times", 15, QFont::Bold));
     scene->addItem(shownDate);
-    shownDate->setPos(shownDate->mapFromScene(1200,10));
+    shownDate->setPos(shownDate->mapFromScene(1200,20));
 
-    //Create continent overalys
+    //Create continent overlays
     createContinentOverlays();
 
     //Add continent layers to scene
@@ -95,12 +99,12 @@ QString MainWindow::getCurSimDate()
 void MainWindow::createContinentOverlays()
 {
     //Object creation using Overlay constructor
-    worldMapFillLayer* Asia = new worldMapFillLayer("Asia", 17.21, curSimResults, .002, 0.0, QPoint(1150,300), QPoint(250,200));
-    worldMapFillLayer* Africa = new worldMapFillLayer("Africa", 11.73, curSimResults, .002, 0.0, QPoint(810,465), QPoint(150,160));
-    worldMapFillLayer* Australia = new worldMapFillLayer("Australia", 3.32, curSimResults, .002, 0.0, QPoint(1315,595), QPoint(150,130));
-    worldMapFillLayer* Europe = new worldMapFillLayer("Europe", 3.931, curSimResults, .002, 0.0, QPoint(800,210), QPoint(150,130));
-    worldMapFillLayer* NorthAmerica = new worldMapFillLayer("NorthAmerica", 9.54, curSimResults, .002, 0.0, QPoint(300,250), QPoint(240,230));
-    worldMapFillLayer* SouthAmerica = new worldMapFillLayer("SouthAmerica", 6.888, curSimResults, .002, 0.0, QPoint(450,560), QPoint(110,135));
+    worldMapFillLayer* Asia = new worldMapFillLayer(createPopLabel(QPoint(1150,300)),"Asia", 17.21, curSimResults, .002, 0.0, QPoint(1150,300), QPoint(250,200));
+    worldMapFillLayer* Africa = new worldMapFillLayer(createPopLabel(QPoint(810,465)), "Africa", 11.73, curSimResults, .002, 0.0, QPoint(810,465), QPoint(150,160));
+    worldMapFillLayer* Australia = new worldMapFillLayer(createPopLabel(QPoint(1315,595)), "Australia", 3.32, curSimResults, .002, 0.0, QPoint(1315,595), QPoint(150,130));
+    worldMapFillLayer* Europe = new worldMapFillLayer(createPopLabel(QPoint(800,210)), "Europe", 3.931, curSimResults, .002, 0.0, QPoint(800,210), QPoint(150,130));
+    worldMapFillLayer* NorthAmerica = new worldMapFillLayer(createPopLabel(QPoint(300,250)), "NorthAmerica", 9.54, curSimResults, .002, 0.0, QPoint(300,250), QPoint(240,230));
+    worldMapFillLayer* SouthAmerica = new worldMapFillLayer(createPopLabel(QPoint(450,560)), "SouthAmerica", 6.888, curSimResults, .002, 0.0, QPoint(450,560), QPoint(110,135));
     //Pushing all continents into the storage vector
     continents.push_back(Asia);
     continents.push_back(Africa);
@@ -108,6 +112,17 @@ void MainWindow::createContinentOverlays()
     continents.push_back(Europe);
     continents.push_back(NorthAmerica);
     continents.push_back(SouthAmerica);
+}
+
+QGraphicsTextItem* MainWindow::createPopLabel(QPoint pos){
+    //Population # string item
+    QGraphicsTextItem* shownPop = new QGraphicsTextItem("XXXXXXXXX");
+    shownPop->setDefaultTextColor(QColor(247,235,63,255));
+    shownPop->setFont(QFont("Times", 12, QFont::Bold));
+    scene->addItem(shownPop);
+    shownPop->setPos(shownPop->mapFromScene(pos.x(), pos.y()));
+    shownPop->setZValue(5);
+    return shownPop;
 }
 
 //Adds continent ovelays to scene (done once)
@@ -159,7 +174,7 @@ void MainWindow::on_beginSimBtn_clicked()
         std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
 
         //Change values only if simulation ran/resumed successfully
-        simTimer->start(50); //FIXME: Test with smaller numbers even 0
+        simTimer->start(1000); //FIXME: Test with smaller numbers even 0
 
         ui->beginSimBtn->setText("Pause Simulation");
         running = true;
@@ -167,6 +182,7 @@ void MainWindow::on_beginSimBtn_clicked()
     else
     {
         ui->beginSimBtn->setText("Begin Simulation");
+        simTimer->stop();
         running = false;
     }
 }
