@@ -59,6 +59,8 @@ private slots:
 
     void on_startDateInput_dateChanged(const QDate &date);
 
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     //Graphic holders
     Ui::MainWindow *ui;
@@ -71,6 +73,7 @@ private:
     Sim_Helper* simInfo;
     SimDeltaOutcome* curSimResults;
     Simulator* simulator;
+    int simSpeed = 100;
     int day = 0; //Tells what day simulation is currently on
     bool running = false; //Tells wether simulation is running
 };

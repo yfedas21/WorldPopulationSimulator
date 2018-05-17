@@ -26,6 +26,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -74,6 +75,10 @@ public:
     QPushButton *beginSimBtn;
     QPushButton *resetSimBtn;
     QSpacerItem *horizontalSpacer_3;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *simSpeedLabel;
+    QSlider *horizontalSlider;
+    QSpacerItem *horizontalSpacer_5;
     QMenuBar *menuBar;
     QMenu *menuWorld_Population_Simulator;
     QMenu *menuHelp;
@@ -356,6 +361,42 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_3);
 
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        simSpeedLabel = new QLabel(widget);
+        simSpeedLabel->setObjectName(QStringLiteral("simSpeedLabel"));
+        QSizePolicy sizePolicy9(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy9.setHorizontalStretch(1);
+        sizePolicy9.setVerticalStretch(0);
+        sizePolicy9.setHeightForWidth(simSpeedLabel->sizePolicy().hasHeightForWidth());
+        simSpeedLabel->setSizePolicy(sizePolicy9);
+        simSpeedLabel->setFont(font3);
+        simSpeedLabel->setTextFormat(Qt::AutoText);
+        simSpeedLabel->setAlignment(Qt::AlignCenter);
+        simSpeedLabel->setIndent(1);
+
+        verticalLayout_7->addWidget(simSpeedLabel);
+
+        horizontalSlider = new QSlider(widget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setMinimum(5);
+        horizontalSlider->setMaximum(200);
+        horizontalSlider->setSingleStep(5);
+        horizontalSlider->setValue(100);
+        horizontalSlider->setOrientation(Qt::Horizontal);
+        horizontalSlider->setInvertedAppearance(false);
+        horizontalSlider->setInvertedControls(true);
+
+        verticalLayout_7->addWidget(horizontalSlider);
+
+
+        horizontalLayout->addLayout(verticalLayout_7);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_5);
+
 
         verticalLayout->addWidget(widget);
 
@@ -381,7 +422,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -414,6 +455,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(Simulation), QApplication::translate("MainWindow", "Simulation", nullptr));
         beginSimBtn->setText(QApplication::translate("MainWindow", "Begin Simulation", nullptr));
         resetSimBtn->setText(QApplication::translate("MainWindow", "Reset Simulation", nullptr));
+        simSpeedLabel->setText(QApplication::translate("MainWindow", "Simulation Speed: 10 days / second ", nullptr));
         menuWorld_Population_Simulator->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi

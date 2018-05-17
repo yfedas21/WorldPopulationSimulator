@@ -47,6 +47,12 @@ worldMapFillLayer::worldMapFillLayer(QGraphicsTextItem* shownPop,
 */
 void worldMapFillLayer::updateLayers(int day)
 {
+    if(info->snapshots.empty()){
+        fillOpacity = 0;
+        shownPop->setPlainText("0");
+        return;
+    }
+
     //Update Values for next frame
     // - Layer opacity
     fillOpacity = std::fmin(1, (info->snapshots[day].continents[name].totalPop/landArea) * fillMultiplier);
@@ -68,11 +74,11 @@ void worldMapFillLayer::updateLayers(int day)
     shownPop->setPlainText(QString::number(info->snapshots[simDay].continents[name].totalPop));
 
     //DEBUG CODE
-    if(name == "NorthAmerica"){
-        std::cout << std::showpoint << std::fixed << std::setprecision(4)
-                  << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
-        std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
-    }
+    //if(name == "NorthAmerica"){
+    //   std::cout << std::showpoint << std::fixed << std::setprecision(4)
+    //              << info->snapshots[day].continents[name].totalPop << "/" << landArea << " * " << fillMultiplier << std::endl;
+    //    std::cout << "FillOpacity updated: " << std::showpoint << std::fixed << std::setprecision(4) << fillOpacity << std::endl;
+    //}
 }
 
 //Finds the correct disaster indicator color for painter to apply when drawing the dot

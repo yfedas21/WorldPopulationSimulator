@@ -175,7 +175,7 @@ void MainWindow::on_beginSimBtn_clicked()
         std::cout<< "Staring the simulation with " << simInfo->getRunTime() << " days to go!" << std::endl;
 
         //Change values only if simulation ran/resumed successfully
-        simTimer->start(1000); //FIXME: Test with smaller numbers even 0
+        simTimer->start(simSpeed);
 
         ui->beginSimBtn->setText("Pause Simulation");
         running = true;
@@ -223,4 +223,12 @@ void MainWindow::on_continentFocusInput_currentTextChanged(const QString &arg1)
 void MainWindow::on_startDateInput_dateChanged(const QDate &date)
 {
     simInfo->startDate = date;
+}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    simSpeed = value;
+    simTimer->setInterval(value);
+    int dayPerSec = 1000/value;
+    ui->simSpeedLabel->setText("Simulation Speed: " + QString::number(dayPerSec) + " days / second");
 }

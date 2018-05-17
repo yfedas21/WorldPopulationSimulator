@@ -26,7 +26,6 @@ public:
 
     std::pair<int, globalDay> run_simulation(int curDay)
     { 
-        std::cout << "Completing Day: " << curDay << std::endl;
         // Call the Globe update (which calls each Continent update):
         return std::make_pair(curDay, g->update(curDay));
     }
