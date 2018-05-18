@@ -9,7 +9,7 @@ struct values {
 	// Constructor with name parameter
 	values() {}
 	values(std::string name) { this->name = name; }
-    double population = 0;
+    long long population = 0;
 	double net_growth = 0;
 	double hurricane_rate = 0;
 	double hurricane_deaths = 0;

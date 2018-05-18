@@ -146,7 +146,7 @@ public:
 
         // For each day, increment the continental population based on annual net growth rate / 365
         value_container.population +=
-            (int)((value_container.population * value_container.net_growth / 365) + 0.5);
+            (long long) ((value_container.population * value_container.net_growth / 365) + 0.5);
 
         // Loop through the disasters vector to determine which ones will occur
         for (int loc_in_vec = 0; loc_in_vec < disasters.size(); ++loc_in_vec) {
@@ -180,6 +180,10 @@ public:
             //Remove pending disasters for this continent for today
             disasters_in_queue.pop();
         }
+
+        //Debug: for graph and final report
+        if (day == 150)
+            std::cout << "Continent: " << name << " | Population: " << value_container.population << std::endl;
 
         //Read population state into continent day snapshot
         contDayResult.totalPop = value_container.population;
